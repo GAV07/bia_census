@@ -8,6 +8,8 @@ import dsv from "@rollup/plugin-dsv";
 import hmr from "rollup-plugin-hot";
 import execute from "rollup-plugin-execute";
 import { terser } from "rollup-plugin-terser";
+import globals from 'rollup-plugin-node-globals';
+import scss from 'rollup-plugin-scss';
 
 const isWatch = !!process.env.ROLLUP_WATCH;
 const isLiveReload = !!process.env.LIVERELOAD;
@@ -16,6 +18,9 @@ const isProduction = !isDev;
 const isHot = isWatch && !isLiveReload;
 
 const preprocess = sveltePreprocess({
+  scss: {
+    includePaths: ['src'],
+  },
   postcss: {
     plugins: [require("autoprefixer")]
   }
@@ -76,6 +81,8 @@ export default {
 		json(),
     dsv(),
 		svg(),
+    globals(),
+    scss(),
 		
 		// In dev mode, call `npm run start` once
     // the bundle has been generated

@@ -1,0 +1,32 @@
+/* Call to Action Button */
+.cta-btn {
+  font-size: $button-font-size;
+  font-weight: 700;
+  display: inline-block;
+  position: relative;
+  padding: 1rem 2rem;
+  line-height: 1;
+  z-index: 1;
+  background-color: $primary1;
+  color: $white;
+  border: none;
+  max-height: 56px;
+  border-radius: 18px;
+}
+
+.cta-btn-alt {
+  font-size: $button-font-size;
+  font-weight: 700;
+  display: inline-block;
+  position: relative;
+  padding: 1rem 2rem;
+  line-height: 1;
+  z-index: 1;
+  background-color: $primary3;
+  color: $white;
+  border: none;
+  max-height: 56px;
+  border-radius: 18px;
+}
+
+
