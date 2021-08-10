@@ -16,6 +16,10 @@
             align-items: flex-start;
             gap: 2em;
 
+            h1 {
+                font-weight: bold;
+            }
+
             p {
                 font-size: $article-font-size;
                 padding-right: 10em; 
@@ -34,8 +38,8 @@
             text-align: left;
 
             img {
-                max-width: 1000px;
-                transform: translateY(200px);
+                max-width: 800px;
+                transform: translateY(100px);
             }
         }
 

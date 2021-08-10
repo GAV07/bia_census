@@ -1,67 +1,74 @@
 <script>
-    import { LayerCake, Svg, Html } from 'layercake';
-    import { scaleOrdinal } from 'd3-scale';
-    import { orgData } from '../../stores/apiStore'
-    import Key from '../cake-components/Key.svelte';
-    import AxisX from '../cake-components/AxisX.svelte';
-    import Beeswarm from '../cake-components/BeeswarmForce.svelte';
-    import ChartTitle from '../helpers/ChartTitle.svelte'
+  import { LayerCake, Svg, Html } from 'layercake';
+  import { scaleOrdinal } from 'd3-scale';
+  import Key from '../cake-components/Key.svelte';
+  import AxisX from '../cake-components/AxisX.svelte';
+  import Beeswarm from '../cake-components/BeeswarmForce.svelte';
+  import ChartTitle from '../helpers/ChartTitle.svelte';
 
-    export let title;
-    export let subtitle;
-  
-    const xKey = 'year';
-    const zKey = 'type';
-    const titleKey = 'name';
-  
-    const r = 6;
-    const seriesColors = ['#FAAB18', '#00B8D1', '#EA96CA', '#E26D5A', '#ECE5F0'];
+  export let data;
+  export let title;
+  export let description;
 
-    $: fData = $orgData.filter((data) => { return data.type !== undefined })
-  
-    $: seriesNames = new Set();
-  
-    $: fData.map(d => {
-      seriesNames.add(d[zKey]);
-    })
-    
-  </script>
-  
-  <style lang="scss">
+  let chartData = data.filter((data) => { return data.type !== undefined })
+  const xKey = 'year';
+  const zKey = 'type';
+  const titleKey = 'name';
 
-  </style>
+  const r = 6;
+
+  const seriesNames = new Set();
+  const seriesColors = ['#fc0', '#000'];
+
+
+  chartData.map(d => {
+    seriesNames.add(d[zKey]);
+  })
+  
+</script>
+
+<style lang="scss">
+  // .chart-container {
+  //   width: 100%;
+  //   height: 800px;
+  // }
+</style>
+
 
 <section class="chart-section">
-    <ChartTitle 
+  <ChartTitle 
     title={title}
-    description= {subtitle}
-    />
-    <div class='chart-container'>
-      <LayerCake
-        padding={{bottom: 15}}
-        x={xKey}
-        z={zKey}
-        zScale={scaleOrdinal()}
-        zDomain={Array.from(seriesNames)}
-        zRange={seriesColors}
-        data={fData}
-        custom={{
-          getTitle: d => d[titleKey]
-        }}
-        let:width
-      >
-    
-        <Svg>
-          <AxisX/>
-          <Beeswarm
-            r={width < 400 ? r / 1 : r}
-          />
-        </Svg>
-    
-        <Html pointerEvents={false}>
-          <Key shape='circle' />
-        </Html>
-    
-      </LayerCake>
-    </div>
+    description= {description}
+  />
+  <figure class='chart-container'>
+    <LayerCake
+      padding={{top: 5, left: 20, right: 20, bottom: 20}}
+      x={xKey}
+      z={zKey}
+      zScale={scaleOrdinal()}
+      zDomain={Array.from(seriesNames)}
+      zRange={seriesColors}
+      data={chartData}
+      custom={{
+        getTitle: d => d[titleKey]
+      }}
+      let:width
+    >
+
+      <Svg>
+        <AxisX/>
+        <Beeswarm
+          r={width < 400 ? r / 1.25 : r}
+          strokeWidth={.5}
+          xStrength={0.95}
+          yStrength={0.075}
+        />
+      </Svg>
+
+      <Html pointerEvents={false}>
+        <Key shape='circle'/>
+      </Html>
+
+    </LayerCake>
+  </figure>
 </section>

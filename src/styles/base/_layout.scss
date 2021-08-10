@@ -1,4 +1,6 @@
-
+canvas {
+    background-color: #221f26;;
+}
 
 section {
     min-height: 100vh;
@@ -12,7 +14,7 @@ section {
 
 article {
     width: 100vw;
-    padding: 5em 5em;
+    padding: 5em;
 
     .title, .subtitle {
         max-width: 60vw;
@@ -27,9 +29,13 @@ article {
         align-items: center;
 
         p{
-            padding: 5em 20em 5em 20em;
+            padding: 5em 20em;
             font-size: $article-font-size;
             line-height: 1.7;
+
+            @include respond(tab-land) {
+                padding: 3em 8em;
+            }
         }
     }
 }

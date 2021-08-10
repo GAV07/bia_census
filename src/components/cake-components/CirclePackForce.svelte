@@ -9,14 +9,13 @@
 	} from 'd3-force';
 
 	const { data, width, height, xScale, xGet, rGet, zGet } = getContext('LayerCake');
-
 	/* --------------------------------------------
 	 * Here are some values to play with, but most every force layout
 	 * is going be unique and this component will need to be customized
 	 * See more: https://github.com/d3/d3-force/blob/master/README.md
 	 */
-	export let manyBodyStrength = 5;
-	export let xStrength = 0.1;
+	export let manyBodyStrength = 1;
+	export let xStrength = 0.5;
 	/* --------------------------------------------
 	 * Set a manual color, otherwise it will default to using the zScale
 	 */
@@ -29,7 +28,7 @@
 	 * Make a copy because the simulation will alter the objects
 	 */
 	const initialNodes = $data.map((d) => ({ ...d }));
-
+	
 	const simulation = forceSimulation(initialNodes)
 
 	let nodes = [];
@@ -55,10 +54,11 @@
 			.alpha(1)
 			.restart()
 	}
-
+	// $: console.log(nodes)
 </script>
+
 	{#each nodes as point}
-    <circle
+   		 <circle
 			class='node'
 			r={$rGet(point)}
 			fill={nodeColor || $zGet(point)}
@@ -67,6 +67,5 @@
 			cx='{point.x}'
 			cy='{point.y}'
 		>
-    	<!-- <title>{point[$custom.title]}</title> -->
 		</circle>
 	{/each}

@@ -37,14 +37,14 @@
 
 <style>
 	.key {
-		position: absolute;
-		top: -64px;
 		display: flex;
+		flex-direction: column;
 		flex-wrap: wrap;
-		row-gap: 8px;
+		max-height: 100px;
 	}
 	.key-item {
 		margin-right: 14px;
+		display: flex;
 	}
 	.chip {
 		display: inline-block;

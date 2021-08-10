@@ -18,8 +18,10 @@
 		.force('collide', forceCollide(r + strokeWidth / 2))
 		.stop();
 
+	let i = 0;
+	let n = 0;
 	$: {
-		for ( var i = 0,
+		for ( i,
 			n = Math.ceil(Math.log(simulation.alphaMin()) / Math.log(1 - simulation.alphaDecay()));
 			i < n;
 			++i ) {

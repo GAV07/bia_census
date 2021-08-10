@@ -16,9 +16,17 @@
         const t1 = gsap.timeline({ repeat: -1, yoyo: true })
 
         t1.fromTo( '.circle', 
-            { scale: 1}, 
-            { scale: 0, duration: 2, stagger: { amount: 1, grid: 'auto',ease: 'linear', from: 'center' }
-        })
+            { scale: .6 }, 
+            { scale: 0,
+                 duration: 2, 
+                 stagger: { 
+                    amount: 1, 
+                    grid: 'auto',
+                    ease: 'linear', 
+                    from: 200
+                }
+            }
+        )
     })
     
     
@@ -27,10 +35,11 @@
 <style>
     .circles {
         position: absolute;
-        top: 50vh;
-        right: 25vh;
-        width: 400px;
+        top: 20vh;
+        right: 45vh;
+        width: 200px;
         height: 200px;
+        clip-path: polygon(0 1%, 100% 50%, 0 100%, 43% 50%);
         display: flex;
         flex-wrap: wrap;
         z-index: 100;
@@ -42,7 +51,7 @@
         border-radius: 50%;
         display: inline-block;
         background-color: #fff;
-        margin: 8px;
+        margin: 4px;
     }
 </style>
 

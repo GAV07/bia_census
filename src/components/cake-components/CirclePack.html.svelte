@@ -9,13 +9,13 @@
 	export let idKey = 'id';
 	export let parentKey = undefined;
 	export let valueKey = 'value';
-	export let labelVisibilityThreshold = r => r > 25;
+	export let labelVisibilityThreshold = r => r > 50;
 	export let fill = '#fff';
 	export let stroke = '#fff';
 	export let textColor = '#333';
 	export let sortBy = (a, b) => b.value - a.value; // 'depth' is also a popular choice
 
-  export let circlePadding = 0;
+  	export let circlePadding = 0;
 
   /* --------------------------------------------
    * This component will automatically group your data
@@ -52,7 +52,7 @@
 
 	$: packed = packer(root);
 
-  $: descendants = packed.descendants();
+  	$: descendants = packed.descendants();
 
 	const titleCase = d => d.replace(/^\w/, w => w.toUpperCase());
 	const commas = format(',');
@@ -82,7 +82,7 @@
 						<div class="text value" >{commas(d.data.data[valueKey])}</div>
 					{/if}
 				</div>
-		</div>
+			</div>
 	{/each}
 </div>
 
@@ -112,14 +112,14 @@
 		background: #fff;
 		border: 1px solid #ccc;
 		transform: translate(-50%, -100%);
-    top: -4px;
+    	top: -4px;
 	}
-  .circle-group[data-visible="false"]:hover .text-group {
+  	.circle-group[data-visible="false"]:hover .text-group {
 		z-index: 999;
 		display: block !important;
 	}
 	.circle-group[data-visible="false"]:hover .circle {
-		border-color: #000 !important;
+		border-color: grey !important;
 	}
 	.text-group {
 		width: auto;
@@ -135,7 +135,6 @@
 	.text {
 		width: 100%;
 		font-size: 11px;
-		
 	}
 	.text.value{
 		font-size: 11px;

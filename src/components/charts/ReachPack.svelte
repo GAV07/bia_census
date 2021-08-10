@@ -6,7 +6,7 @@
     import ChartTitle from '../helpers/ChartTitle.svelte'
 
     export let title;
-    export let subtitle;
+    export let description;
   
     const idKey = 'type';
     const valueKey = 'value';
@@ -14,17 +14,13 @@
     $: summaryData = rollup($orgData, v => v.length, d => d.reach)
     $: summaryData.delete(undefined)
     $: flatData = Array.from(summaryData, ([type, value]) => ({ type, value }))
-    
-  </script>
+</script>
   
-  <style lang="scss">
-    
-  </style>
 
 <section class="chart-section">
     <ChartTitle 
 		title={title}
-		description= {subtitle}
+		description= {description}
 	/>
   <div class="chart-container">
     <LayerCake

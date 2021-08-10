@@ -1,6 +1,8 @@
 .chart-section {
     background-color: $secondary3;
     color: $primary3;
+    padding: 5em;
+    border-radius: 10px;
 
     .chart__copy {
         max-width: 800px;
@@ -15,10 +17,11 @@
     }
 
     .chart-container {
-        height: 500px;
-        width: 900px;
+        height: 400px;
+        width: 800px;
         fill: $primary1;
         overflow: hidden;
+        font-family: 'Montserrat', sans-serif;
 
         svg {
             max-width: 100%;
@@ -29,5 +32,6 @@
                 fill: $primary3;
             }
         }
+
     }
 }

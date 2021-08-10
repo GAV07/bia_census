@@ -4,8 +4,18 @@ export let description;
 </script>
 
 
-<style>
+<style lang="scss">
+    .chart__copy {
+        max-width: 800px;
 
+        &__title {
+            margin-bottom: 8px;
+        }
+
+        &__description {
+            margin-bottom: 32px;
+        }
+    }
 </style>
 
 <div class="chart__copy">

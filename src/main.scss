@@ -1,10 +1,9 @@
 @import './styles/abstracts/reset';
 @import './styles/abstracts/variables';
+@import './styles/abstracts/mixins';
 
 @import './styles/base/typography';
 @import './styles/base/layout';
 @import './styles/base/buttons';
-
-
 
 @import './styles/sections/charts';

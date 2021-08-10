@@ -7,9 +7,9 @@
 	const nodes = $data.map((d) => ({ ...d }));
 
 	export let r = 4;
+	export let strokeWidth = 0.85;
 	export let xStrength = 0.95;
 	export let yStrength = 0.075;
-	export let strokeWidth = .85;
 	export let strokeColor = '#fff';
 
 	$: simulation = forceSimulation(nodes)
@@ -18,10 +18,10 @@
 		.force('collide', forceCollide(r))
 		.stop();
 
-	let i = 0;
-	let n = 0;
+	
+	$: n = 0;
 	$: {
-		for ( i,
+		for ( let i = 0,
 			n = Math.ceil(Math.log(simulation.alphaMin()) / Math.log(1 - simulation.alphaDecay()));
 			i < n;
 			++i ) {

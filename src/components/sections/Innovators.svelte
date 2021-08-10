@@ -1,6 +1,6 @@
 <script>
     import Copy from '../../data/doc.json'
-    import CirclePackChart from '../charts/CirclePackChart.svelte';
+    import CirclePackChart from '../charts/TypeGrouped.svelte';
     import HBarChart from '../charts/HBarChart.svelte';
 </script>
 

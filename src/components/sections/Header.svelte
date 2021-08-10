@@ -14,7 +14,7 @@
         align-items: center;
         justify-content: space-between;
         color: $primary3;
-        background-color: rgba(255, 255, 255, 0.7);
+        background-color: rgba(255, 255, 255, 0.9);
         backdrop-filter: blur(3px);
         
         h3 {
@@ -50,7 +50,7 @@
     <a href="https://blackinnovationalliance.com/">
         <img src="./assets/images/BIA_Logo.png" alt="bia-logo">
     </a>
-    <h3>Cens<em>US</em></h3>
+    <h3>Black Innovation Cens<em>Us</em></h3>
     <nav>
         <ul>
             <li>Geogrpahy</li>

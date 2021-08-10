@@ -1,14 +1,15 @@
 <script>
     import Copy from '../../data/doc.json'
-    import MapChart from '../charts/MapChart.svelte'
+    
+    import MapChart from '../charts/SupportMap.svelte'
     import BeeChart from '../charts/BeeChart.svelte'
-    import ReachChart from '../charts/ReachChart.svelte'
+    import ReachChart from '../charts/ReachPack.svelte'
+    import ReachGrouped from '../charts/ReachGrouped.svelte'
+
+    export let data;
 </script>
 
 
-<style lang="scss">
-    
-</style>
 
 <article class="geography">
     <h1 class="title">{Copy.geohead}</h1>
@@ -19,8 +20,9 @@
         <p>{Copy.geo1}</p>
     </div>
     <MapChart
+        data={data}
         title={Copy.geoChartTitle1}
-        subtitle={Copy.geoChartSub1}
+        description={Copy.geoChartSub1}
     />
     
     <!-- Year of inception for orgs in dataset -->
@@ -28,17 +30,19 @@
         <p>{Copy.geo2}</p>
     </div>
     <BeeChart
+        data={data}
         title={Copy.geoChartTitle2}
-        subtitle={Copy.geoChartSub2}
+        description={Copy.geoChartSub2}
     />
 
     <!-- Reach of organizations in dataset -->
     <div class="copy">
         <p>{Copy.geo3}</p>
     </div>
-    <ReachChart
+    <ReachGrouped
+        data={data}
         title={Copy.geoChartTitle3}
-        subtitle={Copy.geoChartSub3}
+        description={Copy.geoChartSub3}
     />
 </article>
 
