@@ -1,13 +1,13 @@
 <script>
 	import { geoAlbersUsa, geoPath } from "d3-geo";
 	import { scaleQuantize, scaleSequential, scaleLinear } from "d3-scale";
-	import { schemeBlues } from 'd3-scale-chromatic';
+	import { schemeGnBu } from 'd3-scale-chromatic';
 	import { extent, rollup } from "d3-array";
 	import { csvParse } from 'd3-dsv'
 	import { onMount } from "svelte";
 	import { feature } from "topojson";
 	import ChartTitle from '../helpers/ChartTitle.svelte';
-	import Icon from '../helpers/Icon.svelte';
+	//import Icon from '../helpers/Icon.svelte';
 
 	export let data;
 	export let title; 
@@ -19,13 +19,14 @@
 	let newList = data;
 	let mapData = [];
 	$: cities = [];
-	const colors = schemeBlues[9]
+	const colors = schemeGnBu[8]
 	let colorScale = () => {};
 	let width = 1200
 	let height = width * 0.7
 	let showHide = 'true';
 	
 	let summary = rollup(data, v => v.length, d => d.state)
+	console.log(data)
 	let orgExtent = extent(summary, d => d[1])
 	
 	$: colorScale = scaleQuantize()

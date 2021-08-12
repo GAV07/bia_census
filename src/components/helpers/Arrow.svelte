@@ -4,6 +4,8 @@ import { gsap } from 'gsap';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
 import { onMount } from 'svelte';
 
+
+
 gsap.registerPlugin(MotionPathPlugin)
 
 onMount(() => {

@@ -1,8 +1,6 @@
 <script>
   import Meta from "./Meta.svelte";
   import AsyncAirtable from 'asyncairtable'
-  //import { results } from '../data/airtableData'
-  // import Intro from './sections/Intro1.svelte'
   import Intro from './sections/Intro.svelte'
   import Geography from './sections/Geography.svelte'
   import Service from './sections/Service.svelte'
@@ -15,16 +13,17 @@
     const results = await asyncAirtable.select('Black Organizations');
     const cleanedData = results.map((org) => ({
         name: org.fields['Org. Name'],
+        year: org.fields['Year Founded'],
         type: org.fields['Stakeholder Type'],
         state: org.fields['Headquarters (State)'],
-        year: org.fields['Year Founded'],
+        city: org.fields['Headquarters (City)'],
         programs: org.fields['Programs (Activities)'],
         customer: org.fields['Primary Customer'],
         reach: org.fields['Reach'],
         site: org.fields['Website'],
         description: org.fields['Short Description'],
         focus: org.fields['Race/Ethnic Focus'],
-        led: org.fields['Black Led Organization']
+        led: org.fields['Black Led Organization'],
     }))
     return cleanedData
   }
@@ -33,9 +32,10 @@
     const results = await asyncAirtable.select('Black Founders');
     const cleanedData = results.map(founder => ({
       company: founder.fields['Company Name'],
-      city: founder.fields['City - Company Headquarter'],
-      state: founder.fields['State - Company Headquarter'],
+      city: founder.fields['City'],
+      state: founder.fields['State'],
     }))
+    return cleanedData
   }
 
   let visible;
@@ -61,9 +61,11 @@
   {#await fetchFoun()}
     {console.log("Founders Loading")}
   {:then founders}
-    {console.log("Founders Loaded")}
-  <!------------ Section #3 - Who is being served (Customers and Ethnic) -->
-  <!-- <Innovators data={founders}/> -->
+    <!------------ Section #3 - Who is being served (Customers and Ethnic) -->
+    <Innovators 
+    data={orgs}
+    altData={founders}
+    />
   {/await}
   {/if}
 {:catch error}

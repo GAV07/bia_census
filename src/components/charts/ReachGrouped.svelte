@@ -3,6 +3,7 @@
 	import { scaleOrdinal, scaleBand } from 'd3-scale';
 	import ChartTitle  from '../helpers/ChartTitle.svelte';
 	import ForceLayout from '../cake-components/CirclePackForce.svelte';
+	import Key from '../cake-components/Key.svelte';
 
 	export let data;
 	export let title;
@@ -70,18 +71,6 @@
 	<div class="input-container">
 		<label><input type="radio" bind:group={groupBy} value="true"/>Group by category</label>
 		<label><input type="radio" bind:group={groupBy} value="false"/>Clump together</label>
-		<!-- <label>
-			<div>
-				Many-Body strength: {manyBodyStrength}
-			</div>
-			<input type="range" bind:value={manyBodyStrength} min={0} max={5} />
-		</label>
-		<label>
-			<div>
-				X Force Strength: {xStrength}
-			</div>
-			<input type="range" bind:value={xStrength} min={0} max={1} step={0.1} />
-		</label> -->
 	</div>
 	
 	<figure class="chart-container">
@@ -106,6 +95,11 @@
 					nodeStrokeColor='#000'
 				/>
 			</Svg>
+
+			<Html pointerEvents={false}>
+				<Key shape='circle'/>
+			</Html>
+
 		</LayerCake>
 	</figure>
 </section>

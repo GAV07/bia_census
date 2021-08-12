@@ -3,7 +3,10 @@
     import { gsap } from 'gsap';
     import { onMount } from 'svelte';
     
-    
+    export let top;
+    export let right;
+    //export let timeDelay = 0;
+
     let circles;
     
     onMount(() => {
@@ -16,14 +19,17 @@
         const t1 = gsap.timeline({ repeat: -1, yoyo: true })
 
         t1.fromTo( '.circle', 
-            { scale: .6 }, 
-            { scale: 0,
-                 duration: 2, 
-                 stagger: { 
+            { 
+                scale: .6
+            }, 
+            { 
+                scale: 0,
+                duration: 2,
+                stagger: { 
                     amount: 1, 
                     grid: 'auto',
-                    ease: 'linear', 
-                    from: 200
+                    ease: 'circ.out', 
+                    from: 'random'
                 }
             }
         )
@@ -33,12 +39,10 @@
 </script>
     
 <style>
-    .circles {
+    .arrow {
         position: absolute;
-        top: 20vh;
-        right: 45vh;
-        width: 200px;
-        height: 200px;
+        width: 150px;
+        height: 150px;
         clip-path: polygon(0 1%, 100% 50%, 0 100%, 43% 50%);
         display: flex;
         flex-wrap: wrap;
@@ -46,15 +50,15 @@
     }
 
     :global(.circle) {
-        width: 10px;
-        height: 10px;
+        width: 4px;
+        height: 4px;
         border-radius: 50%;
         display: inline-block;
         background-color: #fff;
-        margin: 4px;
+        margin: 2px;
     }
 </style>
 
 <div class="intro__background">      
-    <div class="circles" bind:this={circles}></div>       
+    <div style="top:{top}; right:{right}" class="arrow" bind:this={circles}></div>       
 </div>

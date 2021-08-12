@@ -1,6 +1,7 @@
 <script>
     import Header from './Header.svelte'
     import Ripple from '../helpers/Ripple.svelte'
+    import Copy from '../../data/doc.json'
 </script>
 
 <style lang="scss">
@@ -54,6 +55,12 @@
             }
         }
     }
+
+    #lead-in {
+        background-color: $primary3;
+        border-radius: 10px;
+        color: $white;
+    }
     
 </style>
 
@@ -63,7 +70,7 @@
     <div class="intro__area" id="intro__copy">
         <h1>Pathways to Prosperity</h1>
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque in nisi commodo, pellentesque leo vel, pellentesque orci. Nam viverra mi nec mauris elementum, ac lobortis nisi vestibulum. Cras vel augue lacinia, venenatis magna at, lacinia nisi. Proin vitae neque massa. Maecenas odio enim, interdum sit amet eros sed, mollis bibendum ex. Integer id dictum purus. Etiam tincidunt elit sit amet quam vulputate, eget auctor est suscipit. Praesent aliquam felis et maximus consectetur.
+            {Copy.opening}
         </p>
         <div class="intro__cta">
             <button class="cta-btn">Read the Story</button>
@@ -71,7 +78,25 @@
         </div>
     </div>
     <div class="intro__area">
-        <Ripple/>
+        <Ripple
+            top={"25vh"}
+            right={"45vh"}
+        />
+        <Ripple
+            top={"45vh"}
+            right={"25vh"}
+            
+        />
+        <Ripple
+            top={"65vh"}
+            right={"5vh"}
+            
+        />
         <img src="./assets/images/black-up.jpg" alt="Black Female">
     </div>
 </section>
+<article>
+    <div class="copy" id="lead-in">
+        <p>{Copy.leadIn}</p>
+    </div>
+</article>

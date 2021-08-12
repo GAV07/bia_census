@@ -3,8 +3,8 @@
     
     import MapChart from '../charts/SupportMap.svelte'
     import BeeChart from '../charts/BeeChart.svelte'
-    import ReachChart from '../charts/ReachPack.svelte'
-    import ReachGrouped from '../charts/ReachGrouped.svelte'
+    //import ReachGrouped from '../charts/ReachGrouped.svelte'
+    import ReachRadar from '../charts/ReachRadar.svelte';
 
     export let data;
 </script>
@@ -39,7 +39,7 @@
     <div class="copy">
         <p>{Copy.geo3}</p>
     </div>
-    <ReachGrouped
+    <ReachRadar
         data={data}
         title={Copy.geoChartTitle3}
         description={Copy.geoChartSub3}

@@ -1,190 +1,26 @@
 <script>
   import { fade } from 'svelte/transition'
-  import * as THREE from 'three'
+  import { gsap } from 'gsap'
+  import { onMount } from 'svelte';
 
   export let visible;
+
+  onMount(() => {
+    gsap.to(".cls-1", 
+      { 
+        "stroke-dashoffset": 0,
+        duration: 10,
+        ease: "power2.out"
+      })
+  })
  
-  //http://www.pshkvsky.com/gif2code/sine-animation-tutorial-three-js/
-
-window.addEventListener("load", function () {
-  var r=4;
-  var s_r=r/20+Math.sin(0)*r/20;
-  var num_of_corners=7;
-  var obj_resolution=360;
-  var linewidth=0.04;
-
-  
-  var _w=window.innerWidth;
-  var _h=window.innerHeight;
-  var aspect = _w/ _h;
-  var scene = new THREE.Scene(); 
-  var camera = new THREE.PerspectiveCamera( 65,  _w/_h, 0.1, 1000 );
-  camera.position.z = 10; 
-  var renderer = new THREE.WebGLRenderer({ antialias: true } ); 
-  renderer.setClearColor(new THREE.Color(0x000000, 0));
-  renderer.setSize( _w, _h ); 
-
-  document.getElementById("webgl_canvas").appendChild( renderer.domElement );
-
-  var group = new THREE.Object3D();
-  var sub_group = new THREE.Object3D();
-  var all_vertices=[];
-  var all_sub_vertices=[];
-
-  var objects=[];
-  var sub_objects=[];
-  var num=3;
-  var dstnc=0.2;
-  var border=0.04;
-  var colors=[0x379392,0x2E4952,0x0BC9C7];
-
-  for(var i=0;i<num;i++){
-    var obj=create_mesh(colors[i],1+linewidth*0.8*i,all_vertices,i);
-    objects.push(obj);
-    sub_group   .add(obj);
-    obj.rotation.y =Math.PI/180*180;
-  } 
-
-
-  group.rotation.x = sub_group.rotation.x = Math.PI/180*360;
-  scene.add(group);
-  scene.add(sub_group);
-
-  function create_mesh(clr,r_coof,ver_arr,wave_type){
-    var geometry = new THREE.BufferGeometry();
-    var points=generate_points(r,s_r,5,wave_type);
-    var points2=generate_points(r*(1-linewidth),s_r,5,wave_type);
-    var vertices =generate_vertices(points,points2);
-    ver_arr.push(vertices);
-    geometry.addAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
-    var material = new THREE.MeshBasicMaterial( { color: clr,wireframe:false } );
-    var mesh = new THREE.Mesh( geometry, material );
-    mesh.anim_shape=num_of_corners;
-    mesh.anim=-1;
-    mesh.r_coof=r_coof;
-    mesh.wave_type=wave_type;
-    return mesh;
-  }
-
-  function generate_points(radius,wave_height,anim_shape,wave_type){
-
-    var new_poistions=[];
-    for (var i = 0; i <=  obj_resolution; i++) {
-      var angle=2*Math.PI/obj_resolution*i;
-      var raidus_addon=0;
-      var speed_incrementer=counter/40;
-      var sine_pct=0.5;
-
-      if(i<sine_pct*obj_resolution||i==obj_resolution){
-        var smoothing_amount=.14;
-        var smooth_pct=1;
-        if(i<sine_pct*obj_resolution*smoothing_amount)smooth_pct=i/(sine_pct*obj_resolution*smoothing_amount);
-        if(i>sine_pct*obj_resolution*(1-smoothing_amount)&&i<=sine_pct*obj_resolution)smooth_pct=(sine_pct*obj_resolution-i)/(sine_pct*obj_resolution*smoothing_amount);
-        if(i==obj_resolution)smooth_pct=0;
-
-        if(wave_type==1) raidus_addon=wave_height*smooth_pct*Math.cos((angle+speed_incrementer)*anim_shape);
-        if(wave_type==0) raidus_addon=wave_height*smooth_pct*Math.sin((angle+speed_incrementer)*anim_shape);
-        if(wave_type==2) raidus_addon=wave_height*smooth_pct*Math.cos((angle+Math.PI/180*120+speed_incrementer)*anim_shape);
-      }
-
-      var x = (radius+raidus_addon) * Math.cos(angle+speed_incrementer);
-      var y = (radius+raidus_addon) * Math.sin(angle+speed_incrementer);
-      var z=0;
-
-      new_poistions.push([x,y,z]);
-    }
-
-    return new_poistions;
-  }
-
-
-  function generate_vertices(points,points2){
-   var vertexPositions=[];
-   var center_point=[0,0,0];
-
-   for (var i = 0; i <  points.length-1; i++) {
-    vertexPositions.push(points[i],points2[i],points[i+1]);
-    vertexPositions.push(points2[i],points2[i+1],points[i+1]);
-  }
-  vertexPositions.push(points[ points.length-1],points2[points.length-1],points[0]);
-  let vertices = new Float32Array( vertexPositions.length * 3 ); 
-
-  for ( var i = 0; i < vertexPositions.length; i++ )
-  {
-    vertices[ i*3 + 0 ] = vertexPositions[i][0];
-    vertices[ i*3 + 1 ] = vertexPositions[i][1];
-    vertices[ i*3 + 2 ] = vertexPositions[i][2];
-  }
-
-
-  return vertices;
-}
-
-function update_vertices_v_2(points,points2,my_arr){
-
-  var vertexPositions=[];
-
-  for (var i = 0; i <  points.length-1; i++) {
-    vertexPositions.push(points[i],points2[i],points[i+1]);
-    vertexPositions.push(points2[i],points2[i+1],points[i+1]);
-  }
-
-  vertexPositions.push(points[ points.length-1],points2[points.length-1],points[0]);
-
-  for ( var i = 0; i < vertexPositions.length; i++ ){
-    my_arr[ i*3 + 0 ] = vertexPositions[i][0];
-    my_arr[ i*3 + 1 ] = vertexPositions[i][1];
-    my_arr[ i*3 + 2 ] = vertexPositions[i][2];
-  }
-
-}
-
-
-var last_anim=false;
-var delay_time=0.3;
-var anim_time=2.12;
-var rot_angle=90;
-var counter=0;
-var counter_anim=0;
-var frame=0;
-var frame_num=0;
-var loop = function loop() {
-  requestAnimationFrame(loop);
-
-  for (var k = 0; k <  objects.length; k++) {
-    var time=(counter+k)/60;
-    var time_sin=Math.sin(time*4);
-
-    var obj=objects[k];
-    var rad=r*obj.r_coof;
-    s_r=rad/15;
-    var points=generate_points(rad,s_r,obj.anim_shape,obj.wave_type); 
-    var points2=generate_points(rad*(1-linewidth),s_r,obj.anim_shape,obj.wave_type); 
-    update_vertices_v_2(points,points2, all_vertices[k]);
-    obj.geometry.attributes.position.needsUpdate = true;
-
-  }
-
-  renderer.render(scene, camera);
-  counter++;
-
-};
-
-
-
-
-
-loop();
-
-}, false);
-  
 </script>
 
 <style lang="scss">
   #pre-loader {
     position: relative;
   }
-  .img-container {
+  #icon-container {
     position: absolute;
     width: 100%;
     height: 100vh;
@@ -193,12 +29,18 @@ loop();
     justify-content: center;
     align-items: center;
 
-    img {
+    #icon {
       max-width: 300px;
     }
-  }
-  #webgl_canvas {
-    position: absolute;
+    .cls-1{
+      fill:none;
+      stroke:#231f20;
+      stroke-width: .75px;
+      stroke-miterlimit:10;
+      stroke-dasharray: 600;
+      stroke-dashoffset: 600;
+      fill-opacity: 0;
+    }
   }
 </style>
 
@@ -208,11 +50,12 @@ loop();
   on:introstart="{() => visible = false}"
   on:outroend="{() => visible = true}"
 >
-  <div class="img-container">
-    <img src="./assets/images/BIA_Symbol.png" alt="">
-  </div>
-  <div id="webgl_canvas" 
-    
-  >
+  <div id="icon-container">
+    <svg id="icon" viewBox="0 0 98.04 98.04">
+      <path class="cls-1" d="M34.45,59.08,21.89,66.92a18.62,18.62,0,0,0,8.27,2l10.42-.53,2.29-1.43A20.39,20.39,0,0,1,34.45,59.08Z"/>
+      <path class="cls-1" d="M42.87,30.36l-2.29-1.43L30.16,28.4a18.62,18.62,0,0,0-8.27,2l12.56,7.85A20.41,20.41,0,0,1,42.87,30.36Z"/>
+      <path class="cls-1" d="M72.19,48.67l0,0,0,0L42.87,30.36a20.41,20.41,0,0,0-8.42,7.85L51.21,48.67,34.45,59.08a20.39,20.39,0,0,0,8.42,7.84Z"/>
+      <path class="cls-1" d="M49.46,1.08A47.72,47.72,0,1,0,97.17,48.8,47.73,47.73,0,0,0,49.46,1.08Zm-36,58a20.33,20.33,0,0,1-2.93-10.33s0,0,0-.08v-.05c0-.09,0-.1,0-.09a20.3,20.3,0,0,1,2.93-10.32L30.14,48.62ZM93.13,48.64l0,0L61.56,68.35l-10.42.53a18.65,18.65,0,0,1-8.27-2l-2.29,1.43-10.42.53a18.62,18.62,0,0,1-8.27-2l12.56-7.84a20.53,20.53,0,0,1-2.93-10.33s0,0,0-.08v-.05c0-.09,0-.1,0-.09a20.49,20.49,0,0,1,2.93-10.32L21.89,30.36a18.62,18.62,0,0,1,8.27-2l10.42.53,2.29,1.43a18.65,18.65,0,0,1,8.27-2l10.42.53L93.09,48.62Z"/>
+    </svg>
   </div>
 </div>

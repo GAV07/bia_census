@@ -1,6 +1,7 @@
 <script>
   import { LayerCake, Svg, Html } from 'layercake';
   import { scaleOrdinal } from 'd3-scale';
+  import { schemeSet1 } from 'd3-scale-chromatic';
   import Key from '../cake-components/Key.svelte';
   import AxisX from '../cake-components/AxisX.svelte';
   import Beeswarm from '../cake-components/BeeswarmForce.svelte';
@@ -18,7 +19,7 @@
   const r = 6;
 
   const seriesNames = new Set();
-  const seriesColors = ['#fc0', '#000'];
+  const seriesColors = schemeSet1;
 
 
   chartData.map(d => {
