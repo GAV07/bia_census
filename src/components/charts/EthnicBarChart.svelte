@@ -4,7 +4,7 @@
     import Bar from '../cake-components/Bar.svelte';
     import AxisX from '../cake-components/AxisX.svelte';
     import AxisY from '../cake-components/AxisY.svelte';
-    import ChartTitle from '../helpers/ChartTitle.svelte';
+    import ChartTitle from '../tools/ChartTitle.svelte';
     import { rollup } from 'd3-array';
     
     export let data;

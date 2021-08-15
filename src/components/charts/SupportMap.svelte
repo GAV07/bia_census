@@ -1,13 +1,13 @@
 <script>
 	import { geoAlbersUsa, geoPath } from "d3-geo";
 	import { scaleQuantize, scaleSequential, scaleLinear } from "d3-scale";
-	import { schemeBlues } from 'd3-scale-chromatic';
+	import { schemeRdGy } from 'd3-scale-chromatic';
 	import { extent, rollup } from "d3-array";
 	import { csvParse } from 'd3-dsv'
 	import { onMount } from "svelte";
 	import { feature } from "topojson";
-	import ChartTitle from '../helpers/ChartTitle.svelte';
-	import Icon from '../helpers/Icon.svelte';
+	import ChartTitle from '../tools/ChartTitle.svelte';
+	import Icon from '../tools/Icon.svelte';
 
 	export let data;
 	export let title; 
@@ -19,7 +19,8 @@
 	let newList = data;
 	let mapData = [];
 	$: cities = [];
-	const colors = schemeBlues[9]
+	const keys = [4,8,12,16,20,24,28,32]
+	const colors = schemeRdGy[8]
 	let colorScale = () => {};
 	let width = 1200
 	let height = width * 0.7
@@ -36,13 +37,13 @@
 	let cityExtent = extent(cityCount, d => d[1])
 	const radiusScale = scaleLinear()
 		.domain(cityExtent)
-		.range([1,30])
+		.range([2,20])
 
 	$: getColor = function (feature) {
 		let number = summary.get(feature.properties.name)
 		let color = colorScale(number)
 		if (color) {
-			return color
+			return [color, number]
 		} else {
 			return "#000"
 		}
@@ -101,9 +102,6 @@
 		width: 1000px;
 		height: 500px;
 	}
-	.states {
-		//transform: translateX(-50px);
-	}
 	.stateShape {
 	  stroke: $slate;
 	  stroke-width: 0.15;
@@ -119,6 +117,31 @@
 	}
 	.cities {
 		opacity: .7;
+	}
+	.chart-container {
+		position: relative;
+		overflow: visible;
+	}
+	.map-key {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		transform: translate(0, 30px);
+
+		.keys {
+			display: flex;
+
+			.boxes {
+				width: 40px;
+				height: 10px;
+				overflow: visible;
+	
+				p {
+					font-size: $sm-font-size;
+					transform: translate(10px, -20px);
+				}
+			}
+		}
 	}
 
 </style>
@@ -139,9 +162,9 @@
 					<path
 					d={path(feature)}
 					id={feature.properties.name}
-					class="stateShape {getColor(feature) != "#000" ? "filled" : "not-filled"}"
-					fill={getColor(feature)} 
-					on:click={(event) => { filteronState(event.target.id)}}
+					class="stateShape"
+					fill={getColor(feature)[0]} 
+					on:click={(event) => { filteronState(event.target.id) }}
 					/>
 				{/each}
 			</g>
@@ -155,5 +178,13 @@
 			</g>
 			{/if}
 		</svg>
+		<div class="map-key">
+			<div class="keys">
+				{#each colors as color, index}
+						<div class="boxes" style="background-color: {color};"><p>{keys[index]}</p></div>
+				{/each}
+			</div>
+			<p>Number of Orgs in State</p>
+		</div>
 	</div>
 </section>

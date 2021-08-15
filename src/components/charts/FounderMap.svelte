@@ -6,8 +6,8 @@
 	import { csvParse } from 'd3-dsv'
 	import { onMount } from "svelte";
 	import { feature } from "topojson";
-	import ChartTitle from '../helpers/ChartTitle.svelte';
-	//import Icon from '../helpers/Icon.svelte';
+	import ChartTitle from '../tools/ChartTitle.svelte';
+	//import Icon from '../tools/Icon.svelte';
 
 	export let data;
 	export let title; 

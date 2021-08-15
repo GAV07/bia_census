@@ -3,14 +3,14 @@
     
     import TypeBarChart from '../charts/TypeBarChart.svelte';
     import ProgramsForce from '../charts/ProgramsForce.svelte'
-    import Stat from '../helpers/Stat.svelte'
+    import Stat from '../tools/Stat.svelte'
 
     export let data;
 </script>
 
 
 
-<article class="service">
+<article id="service">
     <h1 class="title">{Copy.serhead}</h1>
     <p class="subtitle">{Copy.sersub}</p>
 
@@ -43,7 +43,8 @@
         data={data}
         category={"customer"}
         dataPoint={"Founder/Entrepreneur"}
-        info="Hey Erick, this would be a great place to put a particular stat that can inform your audience"
+        info="The percentage of Black Support Organizations that focus on Founders and Entrepreneurs as an audience. 
+            Does this heavy emphasis on Founders limit the impact of impact that BSO's can have collectively on the wider Black Innovation Ecosystem?"
     />
     
 </article>

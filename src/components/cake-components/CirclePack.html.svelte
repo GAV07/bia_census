@@ -112,19 +112,19 @@
 		background: #fff;
 		border: 1px solid #ccc;
 		transform: translate(-50%, -100%);
-    	top: -4px;
+    top: -4px;
 	}
-  	.circle-group[data-visible="false"]:hover .text-group {
+  .circle-group[data-visible="false"]:hover .text-group {
 		z-index: 999;
 		display: block !important;
 	}
 	.circle-group[data-visible="false"]:hover .circle {
-		border-color: grey !important;
+		border-color: #000 !important;
 	}
 	.text-group {
 		width: auto;
-    	top: 50%;
-    	left: 50%;
+    top: 50%;
+    left: 50%;
 		text-align: center;
 		transform: translate(-50%, -50%);
 		white-space: nowrap;
@@ -135,6 +135,7 @@
 	.text {
 		width: 100%;
 		font-size: 11px;
+		/* text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff; */
 	}
 	.text.value{
 		font-size: 11px;

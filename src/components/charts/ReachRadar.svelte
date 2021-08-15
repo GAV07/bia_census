@@ -1,7 +1,7 @@
 <script>
     import { LayerCake, Svg } from 'layercake';
     import { scaleLinear } from 'd3-scale';
-    import ChartTitle from '../helpers/ChartTitle.svelte'
+    import ChartTitle from '../tools/ChartTitle.svelte'
     import Radar from '../cake-components/Radar.svelte';
     import AxisRadial from '../cake-components/AxisRadial.svelte';
 import { rollup } from 'd3-array';
@@ -10,7 +10,6 @@ import { rollup } from 'd3-array';
     export let title;
     export let description;
 
-    const seriesKey = 'type';
     const xKey = ['Local', 'Regional', 'National', 'International'];
 
     let summary = rollup(data, v => v.length, d => d.type, e => e.reach)
@@ -23,7 +22,10 @@ import { rollup } from 'd3-array';
         International: group.value.get("International"),
     }))
     console.log(formatData)
-    let chartData = formatData.filter(d => d.type === "Accelerator/Incubator")
+    let firstChart = formatData.filter(d => d.type === "Accelerator/Incubator")
+    let secondChart = formatData.filter(d => d.type === "VC Firm/Angel Association")
+    console.log(firstChart)
+    console.log(secondChart)
 </script>
 
 
@@ -38,7 +40,7 @@ import { rollup } from 'd3-array';
         x={xKey}
         xDomain={[0, 15]}
         xRange={({ height }) => [0, height / 2]}
-        data={chartData}
+        data={firstChart}
       >
         <Svg>
           <AxisRadial/>
@@ -46,4 +48,18 @@ import { rollup } from 'd3-array';
         </Svg>
       </LayerCake>
     </figure>
+    <!-- <figure class="chart-container">
+      <LayerCake
+        padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
+        x={xKey}
+        xDomain={[0, 15]}
+        xRange={({ height }) => [0, height / 2]}
+        data={secondChart}
+      >
+        <Svg>
+          <AxisRadial/>
+          <Radar/>
+        </Svg>
+      </LayerCake>
+    </figure> -->
 </section>

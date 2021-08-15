@@ -20,7 +20,7 @@
 
         t1.fromTo( '.circle', 
             { 
-                scale: .6
+                scale: .7
             }, 
             { 
                 scale: 0,
@@ -28,8 +28,8 @@
                 stagger: { 
                     amount: 1, 
                     grid: 'auto',
-                    ease: 'circ.out', 
-                    from: 'random'
+                    ease: 'circ.inOut', 
+                    from: 'right'
                 }
             }
         )

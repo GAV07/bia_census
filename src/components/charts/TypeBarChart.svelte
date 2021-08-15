@@ -4,7 +4,7 @@
     import Bar from '../cake-components/Bar.svelte';
     import AxisX from '../cake-components/AxisX.svelte';
     import AxisY from '../cake-components/AxisY.svelte';
-    import ChartTitle from '../helpers/ChartTitle.svelte';
+    import ChartTitle from '../tools/ChartTitle.svelte';
     import { rollup } from 'd3-array';
     
     export let data;
@@ -31,7 +31,7 @@
     />
     <figure class="chart-container">
         <LayerCake
-            padding={{ top: 0, bottom: 20, left: 180 }}
+            padding={{ top: 0, bottom: 20, left: 180, right: 20 }}
             x={xKey}
             y={yKey}
             yScale={scaleBand().paddingInner(.15).round(true)}

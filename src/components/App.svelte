@@ -5,7 +5,7 @@
   import Geography from './sections/Geography.svelte'
   import Service from './sections/Service.svelte'
   import Innovators from "./sections/Innovators.svelte"
-  import Layout from "./helpers/_Layout.svelte"
+  import Layout from "./tools/_Layout.svelte"
   import PreLoader from '../components/sections/PreLoader.svelte'
 
   const asyncAirtable = new AsyncAirtable('keyN1k9XF9da7gLtx', 'appjLRnzzcRAolMde')

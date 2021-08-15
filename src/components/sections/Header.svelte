@@ -41,6 +41,12 @@
             
             li {
                 padding: 0 1em 0 1em;
+
+                a {
+                    font-size: $default-font-size;
+                    text-decoration: none;
+                    color: $primary3;
+                }
             }
         }
     }
@@ -53,9 +59,9 @@
     <h3>Black Innovation Cens<em>Us</em></h3>
     <nav>
         <ul>
-            <li>Geogrpahy</li>
-            <li>Service</li>
-            <li>Audience</li>
+            <li><a href="#geography">Place</a></li>
+            <li><a href="#service">Service</a></li>
+            <li><a href="#innovators">Audience</a></li>
         </ul>
     </nav>
 </div>

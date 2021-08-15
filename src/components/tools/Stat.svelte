@@ -44,5 +44,5 @@
 
 <div class="stat-container">
     <h1 class="stat">{percentageOfCategory()}%</h1>
-    <h2 class="info">{info}</h2>
+    <h3 class="info">{info}</h3>
 </div>

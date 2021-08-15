@@ -16,6 +16,16 @@
         }
     }
 
+    .input-container {
+        margin-right: 1em;
+
+        label {
+            background-color: $secondary3;
+            padding: 1em 2em;
+            border-radius: 10px;
+        }
+    }
+
     .chart-container {
         height: 400px;
         width: 800px;

@@ -3,7 +3,7 @@
     import { orgData } from '../../stores/apiStore';
     import { rollup } from 'd3-array'
     import CirclePack from '../cake-components/CirclePack.html.svelte';
-    import ChartTitle from '../helpers/ChartTitle.svelte'
+    import ChartTitle from '../tools/ChartTitle.svelte'
 
     export let title;
     export let description;

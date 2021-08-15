@@ -1,7 +1,7 @@
 <script>
   import { LayerCake, Html } from 'layercake';
   import CirclePack from '../cake-components/CirclePack.html.svelte';
-  import ChartTitle from '../helpers/ChartTitle.svelte'
+  import ChartTitle from '../tools/ChartTitle.svelte'
 
   export let data;
   export let title;

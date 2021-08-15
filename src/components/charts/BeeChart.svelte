@@ -5,7 +5,7 @@
   import Key from '../cake-components/Key.svelte';
   import AxisX from '../cake-components/AxisX.svelte';
   import Beeswarm from '../cake-components/BeeswarmForce.svelte';
-  import ChartTitle from '../helpers/ChartTitle.svelte';
+  import ChartTitle from '../tools/ChartTitle.svelte';
 
   export let data;
   export let title;

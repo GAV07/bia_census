@@ -9,7 +9,7 @@
 </script>
 
 
-<article class="innovators">
+<article id="innovators">
     <h1 class="title">{Copy.innhead}</h1>
     <p class="subtitle">{Copy.innsub}</p>
 

@@ -1,10 +1,10 @@
 <svelte:head>
-  <title>Svelte Starter</title>
+  <title>Black Innovation CensUs</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
+  <meta name="description" content="A landscape analysis of Black Support Organizations across America" />
+  <meta name="author" content="Black Innovation Alliance" />
   <meta name="news_keywords" content="" />
 
   <meta property="og:title" content="" />

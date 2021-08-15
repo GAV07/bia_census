@@ -1,7 +1,30 @@
 <script>
     import Header from './Header.svelte'
-    import Ripple from '../helpers/Ripple.svelte'
+    import Ripple from '../tools/Ripple.svelte'
     import Copy from '../../data/doc.json'
+    import gsap from 'gsap'
+    import { onMount } from 'svelte'
+    let y;
+
+    onMount(() => {
+        let textWrapper = document.querySelector('.intro__area__title');
+        textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+        let tl = gsap.timeline({delay: .25})
+        tl.fromTo(".letter", 
+        { 
+            opacity: 0
+        },
+        { 
+            opacity: 1,
+            stagger: { 
+                    amount: .5, 
+                    grid: 'auto',
+                    ease: 'power3.out', 
+                }
+        }
+        )
+    })
 </script>
 
 <style lang="scss">
@@ -12,13 +35,16 @@
         flex-wrap: wrap;
         flex-direction: row;
         overflow: hidden;
+        
 
-        #intro__copy {
+        #intro__copy-wrapper {
+            height: 60vh;
             align-items: flex-start;
             gap: 2em;
+            z-index: 2;
 
             h1 {
-                font-weight: bold;
+                font-size: $mega-font-size;
             }
 
             p {
@@ -30,17 +56,28 @@
 
         &__area {
             width: 50vw;
-            height: 60vh;
-            padding: 2em;
+            height: 100vh;
+            padding: 0 3em;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: left;
 
-            img {
-                max-width: 800px;
-                transform: translateY(100px);
+            .img-container {
+                position: relative;
+                overflow: hidden;
+                height: 100vh;
+                width: 50vw;
+
+                img {
+                    position: absolute;
+                    top: 0%;
+                    left: 0%;
+                    max-width: 200%;
+                    width: 100%;
+                    transition: transform ease-in-out;
+                }
             }
         }
 
@@ -57,19 +94,42 @@
     }
 
     #lead-in {
-        background-color: $primary3;
+        position: relative;
+        padding: 4em 2em;
         border-radius: 10px;
         color: $white;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        overflow: hidden;
+        
+        .bk {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url("./assets/images/BIA_Pattern_Wakanda Blue.jpg");
+            z-index: -1;
+        }
+
+        img {
+            max-width: 400px;
+        }
+
+        p {
+            max-width: 600px;
+            line-height: 1.7;
+        }
     }
     
 </style>
 
+<svelte:window bind:scrollY={y} />
 
 <Header/>
 <section class="intro">
-    <div class="intro__area" id="intro__copy">
-        <h1>Pathways to Prosperity</h1>
-        <p>
+    <div class="intro__area" id="intro__copy-wrapper">
+        <h1 class="intro__area__title">Pathways to Prosperity</h1>
+        <p class="intro__area__description">
             {Copy.opening}
         </p>
         <div class="intro__cta">
@@ -92,11 +152,15 @@
             right={"5vh"}
             
         />
-        <img src="./assets/images/black-up.jpg" alt="Black Female">
+        <div class="img-container">
+            <img style="transform: translate3d(0, -{y/100}%, 0) scale({(100+y/15)/100})" src="./assets/images/black-up.jpg" alt="Black Female">
+        </div>
     </div>
 </section>
 <article>
-    <div class="copy" id="lead-in">
+    <div id="lead-in">
+        <img src="./assets/images/King.png" alt="Dr.King">
         <p>{Copy.leadIn}</p>
+        <div class="bk"></div>
     </div>
 </article>

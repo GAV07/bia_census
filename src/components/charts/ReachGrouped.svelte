@@ -1,7 +1,7 @@
 <script>
 	import { LayerCake, Svg, Html } from 'layercake';
 	import { scaleOrdinal, scaleBand } from 'd3-scale';
-	import ChartTitle  from '../helpers/ChartTitle.svelte';
+	import ChartTitle  from '../tools/ChartTitle.svelte';
 	import ForceLayout from '../cake-components/CirclePackForce.svelte';
 	import Key from '../cake-components/Key.svelte';
 
