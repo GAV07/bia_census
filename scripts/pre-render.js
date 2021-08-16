@@ -25,7 +25,7 @@ const result = template
   .replace(/\.css/g, `.css?version=${version}`)
   .replace(/\.js/g, `.js?version=${version}`);
 
-fs.writeFileSync(`${tmpPath}/index.html`, result);
+fs.writeFileSync(`index.html`, result);
 shell.rm(`${tmpPath}/ssr.js`);
 shell.cp("-Rf", `${tmpPath}/*`, outPath);
 shell.rm("-Rf", tmpPath);

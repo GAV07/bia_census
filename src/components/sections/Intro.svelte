@@ -107,7 +107,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background-image: url("./assets/images/BIA_Pattern_Wakanda Blue.jpg");
+            background-image: url("../assets/images/BIA_Pattern_Wakanda.jpg");
             z-index: -1;
         }
 
