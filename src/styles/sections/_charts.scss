@@ -12,7 +12,7 @@
         }
 
         &__description {
-            margin-bottom: 16px;
+            margin-bottom: 32px;
         }
     }
 
@@ -23,13 +23,17 @@
             background-color: $secondary3;
             padding: 1em 2em;
             border-radius: 10px;
+            font-family: 'Montserrat', sans-serif;
+
+            input {
+                margin-right: 6px;
+            }
         }
     }
 
     .chart-container {
         height: 400px;
         width: 800px;
-        fill: $primary1;
         overflow: hidden;
         font-family: 'Montserrat', sans-serif;
 
@@ -41,7 +45,7 @@
             text {
                 fill: $primary3;
             }
-        }
+        }  
 
     }
 }

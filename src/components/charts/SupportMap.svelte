@@ -1,7 +1,7 @@
 <script>
 	import { geoAlbersUsa, geoPath } from "d3-geo";
 	import { scaleQuantize, scaleSequential, scaleLinear } from "d3-scale";
-	import { schemeRdGy } from 'd3-scale-chromatic';
+	import { schemeOranges } from 'd3-scale-chromatic';
 	import { extent, rollup } from "d3-array";
 	import { csvParse } from 'd3-dsv'
 	import { onMount } from "svelte";
@@ -20,11 +20,12 @@
 	let mapData = [];
 	$: cities = [];
 	const keys = [4,8,12,16,20,24,28,32]
-	const colors = schemeRdGy[8]
+	const colors = schemeOranges[8]
 	let colorScale = () => {};
 	let width = 1200
 	let height = width * 0.7
 	let showHide = 'true';
+	
 	
 	let summary = rollup(data, v => v.length, d => d.state)
 	let orgExtent = extent(summary, d => d[1])
@@ -45,13 +46,8 @@
 		if (color) {
 			return [color, number]
 		} else {
-			return "#000"
+			return ["#fff", "#fff"]
 		}
-	}
-
-	const filteronState = function(state) {
-		newList = data.filter(d => d.state == state)
-		return newList
 	}
 
 	const projectionAlbersUsa = geoAlbersUsa().scale(950)
@@ -114,9 +110,13 @@
 	.not-filled {
 		opacity: .2;
 		pointer-events: none;
+		color: #000;
 	}
 	.cities {
 		opacity: .7;
+	}
+	.city {
+		fill: $primary1;
 	}
 	.chart-container {
 		position: relative;
@@ -135,10 +135,11 @@
 				width: 40px;
 				height: 10px;
 				overflow: visible;
+				margin-bottom: 8px;
 	
 				p {
 					font-size: $sm-font-size;
-					transform: translate(10px, -20px);
+					transform: translate(16px, -12px);
 				}
 			}
 		}
@@ -160,11 +161,11 @@
 			<g class="states">
 				{#each mapData as feature}
 					<path
+					data-tooltip="{feature.properties.name}: {getColor(feature)[1]}"
 					d={path(feature)}
 					id={feature.properties.name}
 					class="stateShape"
 					fill={getColor(feature)[0]} 
-					on:click={(event) => { filteronState(event.target.id) }}
 					/>
 				{/each}
 			</g>
@@ -172,7 +173,7 @@
 			<g class="cities">
 				{#each cities as city}
 					{#if data.some(org => org.city === city.city)}
-						<circle className="citiPop" cx={makePoints(city.lng, city.lat)[0]} cy={makePoints(city.lng, city.lat)[1]} r={getRadius(city.city)} />
+						<circle class="city" cx={makePoints(city.lng, city.lat)[0]} cy={makePoints(city.lng, city.lat)[1]} r={getRadius(city.city)} />
 					{/if}
 				{/each}
 			</g>
