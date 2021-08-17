@@ -19,10 +19,11 @@
 
 <style lang="scss">
   #pre-loader {
-    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   #icon-container {
-    position: absolute;
     width: 100%;
     height: 100vh;
     z-index: 100;
@@ -31,7 +32,8 @@
     align-items: center;
 
     .icon {
-      max-width: 200px;
+      max-width: 225px;
+      margin: 1em;
     }
     .cls-1{
       fill:none;
@@ -47,7 +49,7 @@
 
 <div 
   id="pre-loader"
-  transition:fade="{{delay: 3000}}"
+  transition:fade="{{delay: 4000}}"
   on:introstart="{() => visible = false}"
   on:outroend="{() => visible = true}"
 >

@@ -25,6 +25,7 @@
 	let width = 1200
 	let height = width * 0.7
 	let showHide = 'true';
+	let toolTip = "";
 	
 	
 	let summary = rollup(data, v => v.length, d => d.state)
@@ -46,7 +47,7 @@
 		if (color) {
 			return [color, number]
 		} else {
-			return ["#fff", "#fff"]
+			return ["#fff", "0"]
 		}
 	}
 
@@ -64,6 +65,15 @@
 		let org = data.filter(d => d.city === cityName)
 		let radius = org.length
 		return radiusScale(radius)
+	}
+
+	const handleToolTip = function(stateName) {
+		toolTip = stateName
+		return toolTip
+	}
+	const handleMouseOut = function() {
+		toolTip = ""
+		return toolTip
 	}
 
   
@@ -98,14 +108,28 @@
 		width: 1000px;
 		height: 500px;
 	}
-	.stateShape {
-	  stroke: $slate;
-	  stroke-width: 0.15;
-	  transition: all .5s ease-in-out;
-	}
-	.stateShape:hover {
-		stroke: $secondary2;
-		stroke-width: 1.5px;
+	.state {
+
+		&__shape {
+		  stroke: $slate;
+		  stroke-width: 0.15;
+		  transition: all .5s ease-in-out;
+		}
+		&__shape:hover {
+			stroke: $secondary2;
+			stroke-width: 1.5px;
+		}
+
+		&__info {
+			position: absolute;
+			font-family: 'Montserrat Alternates', sans-serif;
+			font-size: $mid-font-size;
+			transform: translate(0 ,320px)
+		}
+		&__info__number {
+			position: absolute;
+			transform: translate(0 ,350px)
+		}
 	}
 	.not-filled {
 		opacity: .2;
@@ -160,13 +184,24 @@
 		<svg style="{`width: ${width}px; height: ${height}px`}">
 			<g class="states">
 				{#each mapData as feature}
-					<path
-					data-tooltip="{feature.properties.name}: {getColor(feature)[1]}"
-					d={path(feature)}
-					id={feature.properties.name}
-					class="stateShape"
-					fill={getColor(feature)[0]} 
-					/>
+					<g 
+						class="state" 
+						id={feature.properties.name}
+						on:mouseover={handleToolTip(feature.properties.name)} 
+						on:mouseout={handleMouseOut}
+					>
+						<path
+							data-tooltip="{feature.properties.name}: {getColor(feature)[1]}"
+							d={path(feature)}
+							class="state__shape"
+							fill={getColor(feature)[0]} 
+						/>
+						{#if toolTip === feature.properties.name}
+							<text class="state__info">{feature.properties.name}:</text>
+							<text class="state__info__number">{getColor(feature)[1]} Black Support Organization(s)</text>
+						{/if}
+					</g>
+					
 				{/each}
 			</g>
 			{#if showHide === 'false'}

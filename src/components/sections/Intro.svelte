@@ -6,25 +6,25 @@
     import { onMount } from 'svelte'
     let y;
 
-    onMount(() => {
-        let textWrapper = document.querySelector('.intro__area__title');
-        textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+    // onMount(() => {
+    //     let textWrapper = document.querySelector('.intro__area__title');
+    //     textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
 
-        let tl = gsap.timeline({delay: .25})
-        tl.fromTo(".letter", 
-        { 
-            opacity: 0
-        },
-        { 
-            opacity: 1,
-            stagger: { 
-                    amount: .5, 
-                    grid: 'auto',
-                    ease: 'power3.out', 
-                }
-        }
-        )
-    })
+    //     let tl = gsap.timeline({delay: .25})
+    //     tl.fromTo(".letter", 
+    //     { 
+    //         opacity: 0
+    //     },
+    //     { 
+    //         opacity: 1,
+    //         stagger: { 
+    //                 amount: .5, 
+    //                 grid: 'auto',
+    //                 ease: 'power3.out', 
+    //             }
+    //     }
+    //     )
+    // })
 </script>
 
 <style lang="scss">
@@ -153,7 +153,8 @@
             
         />
         <div class="img-container">
-            <img style="transform: translate3d(0, -{y/100}%, 0) scale({(100+y/15)/100})" src="./assets/images/black-up.jpg" alt="Black Female">
+            <!-- <img style="transform: translate3d(0, -{y/100}%, 0) scale({(100+y/15)/100})" src="./assets/images/black-up.jpg" alt="Black Female"> -->
+            <img src="./assets/images/black-up.jpg" alt="Black Female">
         </div>
     </div>
 </section>
