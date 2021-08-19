@@ -120,15 +120,17 @@
 			stroke-width: 1.5px;
 		}
 
+
 		&__info {
-			position: absolute;
-			font-family: 'Montserrat Alternates', sans-serif;
-			font-size: $mid-font-size;
-			transform: translate(0 ,320px)
-		}
-		&__info__number {
-			position: absolute;
-			transform: translate(0 ,350px)
+			
+			&__name {
+				font-family: 'Montserrat Alternates', sans-serif;
+				font-size: $mid-font-size;
+				transform: translate(0 ,250px)
+			}
+			&__number {
+				transform: translate(0 ,270px)
+			}
 		}
 	}
 	.not-filled {
@@ -197,11 +199,12 @@
 							fill={getColor(feature)[0]} 
 						/>
 						{#if toolTip === feature.properties.name}
-							<text class="state__info">{feature.properties.name}:</text>
-							<text class="state__info__number">{getColor(feature)[1]} Black Support Organization(s)</text>
+							<g class="state_info">
+								<text class="state__info__name">{feature.properties.name}:</text>
+								<text class="state__info__number">{getColor(feature)[1]} BSO(s)</text>
+							</g>
 						{/if}
 					</g>
-					
 				{/each}
 			</g>
 			{#if showHide === 'false'}

@@ -40,17 +40,23 @@
 		display: flex;
 		flex-direction: column;
 		flex-wrap: wrap;
-		max-height: 100px;
+		max-height: 120px;
+		background-color: rgb(186, 211, 216);
+		border-radius: 10px;
+		padding: 1em;
 	}
 	.key-item {
 		margin-right: 14px;
+		margin-bottom: 8px;
 		display: flex;
+		align-items: center;
 	}
 	.chip {
 		display: inline-block;
 		position: relative;
 		width: 12px;
 		height: 12px;
+		margin-right: 4px;
 	}
 	.chip__circle {
 		border-radius: 50%;

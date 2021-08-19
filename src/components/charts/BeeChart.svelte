@@ -19,7 +19,7 @@
   const r = 6;
 
   const seriesNames = new Set();
-  const seriesColors = schemeSet1;
+  const seriesColors = ["#003f5c", "#2f4b7c", "#665191", "#a05195", "#d45087", "#f95d6a", "#ff7c43", "#ffa600"];
 
 
   chartData.map(d => {
@@ -28,12 +28,6 @@
   
 </script>
 
-<style lang="scss">
-  // .chart-container {
-  //   width: 100%;
-  //   height: 800px;
-  // }
-</style>
 
 
 <section class="chart-section">

@@ -14,13 +14,19 @@
     let types = []
     let summaryData = rollup(data, v => v.length, d => d.type)
     summaryData.delete(undefined)
-
+    
     let chartData = Array.from(summaryData, ([type, value]) => ({ type, value }))
-    chartData.forEach((object) => {
-        types = [...types, object.type]
+    chartData = chartData.map(group => ({
+        type: group.type,
+        value: group.value,
+        percent: Math.round(group.value / data.length * 100)
+    }))
+    chartData.sort((a,b) => a.percent - b.percent)
+    chartData.forEach((group) => {
+        types = [...types, group.type]
     })
-
-    const xKey = 'value';
+    console.log(chartData)
+    const xKey = 'percent';
     const yKey = 'type';
 </script>
 
@@ -35,7 +41,7 @@
             x={xKey}
             y={yKey}
             yScale={scaleBand().paddingInner(.15).round(true)}
-            yDomain={[...types].sort()}
+            yDomain={[...types]}
             xDomain={[0, null]}
             data={chartData}
         >
@@ -44,6 +50,7 @@
                     gridlines={true}
                     baseline={true}
                     snapTicks={true}
+                    formatTick={d => d + "%"}
                 />
                 <AxisY
                     gridlines={false}
