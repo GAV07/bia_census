@@ -54,7 +54,7 @@
 			.alpha(1)
 			.restart()
 	}
-	// $: console.log(nodes)
+	$: console.log(nodes)
 </script>
 
 	{#each nodes as point}
@@ -68,4 +68,22 @@
 			cy='{point.y}'
 		>
 		</circle>
+		<!-- <rect
+			class="tag"
+			x='{point.x}'
+			y='{point.y - 80}'
+			rx='10px'
+			ry='10px'
+			width='100px'
+			height='50px'
+			fill="#fff"
+		></rect>
+		<text
+			class="tag-text"
+			x='{point.x + 10}'
+			y='{point.y - 50}'
+			fill='#F44E3F'
+		>
+		{point.name}
+		</text> -->
 	{/each}

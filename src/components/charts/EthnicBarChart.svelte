@@ -13,7 +13,6 @@
 
     let focuses = []
     let summaryData = rollup(data, v => v.length, d => d.focus)
-    console.log(summaryData)
     summaryData.delete(undefined)
 
     let chartData = Array.from(summaryData, ([focus, value]) => ({ focus, value }))

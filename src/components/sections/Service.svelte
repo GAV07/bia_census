@@ -2,8 +2,9 @@
     import Copy from '../../data/doc.json'
     
     import TypeBarChart from '../charts/TypeBarChart.svelte';
-    import ProgramsForce from '../charts/ProgramsForce.svelte'
+    import ProgramsPack from '../charts/ProgramsPack.svelte'
     import Stat from '../tools/Stat.svelte'
+    import ReachPack from '../charts/ReachPack.svelte';
 
     export let data;
 </script>
@@ -28,7 +29,7 @@
     <div class="copy">
         <p>{Copy.ser2}</p>
     </div>
-    <ProgramsForce 
+    <ProgramsPack 
         data={data}
         title={Copy.serChartTitle2}
         description={Copy.serChartSub2}

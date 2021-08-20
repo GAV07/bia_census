@@ -2,6 +2,7 @@
     import Header from './Header.svelte'
     import Ripple from '../tools/Ripple.svelte'
     import Copy from '../../data/doc.json'
+    import Image from '../tools/Image.svelte'
     import gsap from 'gsap'
     import { onMount } from 'svelte'
     let y;
@@ -154,13 +155,13 @@
         />
         <div class="img-container">
             <!-- <img style="transform: translate3d(0, -{y/100}%, 0) scale({(100+y/15)/100})" src="./assets/images/black-up.jpg" alt="Black Female"> -->
-            <img src="./assets/images/black-up.jpg" alt="Black Female">
+            <Image src="/assets/images/black-up.jpg" alt="Black Woman"/>
         </div>
     </div>
 </section>
 <article>
     <div id="lead-in">
-        <img src="./assets/images/King.png" alt="Dr.King">
+        <Image src="./assets/images/black-in-wrap.jpg" alt="Black Woman in Head Wrap" width=400/>
         <p>{Copy.leadIn}</p>
         <div class="bk"></div>
     </div>

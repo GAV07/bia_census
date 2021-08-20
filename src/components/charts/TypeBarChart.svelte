@@ -25,7 +25,7 @@
     chartData.forEach((group) => {
         types = [...types, group.type]
     })
-    console.log(chartData)
+    
     const xKey = 'percent';
     const yKey = 'type';
 </script>

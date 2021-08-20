@@ -1,17 +1,17 @@
 <script>
     import { LayerCake, Html } from 'layercake';
-    import { orgData } from '../../stores/apiStore';
     import { rollup } from 'd3-array'
     import CirclePack from '../cake-components/CirclePack.html.svelte';
     import ChartTitle from '../tools/ChartTitle.svelte'
 
     export let title;
     export let description;
+    export let data;
   
     const idKey = 'type';
     const valueKey = 'value';
 
-    $: summaryData = rollup($orgData, v => v.length, d => d.reach)
+    $: summaryData = rollup(data, v => v.length, d => d.reach)
     $: summaryData.delete(undefined)
     $: flatData = Array.from(summaryData, ([type, value]) => ({ type, value }))
 </script>

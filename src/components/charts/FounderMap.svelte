@@ -26,7 +26,6 @@
 	let showHide = 'true';
 	
 	let summary = rollup(data, v => v.length, d => d.state)
-	console.log(data)
 	let orgExtent = extent(summary, d => d[1])
 	
 	$: colorScale = scaleQuantize()

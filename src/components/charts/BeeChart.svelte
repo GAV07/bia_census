@@ -28,6 +28,11 @@
   
 </script>
 
+<style lang="scss">
+  #bee-chart {
+    overflow: visible;
+  }
+</style>
 
 
 <section class="chart-section">
@@ -35,9 +40,9 @@
     title={title}
     description= {description}
   />
-  <figure class='chart-container'>
+  <figure id="bee-chart" class='chart-container'>
     <LayerCake
-      padding={{top: 5, left: 20, right: 20, bottom: 20}}
+      padding={{top: 5, left: 20, right: 10, bottom: 20}}
       x={xKey}
       z={zKey}
       zScale={scaleOrdinal()}
@@ -61,7 +66,7 @@
       </Svg>
 
       <Html pointerEvents={false}>
-        <Key shape='circle'/>
+        <Key width=107 shape='circle'/>
       </Html>
 
     </LayerCake>

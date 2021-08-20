@@ -21,6 +21,8 @@
 	 */
 	export let capitalize = true;
 
+	export let width = 100;
+
 	const { zDomain, zScale } = getContext('LayerCake');
 
 	function cap (val) {
@@ -37,6 +39,9 @@
 
 <style>
 	.key {
+		position: absolute;
+		top: -25px;
+		left: -25px;
 		display: flex;
 		flex-direction: column;
 		flex-wrap: wrap;
@@ -76,7 +81,7 @@
 	}
 </style>
 
-<div class='key' style="justify-content: {align === 'end' ? 'flex-end': align};">
+<div class='key' style="justify-content: {align === 'end' ? 'flex-end': align}; width: {width}%">
 	{#each $zDomain as item}
 	<div class='key-item'>
 		<div

@@ -4,7 +4,7 @@
     import ChartTitle from '../tools/ChartTitle.svelte'
     import Radar from '../cake-components/Radar.svelte';
     import AxisRadial from '../cake-components/AxisRadial.svelte';
-import { rollup } from 'd3-array';
+    import { rollup } from 'd3-array';
 
     export let data;
     export let title;
@@ -21,7 +21,7 @@ import { rollup } from 'd3-array';
         Regional: group.value.get("Regional"),
         International: group.value.get("International"),
     }))
-    console.log(formatData)
+    
     let firstChart = formatData.filter(d => d.type === "Accelerator/Incubator")
     let secondChart = formatData.filter(d => d.type === "VC Firm/Angel Association")
     let thirdChart = formatData.filter(d => d.type === "Talent/Workforce")
@@ -50,10 +50,15 @@ import { rollup } from 'd3-array';
   #radar-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+
+    .radar-title {
+      margin-bottom: 0px;
+    }
     
     #radar-chart {
-      height: 200px;
-      width: 350px;
+      height: 300px;
+      width: 380px;
       margin-bottom: 32px;
     }
   }
@@ -66,43 +71,28 @@ import { rollup } from 'd3-array';
     />
     <div id="radar-container">
       <figure id="radar-chart" class="chart-container">
-        <h3>{firstChart[0].type}</h3>
+        <h3 class="radar-title">{firstChart[0].type}</h3>
         <LayerCake
-          padding={{ top: 15, right: 0, bottom: 30, left: 0 }}
+          padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
           x={xKey}
           xDomain={[0, 15]}
-          xRange={({ height }) => [0, height / 2]}
+          xRange={({ height }) => [0, height / 3]}
           data={firstChart}
         >
           <Svg>
             <AxisRadial/>
-            <Radar color={colors[3]}/>
-          </Svg>
-        </LayerCake>
-      </figure>
-      <figure id="radar-chart" class="chart-container">
-        <h3>{secondChart[0].type}</h3>
-        <LayerCake
-          padding={{ top: 15, right: 0, bottom: 30, left: 0 }}
-          x={xKey}
-          xDomain={[0, 15]}
-          xRange={({ height }) => [0, height / 2]}
-          data={secondChart}
-        >
-          <Svg>
-            <AxisRadial />
             <Radar color={colors[0]}/>
           </Svg>
         </LayerCake>
       </figure>
       <figure id="radar-chart" class="chart-container">
-        <h3>{thirdChart[0].type}</h3>
+        <h3 class="radar-title">{secondChart[0].type}</h3>
         <LayerCake
-          padding={{ top: 0, right: 0, bottom: 30, left: 0 }}
+          padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
           x={xKey}
           xDomain={[0, 15]}
-          xRange={({ height }) => [0, height / 2]}
-          data={thirdChart}
+          xRange={({ height }) => [0, height / 3]}
+          data={secondChart}
         >
           <Svg>
             <AxisRadial/>
@@ -111,17 +101,32 @@ import { rollup } from 'd3-array';
         </LayerCake>
       </figure>
       <figure id="radar-chart" class="chart-container">
-        <h3>{fourthChart[0].type}</h3>
+        <h3 class="radar-title">{thirdChart[0].type}</h3>
         <LayerCake
-          padding={{ top: 0, right: 0, bottom: 30, left: 0 }}
+          padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
           x={xKey}
           xDomain={[0, 15]}
-          xRange={({ height }) => [0, height / 2]}
-          data={fourthChart}
+          xRange={({ height }) => [0, height / 3]}
+          data={thirdChart}
         >
           <Svg>
             <AxisRadial/>
             <Radar color={colors[2]}/>
+          </Svg>
+        </LayerCake>
+      </figure>
+      <figure id="radar-chart" class="chart-container">
+        <h3 class="radar-title">{fourthChart[0].type}</h3>
+        <LayerCake
+          padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
+          x={xKey}
+          xDomain={[0, 15]}
+          xRange={({ height }) => [0, height / 3]}
+          data={fourthChart}
+        >
+          <Svg>
+            <AxisRadial/>
+            <Radar color={colors[3]}/>
           </Svg>
         </LayerCake>
       </figure>
