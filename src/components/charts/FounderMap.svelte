@@ -1,13 +1,12 @@
 <script>
 	import { geoAlbersUsa, geoPath } from "d3-geo";
 	import { scaleQuantize, scaleSequential, scaleLinear } from "d3-scale";
-	import { schemeGnBu } from 'd3-scale-chromatic';
+	import { schemeOranges } from 'd3-scale-chromatic';
 	import { extent, rollup } from "d3-array";
 	import { csvParse } from 'd3-dsv'
 	import { onMount } from "svelte";
 	import { feature } from "topojson";
 	import ChartTitle from '../tools/ChartTitle.svelte';
-	//import Icon from '../tools/Icon.svelte';
 
 	export let data;
 	export let title; 
@@ -16,17 +15,26 @@
 	const citiesURL = 'https://gist.githubusercontent.com/curran/13d30e855d48cdd6f22acdf0afe27286/raw/0635f14817ec634833bb904a47594cc2f5f9dbf8/worldcities_clean.csv';
 	const stateURL = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"
 
-	let newList = data;
 	let mapData = [];
 	$: cities = [];
-	const colors = schemeGnBu[8]
+	const keys = []
+	const colors = schemeOranges[8]
 	let colorScale = () => {};
 	let width = 1200
 	let height = width * 0.7
 	let showHide = 'true';
+	let toolTip = "";
 	
 	let summary = rollup(data, v => v.length, d => d.state)
 	let orgExtent = extent(summary, d => d[1])
+	
+	// bucket of range for color scale
+	let dif = orgExtent[1] - orgExtent[0];
+	let a = dif/8;
+
+	for (let i=orgExtent[0]; i<=orgExtent[1];i=i+a){
+		keys.push(Math.round(i))
+	}
 	
 	$: colorScale = scaleQuantize()
 		.domain(orgExtent)
@@ -42,15 +50,10 @@
 		let number = summary.get(feature.properties.name)
 		let color = colorScale(number)
 		if (color) {
-			return color
+			return [color, number]
 		} else {
-			return "#000"
+			return ["#fff", "0"]
 		}
-	}
-
-	const filteronState = function(state) {
-		newList = data.filter(d => d.state == state)
-		return newList
 	}
 
 	const projectionAlbersUsa = geoAlbersUsa().scale(950)
@@ -69,7 +72,15 @@
 		return radiusScale(radius)
 	}
 
-  
+	const handleToolTip = function(stateName) {
+		toolTip = stateName
+		return toolTip
+	}
+	const handleMouseOut = function() {
+		toolTip = ""
+		return toolTip
+	}
+
 	onMount(async function() {
 		const stateResponse = await fetch(
 			stateURL
@@ -94,24 +105,38 @@
 <style lang="scss">
 	@import '../../styles/abstracts/variables';
 	
-	.chart-section {
+	#founder-map {
 		background-color: $bk;
 	}
 	#map-wrapper {
 		width: 1000px;
 		height: 500px;
+		position: relative;
+		overflow: visible;
 	}
-	.states {
-		//transform: translateX(-50px);
-	}
-	.stateShape {
-	  stroke: $slate;
-	  stroke-width: 0.15;
-	  transition: all .5s ease-in-out;
-	}
-	.stateShape:hover {
-		stroke: $secondary2;
-		stroke-width: 1.5px;
+	.state {
+		&__shape {
+		stroke: $slate;
+		stroke-width: 0.15;
+		transition: all .5s ease-in-out;
+		}
+		&__shape:hover {
+			stroke: $secondary2;
+			stroke-width: 1.5px;
+		}
+
+
+		&__info {
+			
+			&__name {
+				font-family: 'Montserrat Alternates', sans-serif;
+				font-size: $mid-font-size;
+				transform: translate(0 ,250px)
+			}
+			&__number {
+				transform: translate(0 ,270px)
+			}
+		}
 	}
 	.not-filled {
 		opacity: .2;
@@ -120,10 +145,35 @@
 	.cities {
 		opacity: .7;
 	}
+	.city {
+		fill: $primary1;
+	}
+	.map-key {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		transform: translate(0, 30px);
+
+		.keys {
+			display: flex;
+
+			.boxes {
+				width: 40px;
+				height: 5px;
+				overflow: visible;
+				margin-bottom: 8px;
+	
+				p {
+					font-size: $sm-font-size;
+					transform: translate(16px, -12px);
+				}
+			}
+		}
+	}
 
 </style>
   
-<section class="chart-section">
+<section id="founder-map" class="chart-section">
 	<ChartTitle 
 		title={title}
 		description= {description}
@@ -136,13 +186,25 @@
 		<svg style="{`width: ${width}px; height: ${height}px`}">
 			<g class="states">
 				{#each mapData as feature}
-					<path
-					d={path(feature)}
+				<g
+					class="state" 
 					id={feature.properties.name}
-					class="stateShape {getColor(feature) != "#000" ? "filled" : "not-filled"}"
-					fill={getColor(feature)} 
-					on:click={(event) => { filteronState(event.target.id)}}
+					on:mouseover={handleToolTip(feature.properties.name)} 
+					on:mouseout={handleMouseOut}
+				>
+					<path
+						d={path(feature)}
+						id={feature.properties.name}
+						class="state__shape {getColor(feature) != "#000" ? "filled" : "not-filled"}"
+						fill={getColor(feature)[0]} 
 					/>
+					{#if toolTip === feature.properties.name}
+							<g class="state__info">
+								<text class="state__info__name">{feature.properties.name}:</text>
+								<text class="state__info__number">{getColor(feature)[1]} Venture(s)</text>
+							</g>
+						{/if}
+				</g>
 				{/each}
 			</g>
 			{#if showHide === 'false'}
@@ -155,5 +217,13 @@
 			</g>
 			{/if}
 		</svg>
+		<div class="map-key">
+			<div class="keys">
+				{#each colors as color, index}
+						<div class="boxes" style="background-color: {color};"><p>{keys[index]}</p></div>
+				{/each}
+			</div>
+			<p>Number of Black Funded Companies</p>
+		</div>
 	</div>
 </section>

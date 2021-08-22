@@ -16,11 +16,17 @@
     summaryData.delete(undefined)
 
     let chartData = Array.from(summaryData, ([focus, value]) => ({ focus, value }))
+    chartData = chartData.map(group => ({
+        focus: group.focus,
+        value: group.value,
+        percent: Math.round(group.value / data.length * 100)
+    }))
+    chartData.sort((a,b) => a.percent - b.percent)
     chartData.forEach((object) => {
         focuses = [...focuses, object.focus]
     })
 
-    const xKey = 'value';
+    const xKey = 'percent';
     const yKey = 'focus';
 </script>
 
@@ -35,7 +41,7 @@
             x={xKey}
             y={yKey}
             yScale={scaleBand().paddingInner(.15).round(true)}
-            yDomain={[...focuses].sort()}
+            yDomain={[...focuses]}
             xDomain={[0, null]}
             data={chartData}
         >
@@ -44,6 +50,7 @@
                     gridlines={true}
                     baseline={true}
                     snapTicks={true}
+                    formatTick={d => d + "%"}
                 />
                 <AxisY
                     gridlines={false}

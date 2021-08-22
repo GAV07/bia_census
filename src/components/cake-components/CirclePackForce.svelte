@@ -54,27 +54,46 @@
 			.alpha(1)
 			.restart()
 	}
-	$: console.log(nodes)
+	//$: console.log(nodes)
+
+	let toolTip = "";
+	const handleToolTip = function(programName) {
+		toolTip = programName
+		return toolTip
+	}
+	const handleMouseOut = function() {
+		toolTip = ""
+		return toolTip
+	}
 </script>
 
-	{#each nodes as point}
-   		 <circle
-			class='node'
-			r={$rGet(point)}
-			fill={nodeColor || $zGet(point)}
-			stroke-width={nodeStrokeWidth}
-			stroke={nodeStrokeColor}
-			cx='{point.x}'
-			cy='{point.y}'
-		>
-		</circle>
-		<!-- <rect
+<style>
+	.tag, .tag-text {
+		z-index: 999;
+	}
+</style>
+
+{#each nodes as point}
+		<circle
+		class='node'
+		r={$rGet(point)}
+		fill={nodeColor || $zGet(point)}
+		stroke-width={nodeStrokeWidth}
+		stroke={nodeStrokeColor}
+		cx='{point.x}'
+		cy='{point.y}'
+		on:mouseover={handleToolTip(point.name)} 
+		on:mouseout={handleMouseOut}
+	>
+	</circle>
+	{#if toolTip === point.name}
+		<rect
 			class="tag"
 			x='{point.x}'
 			y='{point.y - 80}'
 			rx='10px'
 			ry='10px'
-			width='100px'
+			width='{point.name.length > 10 ? point.name.length * 10 : point.name.length * 12}px'
 			height='50px'
 			fill="#fff"
 		></rect>
@@ -85,5 +104,6 @@
 			fill='#F44E3F'
 		>
 		{point.name}
-		</text> -->
-	{/each}
+		</text>
+	{/if}
+{/each}

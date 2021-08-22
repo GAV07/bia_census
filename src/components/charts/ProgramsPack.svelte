@@ -11,15 +11,9 @@
   const xKey = 'name';
   const rKey = 'count';
   const zKey = 'name';
-
+  
   let groupBy = 'true';
-
-  const seriesNameSet = new Set();
   const seriesColors = ['#f0c', '#0cf', '#fc0'];
-
-  // data.forEach(d => {
-  //   seriesNameSet.add(d[zKey]);
-  // });
   
   let programs= [];
   let catNames = [];
@@ -49,20 +43,23 @@
   })
 
   let manyBodyStrength = 3;
-  let xStrength = 0.1
+  let xStrength = 0.5
 </script>
 
-<style>
-  label {
-    cursor: pointer;
-  }
-  input {
-    margin-right: 7px;
+<style lang="scss">
+  @import '../../styles/abstracts/variables';
+
+  #programs {
+		background-color: $bk;
+	}
+
+  #force-chart {
+    overflow: visible;
   }
 </style>
 
 
-<section class="chart-section">
+<section id="programs" class="chart-section">
   <ChartTitle 
     title={title}
     description= {description}
@@ -71,8 +68,7 @@
     <label><input type="radio" bind:group={groupBy} value="true"/>Group by category</label>
     <label><input type="radio" bind:group={groupBy} value="false"/>Clump together</label>
   </div>
-
-  <figure class="chart-container">
+  <figure id="force-chart" class="chart-container">
     <LayerCake
       data={chartData}
       x={xKey}
@@ -80,7 +76,7 @@
       z={zKey}
       xScale={scaleBand()}
       xDomain={catNames}
-      rRange={[3, 55]}
+      rRange={[5, 75]}
       zScale={scaleOrdinal()}
       zDomain={catNames}
       zRange={seriesColors}

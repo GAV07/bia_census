@@ -16,7 +16,7 @@
 	const citiesURL = 'https://gist.githubusercontent.com/curran/13d30e855d48cdd6f22acdf0afe27286/raw/0635f14817ec634833bb904a47594cc2f5f9dbf8/worldcities_clean.csv';
 	const stateURL = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"
 
-	let newList = data;
+	
 	let mapData = [];
 	$: cities = [];
 	const keys = [4,8,12,16,20,24,28,32]
@@ -101,12 +101,14 @@
 <style lang="scss">
 	@import '../../styles/abstracts/variables';
 	
-	.chart-section {
+	#support-map {
 		background-color: $bk;
 	}
 	#map-wrapper {
 		width: 1000px;
 		height: 500px;
+		position: relative;
+		overflow: visible;
 	}
 	.state {
 
@@ -144,10 +146,6 @@
 	.city {
 		fill: $primary1;
 	}
-	.chart-container {
-		position: relative;
-		overflow: visible;
-	}
 	.map-key {
 		position: absolute;
 		bottom: 0;
@@ -159,7 +157,7 @@
 
 			.boxes {
 				width: 40px;
-				height: 10px;
+				height: 5px;
 				overflow: visible;
 				margin-bottom: 8px;
 	
@@ -173,7 +171,7 @@
 
 </style>
   
-<section class="chart-section">
+<section id="support-map" class="chart-section">
 	<ChartTitle 
 		title={title}
 		description= {description}
@@ -199,7 +197,7 @@
 							fill={getColor(feature)[0]} 
 						/>
 						{#if toolTip === feature.properties.name}
-							<g class="state_info">
+							<g class="state__info">
 								<text class="state__info__name">{feature.properties.name}:</text>
 								<text class="state__info__number">{getColor(feature)[1]} BSO(s)</text>
 							</g>
@@ -208,13 +206,13 @@
 				{/each}
 			</g>
 			{#if showHide === 'false'}
-			<g class="cities">
-				{#each cities as city}
-					{#if data.some(org => org.city === city.city)}
-						<circle class="city" cx={makePoints(city.lng, city.lat)[0]} cy={makePoints(city.lng, city.lat)[1]} r={getRadius(city.city)} />
-					{/if}
-				{/each}
-			</g>
+				<g class="cities">
+					{#each cities as city}
+						{#if data.some(org => org.city === city.city)}
+							<circle class="city" cx={makePoints(city.lng, city.lat)[0]} cy={makePoints(city.lng, city.lat)[1]} r={getRadius(city.city)} />
+						{/if}
+					{/each}
+				</g>
 			{/if}
 		</svg>
 		<div class="map-key">
@@ -223,7 +221,7 @@
 						<div class="boxes" style="background-color: {color};"><p>{keys[index]}</p></div>
 				{/each}
 			</div>
-			<p>Number of Orgs in State</p>
+			<p>Number of Black Organizations</p>
 		</div>
 	</div>
 </section>
