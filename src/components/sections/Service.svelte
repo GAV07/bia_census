@@ -12,6 +12,7 @@
 
 
 <article id="service">
+    <p class="lead">Service</p>
     <h1 class="title">{Copy.serhead}</h1>
     <p class="subtitle">{Copy.sersub}</p>
 

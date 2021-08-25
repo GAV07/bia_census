@@ -46,7 +46,8 @@
 		flex-direction: column;
 		flex-wrap: wrap;
 		max-height: 120px;
-		background-color: rgb(186, 211, 216);
+		background-color: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(3px);
 		border-radius: 10px;
 		padding: 1em;
 	}

@@ -1,6 +1,5 @@
 <script>
     import { LayerCake, Svg } from 'layercake';
-    import { scaleLinear } from 'd3-scale';
     import ChartTitle from '../tools/ChartTitle.svelte'
     import Radar from '../cake-components/Radar.svelte';
     import AxisRadial from '../cake-components/AxisRadial.svelte';
@@ -21,7 +20,6 @@
         Regional: group.value.get("Regional"),
         International: group.value.get("International"),
     }))
-    
     let firstChart = formatData.filter(d => d.type === "Accelerator/Incubator")
     let secondChart = formatData.filter(d => d.type === "VC Firm/Angel Association")
     let thirdChart = formatData.filter(d => d.type === "Talent/Workforce")
@@ -73,7 +71,7 @@
       <figure id="radar-chart" class="chart-container">
         <h3 class="radar-title">{firstChart[0].type}</h3>
         <LayerCake
-          padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
+          padding={{ top: 20, right: 0, bottom: 7, left: 0 }}
           x={xKey}
           xDomain={[0, 15]}
           xRange={({ height }) => [0, height / 3]}
@@ -82,6 +80,21 @@
           <Svg>
             <AxisRadial/>
             <Radar color={colors[0]}/>
+          </Svg>
+        </LayerCake>
+      </figure>
+      <figure id="radar-chart" class="chart-container">
+        <h3 class="radar-title">{fourthChart[0].type}</h3>
+        <LayerCake
+          padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
+          x={xKey}
+          xDomain={[0, 15]}
+          xRange={({ height }) => [0, height / 3]}
+          data={fourthChart}
+        >
+          <Svg>
+            <AxisRadial/>
+            <Radar color={colors[3]}/>
           </Svg>
         </LayerCake>
       </figure>
@@ -112,21 +125,6 @@
           <Svg>
             <AxisRadial/>
             <Radar color={colors[2]}/>
-          </Svg>
-        </LayerCake>
-      </figure>
-      <figure id="radar-chart" class="chart-container">
-        <h3 class="radar-title">{fourthChart[0].type}</h3>
-        <LayerCake
-          padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
-          x={xKey}
-          xDomain={[0, 15]}
-          xRange={({ height }) => [0, height / 3]}
-          data={fourthChart}
-        >
-          <Svg>
-            <AxisRadial/>
-            <Radar color={colors[3]}/>
           </Svg>
         </LayerCake>
       </figure>

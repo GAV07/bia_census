@@ -1,5 +1,5 @@
 <script>
-  import { LayerCake, Svg, Html } from 'layercake';
+  import { LayerCake, Svg } from 'layercake';
   import { scaleOrdinal, scaleBand } from 'd3-scale';
   import ChartTitle from '../tools/ChartTitle.svelte'
   import ForceLayout from '../cake-components/CirclePackForce.svelte';
@@ -13,7 +13,7 @@
   const zKey = 'name';
   
   let groupBy = 'true';
-  const seriesColors = ['#f0c', '#0cf', '#fc0'];
+  const seriesColors = ['#faab18', '#e26d5a', '#00b8d1', '#ea96ca', '#ece5f0'];
   
   let programs= [];
   let catNames = [];

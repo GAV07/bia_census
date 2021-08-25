@@ -41,9 +41,13 @@ a:active {
   text-decoration: none;
 }
 
-// a:hover {
-//   transition: all 0.3s ease-in-out;
-// }
+.lead {
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: .1rem;
+  color: $article-color;
+  font-size: $lead-font-size;
+}
 
 
 

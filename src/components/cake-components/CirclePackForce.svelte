@@ -3,6 +3,7 @@
 	import {
 		forceSimulation,
 		forceX,
+		forceY,
 		forceManyBody,
 		forceCollide,
 		forceCenter,
@@ -45,6 +46,7 @@
 			.force('x', forceX().x(d => {
 				return groupBy === true ? $xGet(d) + $xScale.bandwidth() / 2 : $width / 2;
 			}).strength(xStrength))
+			//.force('y', forceY(height / 3).strength(xStrength))
 			.force('center', forceCenter($width / 2, $height / 2))
 			.force('charge', forceManyBody().strength(manyBodyStrength))
 			.force('collision', forceCollide().radius(d => {

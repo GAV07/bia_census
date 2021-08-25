@@ -10,6 +10,7 @@ section {
     justify-content: center;
     flex-direction: column;
     padding-top: 4em;
+
 }
 
 article {
@@ -22,6 +23,13 @@ article {
 
     .title {
         margin-bottom: 16px;
+        color: $primary2;
+        font-size: $large-font-size;
+    }
+
+    .subtitle {
+        color: $primary3;
+        font-size: $mid-font-size;
     }
 
     .copy {
@@ -31,6 +39,7 @@ article {
         p{
             padding: 5em 20em;
             font-size: $article-font-size;
+            color: $article-color;
             line-height: 1.7;
 
             @include respond(tab-land) {
@@ -39,4 +48,6 @@ article {
         }
     }
 }
+
+
 

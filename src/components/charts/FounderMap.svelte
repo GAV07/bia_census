@@ -1,7 +1,6 @@
 <script>
 	import { geoAlbersUsa, geoPath } from "d3-geo";
 	import { scaleQuantize, scaleSequential, scaleLinear } from "d3-scale";
-	import { schemeOranges } from 'd3-scale-chromatic';
 	import { extent, rollup } from "d3-array";
 	import { csvParse } from 'd3-dsv'
 	import { onMount } from "svelte";
@@ -18,7 +17,7 @@
 	let mapData = [];
 	$: cities = [];
 	const keys = []
-	const colors = schemeOranges[8]
+	const colors = ["#adf5ff","#70eeff","#47eaff","#33e7ff","#00b8d1","#00a2b8","#0090a3","#007e8f"]
 	let colorScale = () => {};
 	let width = 1200
 	let height = width * 0.7
@@ -146,7 +145,7 @@
 		opacity: .7;
 	}
 	.city {
-		fill: $primary1;
+		fill: $primary3;
 	}
 	.map-key {
 		position: absolute;

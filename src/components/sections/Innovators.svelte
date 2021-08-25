@@ -10,6 +10,7 @@
 
 
 <article id="innovators">
+    <p class="lead">Audience</p>
     <h1 class="title">{Copy.innhead}</h1>
     <p class="subtitle">{Copy.innsub}</p>
 

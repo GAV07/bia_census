@@ -12,6 +12,7 @@
 
 
 <article id="geography">
+    <p class="lead">Place</p>
     <h1 class="title">{Copy.geohead}</h1>
     <p class="subtitle">{Copy.geosub}</p>
 

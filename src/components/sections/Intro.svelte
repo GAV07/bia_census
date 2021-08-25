@@ -38,30 +38,47 @@
         overflow: hidden;
         
 
-        #intro__copy-wrapper {
-            height: 60vh;
+        .intro__copy {
+            height: 60%;
             align-items: flex-start;
-            gap: 2em;
             z-index: 2;
 
             h1 {
-                font-size: $mega-font-size;
+                font-size: $huge-font-size;
+                color: $primary1;
+                margin-bottom: .5em;
             }
 
+            &__first {
+                font-size: $mid-font-size;
+                color: $primary3;
+                margin-bottom: 1.5em;
+            }
+            &__second {
+                margin-bottom: 2em;
+            }
+
+            
             p {
                 font-size: $article-font-size;
-                padding-right: 10em; 
+                padding-right: 3em; 
                 line-height: 1.5;
             }
+
+            &__cta { 
+                width: 100%;
+                height: 100%;
+                display: flex;
+                gap: 2em;
+            }
+
         }
 
-        &__area {
+        .intro__area {
             width: 50vw;
-            height: 100vh;
-            padding: 0 3em;
+            padding: 0 2em;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
             text-align: left;
 
@@ -81,24 +98,13 @@
                 }
             }
         }
-
-
-        &__cta { 
-            width: 100%;
-            height: 100%;
-            display: flex;
-            
-            button {
-                margin-right: 32px;
-            }
-        }
     }
 
-    #lead-in {
+    .callout {
         position: relative;
-        padding: 4em 2em;
         border-radius: 10px;
-        color: $white;
+        height: 70vh;
+        color: $primary3;
         display: flex;
         justify-content: space-around;
         align-items: center;
@@ -108,17 +114,30 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background-image: url("../assets/images/BIA_Pattern_Wakanda.jpg");
+            background-image: url("../assets/images/BIA_Pattern_Fog.jpg");
             z-index: -1;
         }
 
-        img {
-            max-width: 400px;
+        &__container {
+            display: flex;
+            width: 50%;
+
+            img {
+                position: absolute;
+                width: 800px;
+            }
         }
 
-        p {
-            max-width: 600px;
-            line-height: 1.7;
+        &__copy {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            p {
+                max-width: 80%;
+                font-weight: 600;
+                line-height: 1.7;
+            }
         }
     }
     
@@ -128,17 +147,21 @@
 
 <Header/>
 <section class="intro">
-    <div class="intro__area" id="intro__copy-wrapper">
-        <h1 class="intro__area__title">Pathways to Prosperity</h1>
-        <p class="intro__area__description">
-            {Copy.opening}
+    <div class="intro__area intro__copy">
+        <p class="lead">The Time is Now</p>
+        <h1 class="intro__copy__title">Pathways to Prosperity</h1>
+        <p class="intro__copy__first">
+            {Copy.opening1}
         </p>
-        <div class="intro__cta">
+        <p class="intro__copy__second">
+            {Copy.opening2}
+        </p>
+        <div class="intro__copy__cta">
             <button class="cta-btn">Read the Story</button>
             <button class="cta-btn-alt">Submit your Org</button>
         </div>
     </div>
-    <div class="intro__area">
+    <div class="intro__area intro__image">
         <Ripple
             top={"25vh"}
             right={"45vh"}
@@ -154,15 +177,18 @@
             
         />
         <div class="img-container">
-            <!-- <img style="transform: translate3d(0, -{y/100}%, 0) scale({(100+y/15)/100})" src="./assets/images/black-up.jpg" alt="Black Female"> -->
             <Image src="/assets/images/black-up.jpg" alt="Black Woman"/>
         </div>
     </div>
 </section>
 <article>
-    <div id="lead-in">
-        <Image src="./assets/images/black-in-wrap.jpg" alt="Black Woman in Head Wrap" width=400/>
-        <p>{Copy.leadIn}</p>
+    <div class="callout">
+        <div class="callout__contianer">
+            <Image width={400} src="./assets/images/wesley.jpg" alt="Black Woman in Head Wrap"/>
+        </div>
+        <div class="callout__contianer callout__copy">
+            <p>{Copy.intro}</p>
+        </div>
         <div class="bk"></div>
     </div>
 </article>
