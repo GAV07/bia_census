@@ -1,10 +1,12 @@
 <script>
-export let title;
-export let description;
+    export let title;
+    export let description;
 </script>
 
 
 <style lang="scss">
+    @import '../../styles/abstracts/variables';
+
     .chart__copy {
         max-width: 800px;
 

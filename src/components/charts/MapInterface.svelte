@@ -33,7 +33,7 @@
 		if (color) {
 			return color
 		} else {
-			return "#EA96CA"
+			return "#fff"
 		}
 	}
 
@@ -42,7 +42,7 @@
 		return newList
 	}
 
-	const projectionAlbersUsa = geoAlbersUsa().scale(950)
+	const projectionAlbersUsa = geoAlbersUsa().scale(800)
   
 	let currentProj = projectionAlbersUsa;
 	let path = geoPath().projection(currentProj);
@@ -66,16 +66,21 @@
 	
 	.chart-section {
 		background-color: $bk;
+		border-radius: 0;
+	}
+	#interface {
+		width: 100%;
+		display: flex;
+	}
+	.conclusion__cta {
+		margin-bottom: 3em;
 	}
 	#map-wrapper {
-		width: 1000px;
+		width: 50%;
 		height: 500px;
 	}
-	.states {
-		//transform: translateX(-50px);
-	}
 	.stateShape {
-	  stroke: $white;
+	  stroke: $secondary3;
 	  stroke-width: 0.5;
 	  transition: all .5s ease-in-out;
 	}
@@ -87,16 +92,20 @@
 		opacity: .2;
 		pointer-events: none;
 	}
-	
+	.states {
+		transform: translate(-140px, 0);
+	}
 	.org-list {
-		height: 400px;
+		max-width: 50%;
+		height: 600px;
 		overflow-y: auto;
-		padding: 20px 5em;
+		padding: 1em;
+		border: 2px solid;
 
 		&__item {
 			background-color: $primary3;
 			padding: 1.5em 3em;
-			margin: .5em 1em .5em 0;
+			margin: .5em 0;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -137,6 +146,7 @@
 
 			.right {
 				margin-top: 8px;
+				margin-left: 24px;
 				max-width: 500px;
 				max-height: 100px;
 			}
@@ -162,53 +172,58 @@
 		title={title}
 		description= {description}
 	/>
-	<div class="chart-container" id="map-wrapper" bind:clientWidth="{width}">
-		<svg style="{`width: ${width}px; height: ${height}px`}">
-			<g class="states">
-				{#each mapData as feature}
-					<path
-					d={path(feature)}
-					id={feature.properties.name}
-					class="stateShape {getColor(feature) != "#EA96CA" ? "filled" : "not-filled"}"
-					fill={getColor(feature)} 
-					on:click={(event) => { filteronState(event.target.id)}}
-					/>
-				{/each}
-			</g>
-		</svg>
+	<div class="conclusion__cta">
+		<a href="https://airtable.com/shriQiDe45MmH0YSw" class="cta-btn-alt">Submit your Org</a>
 	</div>
-	<div class="org-list">
-	  {#each newList as org}
-		<div class="org-list__item" 
-			on:click={() => {
-				if(current === 'hide'){
-					current = 'show'
-				}
-				else {
-					current = 'hide'
-				}
-				}}
-		>
-			<div class="left">
-				<div class="org-list__item__title-line">
-					<h3>{org.name}</h3>
-					<a href="{org.site}">  <Icon name="external-link" stroke=1 strokeWidth=1/>  </a>
-				</div>
-				<p>{org.type}</p>
-				{#if org.programs !== undefined}
-					<div class="org-list__item__programs">
-						{#each org.programs as program}
-						<p class="org-list__item__programs__program">{program}</p>
-						{/each}
-					</div>
-				{:else}
-					<p>No Programs Avaliable</p>
-				{/if}
-			</div>
-			<div class="right" class:show="{current === 'show'}" class:hide="{current === 'hide'}" >
-				<p class="org-description" >{org.description}</p>
-			</div>
+	<div id="interface">
+		<div class="chart-container" id="map-wrapper" bind:clientWidth="{width}">
+			<svg style="{`width: ${width}px; height: ${height}px`}">
+				<g class="states">
+					{#each mapData as feature}
+						<path
+						d={path(feature)}
+						id={feature.properties.name}
+						class="stateShape {getColor(feature) != "#EA96CA" ? "filled" : "not-filled"}"
+						fill={getColor(feature)} 
+						on:click={(event) => { filteronState(event.target.id)}}
+						/>
+					{/each}
+				</g>
+			</svg>
 		</div>
-	  {/each}
+		<div class="org-list">
+		  {#each newList as org}
+			<div class="org-list__item" 
+				on:click={() => {
+					if(current === 'hide'){
+						current = 'show'
+					}
+					else {
+						current = 'hide'
+					}
+					}}
+			>
+				<div class="left">
+					<div class="org-list__item__title-line">
+						<h3>{org.name}</h3>
+						<a href="{org.site}">  <Icon name="external-link" stroke=1 strokeWidth=1/>  </a>
+					</div>
+					<p>{org.type}</p>
+					{#if org.programs !== undefined}
+						<div class="org-list__item__programs">
+							{#each org.programs as program}
+							<p class="org-list__item__programs__program">{program}</p>
+							{/each}
+						</div>
+					{:else}
+						<p>No Programs Avaliable</p>
+					{/if}
+				</div>
+				<div class="right" class:show="{current === 'show'}" class:hide="{current === 'hide'}" >
+					<p class="org-description" >{org.description}</p>
+				</div>
+			</div>
+		  {/each}
+		</div>
 	</div>
 </section>

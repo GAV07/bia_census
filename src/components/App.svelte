@@ -5,6 +5,7 @@
   import Geography from './sections/Geography.svelte'
   import Service from './sections/Service.svelte'
   import Innovators from "./sections/Innovators.svelte"
+  import Conclusion from './sections/Conclusion.svelte'
   import Layout from "./tools/_Layout.svelte"
   import PreLoader from '../components/sections/PreLoader.svelte'
 
@@ -63,10 +64,12 @@
   {:then founders}
     <!------------ Section #3 - Who is being served (Customers and Ethnic) -->
     <Innovators 
-    data={orgs}
-    altData={founders}
+      data={orgs}
+      altData={founders} 
     />
   {/await}
+    <!-- Closing to Story Project w Form -->
+    <Conclusion data={orgs}/>
   {/if}
 {:catch error}
   <p style="color: red">{error.message}</p>

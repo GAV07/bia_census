@@ -99,47 +99,6 @@
             }
         }
     }
-
-    .callout {
-        position: relative;
-        border-radius: 10px;
-        height: 70vh;
-        color: $primary3;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        overflow: hidden;
-        
-        .bk {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: url("../assets/images/BIA_Pattern_Fog.jpg");
-            z-index: -1;
-        }
-
-        &__container {
-            display: flex;
-            width: 50%;
-
-            img {
-                position: absolute;
-                width: 800px;
-            }
-        }
-
-        &__copy {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            p {
-                max-width: 80%;
-                font-weight: 600;
-                line-height: 1.7;
-            }
-        }
-    }
     
 </style>
 

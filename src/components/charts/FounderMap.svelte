@@ -8,6 +8,7 @@
 	import ChartTitle from '../tools/ChartTitle.svelte';
 
 	export let data;
+	export let supportData;
 	export let title; 
 	export let description;
 
@@ -18,25 +19,32 @@
 	$: cities = [];
 	const keys = []
 	const colors = ["#adf5ff","#70eeff","#47eaff","#33e7ff","#00b8d1","#00a2b8","#0090a3","#007e8f"]
-	let colorScale = () => {};
+	let founderColorScale = () => {};
 	let width = 1200
 	let height = width * 0.7
 	let showHide = 'true';
 	let toolTip = "";
 	
-	let summary = rollup(data, v => v.length, d => d.state)
-	let orgExtent = extent(summary, d => d[1])
+	let founderSummary = rollup(data, v => v.length, d => d.state)
+	let founderExtent = extent(founderSummary, d => d[1])
 	
+	let supportSummary = rollup(supportData, v => v.length, d => d.state)
+	let supportExtent = extent(supportSummary, d => d[1])
+
 	// bucket of range for color scale
-	let dif = orgExtent[1] - orgExtent[0];
+	let dif = founderExtent[1] - founderExtent[0];
 	let a = dif/8;
 
-	for (let i=orgExtent[0]; i<=orgExtent[1];i=i+a){
+	for (let i=founderExtent[0]; i<=founderExtent[1];i=i+a){
 		keys.push(Math.round(i))
 	}
 	
-	$: colorScale = scaleQuantize()
-		.domain(orgExtent)
+	$: founderColorScale = scaleQuantize()
+		.domain(founderExtent)
+		.range(colors);
+
+	$: supportColorScale = scaleQuantize()
+		.domain(supportExtent)
 		.range(colors);
 
 	let cityCount = rollup(data, v => v.length, d => d.city)
@@ -45,9 +53,9 @@
 		.domain(cityExtent)
 		.range([1,30])
 
-	$: getColor = function (feature) {
-		let number = summary.get(feature.properties.name)
-		let color = colorScale(number)
+	$: getFounderColor = function (feature) {
+		let number = founderSummary.get(feature.properties.name)
+		let color = founderColorScale(number)
 		if (color) {
 			return [color, number]
 		} else {
@@ -55,7 +63,17 @@
 		}
 	}
 
-	const projectionAlbersUsa = geoAlbersUsa().scale(950)
+	$: getSupportColor = function (feature) {
+		let number = supportSummary.get(feature.properties.name)
+		let color = supportColorScale(number)
+		if (color) {
+			return [color, number]
+		} else {
+			return ["#fff", "0"]
+		}
+	}
+
+	const projectionAlbersUsa = geoAlbersUsa().scale(650)
 	let currentProj = projectionAlbersUsa;
 	
 	let path = geoPath().projection(currentProj);
@@ -65,8 +83,14 @@
 		return points
 	}
 
-	const getRadius = function(cityName) {
+	const getFounderRadius = function(cityName) {
 		let org = data.filter(d => d.city === cityName)
+		let radius = org.length
+		return radiusScale(radius)
+	}
+
+	const getSupportRadius = function(cityName) {
+		let org = supportData.filter(d => d.city === cityName)
 		let radius = org.length
 		return radiusScale(radius)
 	}
@@ -112,10 +136,17 @@
 		height: 500px;
 		position: relative;
 		overflow: visible;
+		display: flex;
+	}
+	.map-name {
+		transform: translate(100px, 100px);
+	}
+	.states {
+		transform: translate(-250px, 0)
 	}
 	.state {
 		&__shape {
-		stroke: $slate;
+		stroke: $secondary3;
 		stroke-width: 0.15;
 		transition: all .5s ease-in-out;
 		}
@@ -182,7 +213,8 @@
 		<label><input type="radio" bind:group={showHide} value="false"/>Show Cities</label>
 	</div>
 	<div class="chart-container" id="map-wrapper" bind:clientWidth="{width}">
-		<svg style="{`width: ${width}px; height: ${height}px`}">
+		<svg class="founders" style="{`width: ${width}px; height: ${height}px`}">
+			<text class="map-name">Black Funded Founders</text>
 			<g class="states">
 				{#each mapData as feature}
 				<g
@@ -194,13 +226,13 @@
 					<path
 						d={path(feature)}
 						id={feature.properties.name}
-						class="state__shape {getColor(feature) != "#000" ? "filled" : "not-filled"}"
-						fill={getColor(feature)[0]} 
+						class="state__shape {getFounderColor(feature) != "#000" ? "filled" : "not-filled"}"
+						fill={getFounderColor(feature)[0]} 
 					/>
 					{#if toolTip === feature.properties.name}
 							<g class="state__info">
 								<text class="state__info__name">{feature.properties.name}:</text>
-								<text class="state__info__number">{getColor(feature)[1]} Venture(s)</text>
+								<text class="state__info__number">{getFounderColor(feature)[1]} Venture(s)</text>
 							</g>
 						{/if}
 				</g>
@@ -210,10 +242,39 @@
 			<g class="cities">
 				{#each cities as city}
 					{#if data.some(org => org.city === city.city)}
-						<circle className="citiPop" cx={makePoints(city.lng, city.lat)[0]} cy={makePoints(city.lng, city.lat)[1]} r={getRadius(city.city)} />
+						<circle className="citiPop" cx={makePoints(city.lng, city.lat)[0]} cy={makePoints(city.lng, city.lat)[1]} r={getFounderRadius(city.city)} />
 					{/if}
 				{/each}
 			</g>
+			{/if}
+		</svg>
+		<svg class="supporters" style="{`width: ${width}px; height: ${height}px`}">
+			<text class="map-name">Black Support Organizations</text>
+			<g class="states">
+				{#each mapData as feature}
+					<g 
+						class="state" 
+						id={feature.properties.name}
+						on:mouseover={handleToolTip(feature.properties.name)} 
+						on:mouseout={handleMouseOut}
+					>
+						<path
+							data-tooltip="{feature.properties.name}: {getSupportColor(feature)[1]}"
+							d={path(feature)}
+							class="state__shape"
+							fill={getSupportColor(feature)[0]} 
+						/>
+					</g>
+				{/each}
+			</g>
+			{#if showHide === 'false'}
+				<g class="cities">
+					{#each cities as city}
+						{#if supportData.some(org => org.city === city.city)}
+							<circle class="city" cx={makePoints(city.lng, city.lat)[0]} cy={makePoints(city.lng, city.lat)[1]} r={getSupportRadius(city.city)} />
+						{/if}
+					{/each}
+				</g>
 			{/if}
 		</svg>
 		<div class="map-key">

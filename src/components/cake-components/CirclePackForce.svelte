@@ -5,6 +5,7 @@
 		forceX,
 		forceY,
 		forceManyBody,
+		forceRadial,
 		forceCollide,
 		forceCenter,
 	} from 'd3-force';
@@ -15,7 +16,7 @@
 	 * is going be unique and this component will need to be customized
 	 * See more: https://github.com/d3/d3-force/blob/master/README.md
 	 */
-	export let manyBodyStrength = 1;
+	export let manyBodyStrength = 10;
 	export let xStrength = 0.5;
 	/* --------------------------------------------
 	 * Set a manual color, otherwise it will default to using the zScale
@@ -43,20 +44,19 @@
 	 */
 	$: {
 		simulation
-			.force('x', forceX().x(d => {
-				return groupBy === true ? $xGet(d) + $xScale.bandwidth() / 2 : $width / 2;
-			}).strength(xStrength))
-			//.force('y', forceY(height / 3).strength(xStrength))
+			// .force('x', forceX().x(d => {
+			// 	return groupBy === true ? $xGet(d) + $xScale.bandwidth() / 2 : $width / 2;
+			// }).strength(xStrength))
 			.force('center', forceCenter($width / 2, $height / 2))
-			.force('charge', forceManyBody().strength(manyBodyStrength))
+			//.force('charge', forceManyBody().strength(manyBodyStrength))
+			.force("radial", forceRadial(d => $rGet(d), $width / 2, $height / 2))
 			.force('collision', forceCollide().radius(d => {
 				return $rGet(d) + nodeStrokeWidth / 2; // Divide this by two because an svg stroke is drawn halfway out
 			}))
-			.force('center', forceCenter($width / 2, $height / 2))
+			//.force('center', forceCenter($width / 2, $height / 2))
 			.alpha(1)
 			.restart()
 	}
-	//$: console.log(nodes)
 
 	let toolTip = "";
 	const handleToolTip = function(programName) {
@@ -88,24 +88,57 @@
 		on:mouseout={handleMouseOut}
 	>
 	</circle>
-	{#if toolTip === point.name}
+	{#if $rGet(point) > 40}
+		{#if toolTip === point.name}
+			<rect
+				class="tag"
+				x='{point.x}'
+				y='{point.y}'
+				rx='10px'
+				ry='10px'
+				width='150px'
+				height='60px'
+				fill="#ECE5F0"
+				transform='translate(-75,-25)'
+			></rect>
+			<text
+				class="tag-text"
+				x='{point.x - point.name.length * 2.5}'
+				y='{point.y + 20}'
+				fill='#1D1E68'
+				font-size="10"
+			>
+				{point.name}
+			</text>
+		{/if}
+		<text
+			class="tag-text"
+			x='{point.x - 10}'
+			y='{point.y + 5}'
+			fill='#fff'
+		>
+			{point.percent}%
+		</text>
+	{:else if toolTip === point.name}
 		<rect
 			class="tag"
 			x='{point.x}'
-			y='{point.y - 80}'
+			y='{point.y}'
 			rx='10px'
 			ry='10px'
-			width='{point.name.length > 10 ? point.name.length * 10 : point.name.length * 12}px'
-			height='50px'
-			fill="#fff"
+			width='150px'
+			height='60px'
+			fill="#ECE5F0"
+			transform='translate(-75,-25)'
 		></rect>
 		<text
 			class="tag-text"
-			x='{point.x + 10}'
-			y='{point.y - 50}'
-			fill='#F44E3F'
+			x='{point.x - point.name.length * 2.5}'
+			y='{point.y + 20}'
+			fill='#1D1E68'
+			font-size="10"
 		>
-		{point.name}
+			{point.name}
 		</text>
 	{/if}
 {/each}

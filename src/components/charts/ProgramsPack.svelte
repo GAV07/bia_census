@@ -13,7 +13,7 @@
   const zKey = 'name';
   
   let groupBy = 'true';
-  const seriesColors = ['#faab18', '#e26d5a', '#00b8d1', '#ea96ca', '#ece5f0'];
+  const seriesColors = ['#faab18', '#e26d5a', '#00b8d1', '#ea96ca', '#1D1E68'];
   
   let programs= [];
   let catNames = [];
@@ -41,7 +41,11 @@
       item.name === program ? item.count++ : 0
     })
   })
-
+  chartData = chartData.map(group => ({
+    name: group.name,
+    count: group.count,
+    percent: Math.round(group.count / programs.length * 100)
+  }))
   let manyBodyStrength = 3;
   let xStrength = 0.5
 </script>

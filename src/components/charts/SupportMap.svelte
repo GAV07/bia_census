@@ -112,7 +112,7 @@
 	.state {
 
 		&__shape {
-		  stroke: $slate;
+		  stroke: $secondary3;
 		  stroke-width: 0.15;
 		  transition: all .5s ease-in-out;
 		}

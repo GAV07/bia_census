@@ -10,11 +10,10 @@
 </script>
 
 
-
 <article id="service">
     <p class="lead">Service</p>
-    <h1 class="title">{Copy.serhead}</h1>
-    <p class="subtitle">{Copy.sersub}</p>
+    <h1 class="title">{Copy.serHead}</h1>
+    <p class="subtitle">{Copy.serSub}</p>
 
    <!-- Programs in Simple Force Graph (change later) -->
    <div class="copy">
@@ -39,7 +38,7 @@
 
     <!-- Smaller Callout for Primary Customers -->
     <div class="copy">
-        <p>{Copy.geo3}</p>
+        <p>{Copy.place3}</p>
     </div>
     <Stat
         data={data}

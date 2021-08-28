@@ -59,7 +59,7 @@
     <h3>Black Innovation Cens<em>Us</em></h3>
     <nav>
         <ul>
-            <li><a href="#geography">Place</a></li>
+            <li><a href="#place">Place</a></li>
             <li><a href="#service">Service</a></li>
             <li><a href="#innovators">Audience</a></li>
         </ul>
