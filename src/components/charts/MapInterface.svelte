@@ -80,7 +80,7 @@
 		height: 500px;
 	}
 	.stateShape {
-	  stroke: $secondary3;
+	  stroke: $slate;
 	  stroke-width: 0.5;
 	  transition: all .5s ease-in-out;
 	}

@@ -6,7 +6,8 @@
 	import { onMount } from "svelte";
 	import { feature } from "topojson";
 	import ChartTitle from '../tools/ChartTitle.svelte';
-	import Icon from '../tools/Icon.svelte';
+	import { fade } from 'svelte/transition';
+	import { circOut } from 'svelte/easing';
 
 	export let data;
 	export let title; 
@@ -95,6 +96,17 @@
 		};
 		mapData = land.features;
 	});
+
+	// function scale(node, { duration }) {
+	// 	return {
+	// 		duration,
+	// 		css: t => {
+	// 			const eased = circOut(t);
+
+	// 			return `transform: scale(.5);`
+	// 		}
+	// 	}
+	// }
 </script>
   
 <style lang="scss">
@@ -112,7 +124,7 @@
 	.state {
 
 		&__shape {
-		  stroke: $secondary3;
+		  stroke: $slate;
 		  stroke-width: 0.15;
 		  transition: all .5s ease-in-out;
 		}
@@ -208,7 +220,7 @@
 				<g class="cities">
 					{#each cities as city}
 						{#if data.some(org => org.city === city.city)}
-							<circle class="city" cx={makePoints(city.lng, city.lat)[0]} cy={makePoints(city.lng, city.lat)[1]} r={getRadius(city.city)} />
+							<circle transition:fade class="city" cx={makePoints(city.lng, city.lat)[0]} cy={makePoints(city.lng, city.lat)[1]} r={getRadius(city.city)} />
 						{/if}
 					{/each}
 				</g>

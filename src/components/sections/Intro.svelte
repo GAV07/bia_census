@@ -3,29 +3,16 @@
     import Ripple from '../tools/Ripple.svelte'
     import Copy from '../../data/doc.json'
     import Image from '../tools/Image.svelte'
-    import gsap from 'gsap'
-    import { onMount } from 'svelte'
+    import { fly } from 'svelte/transition'
+    import { onMount } from 'svelte';
+
     let y;
+    let visible = true;
 
-    // onMount(() => {
-    //     let textWrapper = document.querySelector('.intro__area__title');
-    //     textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+    onMount(() => {
 
-    //     let tl = gsap.timeline({delay: .25})
-    //     tl.fromTo(".letter", 
-    //     { 
-    //         opacity: 0
-    //     },
-    //     { 
-    //         opacity: 1,
-    //         stagger: { 
-    //                 amount: .5, 
-    //                 grid: 'auto',
-    //                 ease: 'power3.out', 
-    //             }
-    //     }
-    //     )
-    // })
+    })
+
 </script>
 
 <style lang="scss">
@@ -56,11 +43,11 @@
             }
             &__second {
                 margin-bottom: 2em;
+                font-size: $default-font-size;
             }
 
             
             p {
-                font-size: $article-font-size;
                 padding-right: 3em; 
                 line-height: 1.5;
             }
@@ -107,17 +94,17 @@
 <Header/>
 <section class="intro">
     <div class="intro__area intro__copy">
-        <p class="lead">The Time is Now</p>
-        <h1 class="intro__copy__title">Pathways to Prosperity</h1>
-        <p class="intro__copy__first">
+        <p id="intro__lead" class="lead">The Time is Now</p>
+        <h1 transition:fly="{{ x: -20, duration: 1000}}" class="intro__copy__title">Pathways to Prosperity</h1>
+        <p transition:fly="{{ x: -10, duration: 1000, delay: 1000}}" class="intro__copy__first">
             {Copy.opening1}
         </p>
-        <p class="intro__copy__second">
+        <p transition:fly="{{ x: -10, duration: 1000, delay: 1000}}" class="intro__copy__second">
             {Copy.opening2}
         </p>
         <div class="intro__copy__cta">
-            <button class="cta-btn">Read the Story</button>
-            <button class="cta-btn-alt">Submit your Org</button>
+            <button transition:fly="{{ x: -10, duration: 1000, delay: 2000}}" class="cta-btn">Read the Story</button>
+            <button transition:fly="{{ x: -10, duration: 1000, delay: 2500}}" class="cta-btn-alt">Submit your Org</button>
         </div>
     </div>
     <div class="intro__area intro__image">
