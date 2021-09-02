@@ -25,6 +25,14 @@
         description={Copy.serChartSub1}
     />
 
+    <Stat
+        data={data}
+        mark={"<"}
+        category={"type"}
+        dataPoint={"Research Institute"}
+        info="Less than one percent of the types of Black Support Organizations are reserach institutions."
+    />
+
     <!-- Simple Type Breakdown -->
     <div class="copy">
         <p>{Copy.ser2}</p>
@@ -43,7 +51,7 @@
     <Stat
         data={data}
         category={"customer"}
-        dataPoint={"Founder/Entrepreneur"}
+        dataPoint={"Founders/Entrepreneurs"}
         info="The percentage of Black Support Organizations that focus on Founders and Entrepreneurs as an audience. 
             Does this heavy emphasis on Founders limit the impact of impact that BSO's can have collectively on the wider Black Innovation Ecosystem?"
     />

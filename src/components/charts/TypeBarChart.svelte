@@ -37,7 +37,7 @@
     />
     <figure class="chart-container">
         <LayerCake
-            padding={{ top: 0, bottom: 20, left: 180, right: 20 }}
+            padding={{ top: 0, bottom: 20, left: 200, right: 20 }}
             x={xKey}
             y={yKey}
             yScale={scaleBand().paddingInner(.15).round(true)}

@@ -1,6 +1,6 @@
 <script>
     import Copy from '../../data/doc.json'
-    
+    import Stat from '../tools/Stat.svelte'
     import MapChart from '../charts/SupportMap.svelte'
     import BeeChart from '../charts/BeeChart.svelte'
     //import ReachGrouped from '../charts/ReachGrouped.svelte'
@@ -25,6 +25,13 @@
         title={Copy.placeChartTitle1}
         description={Copy.placeChartSub1}
     />
+
+    <Stat
+        data={data}
+        category={"city"}
+        dataPoint={"Atlanta"}
+        info="Atlanta leads cities in America with a little over 20% of all listed Black Support Organizations headquartered there."
+    />
     
     <!-- Year of inception for orgs in dataset -->
     <div class="copy">
@@ -34,6 +41,13 @@
         data={data}
         title={Copy.placeChartTitle2}
         description={Copy.placeChartSub2}
+    />
+
+    <Stat
+        data={data}
+        category={"year"}
+        dataPoint={2017}
+        info="Over 20% of Black Support Organizations were founded in 2017."
     />
 
     <!-- Reach of organizations in dataset -->

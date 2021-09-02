@@ -139,10 +139,10 @@
 			&__name {
 				font-family: 'Montserrat Alternates', sans-serif;
 				font-size: $mid-font-size;
-				transform: translate(0 ,250px)
+				transform: translate(0 ,350px)
 			}
 			&__number {
-				transform: translate(0 ,270px)
+				transform: translate(0 ,370px)
 			}
 		}
 	}
@@ -165,6 +165,11 @@
 
 		.keys {
 			display: flex;
+			flex-wrap: wrap;
+
+			.key-title {
+				flex-basis: 100%;
+			}
 
 			.boxes {
 				width: 40px;
@@ -174,7 +179,7 @@
 	
 				p {
 					font-size: $sm-font-size;
-					transform: translate(16px, -12px);
+					transform: translate(16px, 8px);
 				}
 			}
 		}
@@ -228,11 +233,11 @@
 		</svg>
 		<div class="map-key">
 			<div class="keys">
+				<p class="key-title">Number of Black Organizations</p>
 				{#each colors as color, index}
 						<div class="boxes" style="background-color: {color};"><p>{keys[index]}</p></div>
 				{/each}
 			</div>
-			<p>Number of Black Organizations</p>
 		</div>
 	</div>
 </section>

@@ -14,10 +14,11 @@
 	let newList = data
 	let mapData = []
 	let current = "hide";
-	const blues = ["#4b97c9","#4a96c9","#4895c8","#4794c8","#4693c7","#4592c7","#4492c6","#4391c6","#4190c5","#408fc4","#3f8ec4","#3e8dc3","#3d8cc3","#3c8bc2","#3b8ac2","#3a89c1","#3988c1","#3787c0","#3686c0","#3585bf","#3484bf","#3383be","#3282bd","#3181bd","#3080bc","#2f7fbc","#2e7ebb","#2d7dbb","#2c7cba","#2b7bb9","#2a7ab9","#2979b8","#2878b8","#2777b7","#2676b6","#2574b6","#2473b5","#2372b4","#2371b4","#2270b3","#216fb3","#206eb2","#1f6db1","#1e6cb0","#1d6bb0","#1c6aaf","#1c69ae","#1b68ae","#1a67ad","#1966ac","#1865ab","#1864aa","#1763aa","#1662a9","#1561a8","#1560a7","#145fa6","#135ea5","#135da4","#125ca4","#115ba3","#115aa2","#1059a1","#1058a0","#0f579f","#0e569e","#0e559d","#0e549c","#0d539a","#0d5299","#0c5198","#0c5097","#0b4f96","#0b4e95","#0b4d93","#0b4c92","#0a4b91","#0a4a90","#0a498e","#0a488d","#09478c","#09468a","#094589","#094487","#094386","#094285","#094183","#084082","#083e80","#083d7f","#083c7d","#083b7c","#083a7a","#083979","#083877","#083776","#083674","#083573","#083471","#083370","#08326e","#08316d","#08306b"]
+	const colors = ["#adf5ff","#70eeff","#47eaff","#33e7ff","#00b8d1","#00a2b8","#0090a3","#007e8f"]
 	let colorScale = () => {};
 	let width = 1200
 	let height = width * 0.7
+	let selectedState = ""
 	
 	
 	let summary = rollup(data, v => v.length, d => d.state)
@@ -25,7 +26,7 @@
 	
 	$: colorScale = scaleQuantize()
 		.domain(orgExtent)
-		.range(blues);
+		.range(colors);
 
 	$: getColor = function (feature) {
 		let number = summary.get(feature.properties.name)
@@ -81,7 +82,7 @@
 	}
 	.stateShape {
 	  stroke: $slate;
-	  stroke-width: 0.5;
+	  stroke-width: 0.15;
 	  transition: all .5s ease-in-out;
 	}
 	.stateShape:hover {
@@ -101,6 +102,7 @@
 		overflow-y: auto;
 		padding: 1em;
 		border: 2px solid;
+		border-radius: 10px;
 
 		&__item {
 			background-color: $primary3;
@@ -167,7 +169,7 @@
 	
 </style>
   
-<section class="chart-section">
+<section id="orgs" class="chart-section">
 	<ChartTitle 
 		title={title}
 		description= {description}
@@ -185,45 +187,49 @@
 						id={feature.properties.name}
 						class="stateShape {getColor(feature) != "#EA96CA" ? "filled" : "not-filled"}"
 						fill={getColor(feature)} 
-						on:click={(event) => { filteronState(event.target.id)}}
+						on:click={(event) => { 
+							selectedState = event.target.id
+							filteronState(event.target.id)
+						}}
 						/>
 					{/each}
 				</g>
 			</svg>
 		</div>
 		<div class="org-list">
-		  {#each newList as org}
-			<div class="org-list__item" 
-				on:click={() => {
-					if(current === 'hide'){
-						current = 'show'
-					}
-					else {
-						current = 'hide'
-					}
-					}}
-			>
-				<div class="left">
-					<div class="org-list__item__title-line">
-						<h3>{org.name}</h3>
-						<a href="{org.site}">  <Icon name="external-link" stroke=1 strokeWidth=1/>  </a>
-					</div>
-					<p>{org.type}</p>
-					{#if org.programs !== undefined}
-						<div class="org-list__item__programs">
-							{#each org.programs as program}
-							<p class="org-list__item__programs__program">{program}</p>
-							{/each}
+			<h1 class="selected-state">{selectedState}</h1>
+			{#each newList as org}
+				<div class="org-list__item" 
+				>
+					<!-- on:click={() => {
+						if(current === 'hide'){
+							current = 'show'
+						}
+						else {
+							current = 'hide'
+						}
+						}} -->
+					<div class="left">
+						<div class="org-list__item__title-line">
+							<h3>{org.name}</h3>
+							<a href="{org.site}">  <Icon name="external-link" stroke=1 strokeWidth=1/>  </a>
 						</div>
-					{:else}
-						<p>No Programs Avaliable</p>
-					{/if}
+						<p>{org.type}</p>
+						{#if org.programs !== undefined}
+							<div class="org-list__item__programs">
+								{#each org.programs as program}
+								<p class="org-list__item__programs__program">{program}</p>
+								{/each}
+							</div>
+						{:else}
+							<p>No Programs Avaliable</p>
+						{/if}
+					</div>
+					<div class="right" class:show="{current === 'show'}" class:hide="{current === 'hide'}" >
+						<p class="org-description" >{org.description}</p>
+					</div>
 				</div>
-				<div class="right" class:show="{current === 'show'}" class:hide="{current === 'hide'}" >
-					<p class="org-description" >{org.description}</p>
-				</div>
-			</div>
-		  {/each}
+		  	{/each}
 		</div>
 	</div>
 </section>

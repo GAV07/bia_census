@@ -49,6 +49,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    max-width: 1100px;
 
     .radar-title {
       margin-bottom: 0px;

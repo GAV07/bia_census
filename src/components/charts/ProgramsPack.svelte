@@ -68,10 +68,10 @@
     title={title}
     description= {description}
   />
-  <div class="input-container">
+  <!-- <div class="input-container">
     <label><input type="radio" bind:group={groupBy} value="true"/>Group by category</label>
     <label><input type="radio" bind:group={groupBy} value="false"/>Clump together</label>
-  </div>
+  </div> -->
   <figure id="force-chart" class="chart-container">
     <LayerCake
       data={chartData}

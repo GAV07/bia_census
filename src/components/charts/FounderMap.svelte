@@ -138,11 +138,14 @@
 		overflow: visible;
 		display: flex;
 	}
+	svg {
+		overflow: visible;
+	}
 	.map-name {
 		transform: translate(100px, 100px);
 	}
 	.states {
-		transform: translate(-250px, 0)
+		transform: translate(-250px, 0);
 	}
 	.state {
 		&__shape {
@@ -174,6 +177,7 @@
 	}
 	.cities {
 		opacity: .7;
+		transform: translate(-250px, 0);
 	}
 	.city {
 		fill: $primary3;
@@ -242,7 +246,7 @@
 			<g class="cities">
 				{#each cities as city}
 					{#if data.some(org => org.city === city.city)}
-						<circle className="citiPop" cx={makePoints(city.lng, city.lat)[0]} cy={makePoints(city.lng, city.lat)[1]} r={getFounderRadius(city.city)} />
+						<circle class="city" cx={makePoints(city.lng, city.lat)[0]} cy={makePoints(city.lng, city.lat)[1]} r={getFounderRadius(city.city)} />
 					{/if}
 				{/each}
 			</g>
@@ -255,8 +259,6 @@
 					<g 
 						class="state" 
 						id={feature.properties.name}
-						on:mouseover={handleToolTip(feature.properties.name)} 
-						on:mouseout={handleMouseOut}
 					>
 						<path
 							data-tooltip="{feature.properties.name}: {getSupportColor(feature)[1]}"
@@ -277,13 +279,13 @@
 				</g>
 			{/if}
 		</svg>
-		<div class="map-key">
+		<!-- <div class="map-key">
 			<div class="keys">
 				{#each colors as color, index}
 						<div class="boxes" style="background-color: {color};"><p>{keys[index]}</p></div>
 				{/each}
 			</div>
 			<p>Number of Black Funded Companies</p>
-		</div>
+		</div> -->
 	</div>
 </section>
