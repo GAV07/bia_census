@@ -18,10 +18,17 @@
 </script>
 
 <style lang="scss">
+  @import '../../styles/abstracts/mixins';
+
   #pre-loader {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+
   }
   #icon-container {
     width: 100%;
@@ -30,10 +37,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    @include respond(phone) {
+        flex-direction: column;
+    }
 
     .icon {
       max-width: 225px;
       margin: 1em;
+
+      @include respond(phone) {
+        min-width: 200px;
+      }
     }
     .cls-1{
       fill:none;

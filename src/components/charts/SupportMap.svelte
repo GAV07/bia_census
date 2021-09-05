@@ -7,7 +7,7 @@
 	import { feature } from "topojson";
 	import ChartTitle from '../tools/ChartTitle.svelte';
 	import { fade } from 'svelte/transition';
-	import { circOut } from 'svelte/easing';
+	import MediaQuery from '../tools/MediaQuery.svelte'
 
 	export let data;
 	export let title; 
@@ -26,6 +26,7 @@
 	let height = width * 0.7
 	let showHide = 'true';
 	let toolTip = "";
+	let scaleNumber = 950;
 	
 	
 	let summary = rollup(data, v => v.length, d => d.state)
@@ -51,7 +52,13 @@
 		}
 	}
 
-	const projectionAlbersUsa = geoAlbersUsa().scale(950)
+	
+	if( window.screen.width <= 480) {
+		scaleNumber = 450
+	}
+
+
+	const projectionAlbersUsa = geoAlbersUsa().scale(scaleNumber)
 	let currentProj = projectionAlbersUsa;
 	
 	let path = geoPath().projection(currentProj);
@@ -111,15 +118,28 @@
   
 <style lang="scss">
 	@import '../../styles/abstracts/variables';
+	@import '../../styles/abstracts/mixins';
 	
 	#support-map {
 		background-color: $bk;
+	}
+	.input-container {
+		display: flex;
+		gap: 1em;
+
+		@include respond(phone) {
+			flex-direction: column;
+        }
 	}
 	#map-wrapper {
 		width: 1000px;
 		height: 500px;
 		position: relative;
 		overflow: visible;
+
+		@include respond(phone) {
+			transform: translate(25px, -60px);
+        }
 	}
 	.state {
 
@@ -162,6 +182,10 @@
 		bottom: 0;
 		right: 0;
 		transform: translate(0, 30px);
+
+		@include respond(phone) {
+			transform: translate(-110px, -40px);
+        }
 
 		.keys {
 			display: flex;

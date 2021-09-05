@@ -4,6 +4,10 @@
     padding: 5em;
     border-radius: 10px;
 
+    @include respond(phone) {
+        padding: 2em;
+    }
+
     .chart__copy {
         max-width: 800px;
 

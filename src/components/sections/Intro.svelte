@@ -17,6 +17,7 @@
 
 <style lang="scss">
     @import '../../styles/abstracts/variables';
+    @import '../../styles/abstracts/mixins';
 
     .intro {
         display: flex;
@@ -30,6 +31,16 @@
             align-items: flex-start;
             z-index: 2;
 
+            @include respond(phone) {
+                    margin: 4em 0;
+                }
+
+            .lead {
+                @include respond(phone) {
+                    color: $primary2;
+                }
+            }
+
             h1 {
                 font-size: $huge-font-size;
                 color: $primary1;
@@ -40,10 +51,18 @@
                 font-size: $mid-font-size;
                 color: $primary3;
                 margin-bottom: 1.5em;
+
+                @include respond(phone) {
+                    color: $white;
+                }
             }
             &__second {
                 margin-bottom: 2em;
                 font-size: $default-font-size;
+
+                @include respond(phone) {
+                    color: $bk;
+                }
             }
 
             
@@ -69,11 +88,23 @@
             justify-content: center;
             text-align: left;
 
+            @include respond(phone) {
+                    width: 100vw;
+                    padding-left: 2em;
+            }
+
             .img-container {
                 position: relative;
                 overflow: hidden;
-                height: 100vh;
+                height: 120vh;
                 width: 50vw;
+
+                @include respond(phone) {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100vw;
+                }
 
                 img {
                     position: absolute;
