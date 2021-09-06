@@ -45,7 +45,12 @@
                 font-size: $huge-font-size;
                 color: $primary1;
                 margin-bottom: .5em;
+
+                @include respond(phone) {
+                    font-size: $large-font-size;
+                }
             }
+
 
             &__first {
                 font-size: $mid-font-size;
@@ -54,6 +59,7 @@
 
                 @include respond(phone) {
                     color: $white;
+                    font-size: $default-font-size;
                 }
             }
             &__second {
@@ -62,6 +68,7 @@
 
                 @include respond(phone) {
                     color: $bk;
+                    font-size: $phone-font-size;
                 }
             }
 
@@ -96,7 +103,7 @@
             .img-container {
                 position: relative;
                 overflow: hidden;
-                height: 120vh;
+                height: 100vh;
                 width: 50vw;
 
                 @include respond(phone) {
@@ -160,7 +167,7 @@
 </section>
 <article>
     <div class="callout">
-        <div class="callout__contianer">
+        <div class="callout__contianer callout__image">
             <Image width={400} src="./assets/images/wesley.jpg" alt="Black Woman in Head Wrap"/>
         </div>
         <div class="callout__contianer callout__copy">

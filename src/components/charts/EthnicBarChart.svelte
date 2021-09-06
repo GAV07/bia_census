@@ -5,6 +5,7 @@
     import AxisX from '../cake-components/AxisX.svelte';
     import AxisY from '../cake-components/AxisY.svelte';
     import ChartTitle from '../tools/ChartTitle.svelte';
+    import MediaQuery from '../tools/MediaQuery.svelte'
     import { rollup } from 'd3-array';
     
     export let data;
@@ -35,28 +36,62 @@
         title={title}
         description={description}
     />
-    <figure class="chart-container">
-        <LayerCake
-            padding={{ top: 0, bottom: 20, left: 180 }}
-            x={xKey}
-            y={yKey}
-            yScale={scaleBand().paddingInner(.15).round(true)}
-            yDomain={[...focuses]}
-            xDomain={[0, null]}
-            data={chartData}
-        >
-            <Svg>
-                <AxisX
-                    gridlines={true}
-                    baseline={true}
-                    snapTicks={true}
-                    formatTick={d => d + "%"}
-                />
-                <AxisY
-                    gridlines={false}
-                />
-                <Bar/>
-            </Svg>
-        </LayerCake>
-    </figure>
+    <MediaQuery query="(min-width: 1281px)" let:matches>
+        {#if matches}   
+            <figure class="chart-container bar-chart">
+                <LayerCake
+                    padding={{ top: 0, bottom: 20, left: 180 }}
+                    x={xKey}
+                    y={yKey}
+                    yScale={scaleBand().paddingInner(.15).round(true)}
+                    yDomain={[...focuses]}
+                    xDomain={[0, null]}
+                    data={chartData}
+                >
+                    <Svg>
+                        <AxisX
+                            gridlines={true}
+                            baseline={true}
+                            snapTicks={true}
+                            formatTick={d => d + "%"}
+                        />
+                        <AxisY
+                            gridlines={false}
+                        />
+                        <Bar/>
+                    </Svg>
+                </LayerCake>
+            </figure>
+           
+        {/if}
+    </MediaQuery>
+    <MediaQuery query="(max-width: 480px)" let:matches>
+        {#if matches}   
+            <figure class="chart-container bar-chart">
+                <LayerCake
+                    padding={{ top: 0, bottom: 20, left: 20 }}
+                    x={xKey}
+                    y={yKey}
+                    yScale={scaleBand().paddingInner(.15).round(true)}
+                    yDomain={[...focuses]}
+                    xDomain={[0, null]}
+                    data={chartData}
+                >
+                    <Svg>
+                        <AxisX
+                            gridlines={true}
+                            baseline={true}
+                            snapTicks={true}
+                            formatTick={d => d + "%"}
+                        />
+                        <AxisY
+                            gridlines={false}
+                        />
+                        <Bar/>
+                    </Svg>
+                </LayerCake>
+            </figure>
+           
+        {/if}
+    </MediaQuery>
 </section>

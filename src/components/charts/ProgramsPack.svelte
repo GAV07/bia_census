@@ -2,6 +2,7 @@
   import { LayerCake, Svg } from 'layercake';
   import { scaleOrdinal, scaleBand } from 'd3-scale';
   import ChartTitle from '../tools/ChartTitle.svelte'
+  import MediaQuery from '../tools/MediaQuery.svelte'
   import ForceLayout from '../cake-components/CirclePackForce.svelte';
 
   export let title;
@@ -52,6 +53,7 @@
 
 <style lang="scss">
   @import '../../styles/abstracts/variables';
+  @import '../../styles/abstracts/mixins';
 
   #programs {
 		background-color: $bk;
@@ -59,6 +61,10 @@
 
   #force-chart {
     overflow: visible;
+
+    @include respond(phone) {
+      height: 300px;
+    }
   }
 </style>
 
@@ -72,27 +78,60 @@
     <label><input type="radio" bind:group={groupBy} value="true"/>Group by category</label>
     <label><input type="radio" bind:group={groupBy} value="false"/>Clump together</label>
   </div> -->
-  <figure id="force-chart" class="chart-container">
-    <LayerCake
-      data={chartData}
-      x={xKey}
-      r={rKey}
-      z={zKey}
-      xScale={scaleBand()}
-      xDomain={catNames}
-      rRange={[5, 75]}
-      zScale={scaleOrdinal()}
-      zDomain={catNames}
-      zRange={seriesColors}
-    >
-      <Svg>
-        <ForceLayout
-          {manyBodyStrength}
-          {xStrength}
-          groupBy={JSON.parse(groupBy)}
-          nodeStrokeColor='#fff'
-        />
-      </Svg>
-    </LayerCake>
-  </figure>
+
+  <MediaQuery query="(min-width: 1281px)" let:matches>
+    {#if matches}    
+      <figure id="force-chart" class="chart-container">
+        <LayerCake
+          data={chartData}
+          x={xKey}
+          r={rKey}
+          z={zKey}
+          xScale={scaleBand()}
+          xDomain={catNames}
+          rRange={[5, 75]}
+          zScale={scaleOrdinal()}
+          zDomain={catNames}
+          zRange={seriesColors}
+        >
+          <Svg>
+            <ForceLayout
+              {manyBodyStrength}
+              {xStrength}
+              groupBy={JSON.parse(groupBy)}
+              nodeStrokeColor='#fff'
+            />
+          </Svg>
+        </LayerCake>
+      </figure>
+    {/if}
+  </MediaQuery>
+
+  <MediaQuery query="(max-width: 480px)" let:matches>
+    {#if matches}    
+      <figure id="force-chart" class="chart-container">
+        <LayerCake
+          data={chartData}
+          x={xKey}
+          r={rKey}
+          z={zKey}
+          xScale={scaleBand()}
+          xDomain={catNames}
+          rRange={[5, 55]}
+          zScale={scaleOrdinal()}
+          zDomain={catNames}
+          zRange={seriesColors}
+        >
+          <Svg>
+            <ForceLayout
+              {manyBodyStrength}
+              {xStrength}
+              groupBy={JSON.parse(groupBy)}
+              nodeStrokeColor='#fff'
+            />
+          </Svg>
+        </LayerCake>
+      </figure>
+    {/if}
+  </MediaQuery>
 </section>

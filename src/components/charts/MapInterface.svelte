@@ -19,6 +19,7 @@
 	let width = 1200
 	let height = width * 0.7
 	let selectedState = ""
+	let scaleNumber = 800;
 	
 	
 	let summary = rollup(data, v => v.length, d => d.state)
@@ -43,7 +44,11 @@
 		return newList
 	}
 
-	const projectionAlbersUsa = geoAlbersUsa().scale(800)
+	if( window.screen.width <= 480) {
+		scaleNumber = 400
+	}
+
+	const projectionAlbersUsa = geoAlbersUsa().scale(scaleNumber)
   
 	let currentProj = projectionAlbersUsa;
 	let path = geoPath().projection(currentProj);
@@ -64,7 +69,11 @@
   
 <style lang="scss">
 	@import '../../styles/abstracts/variables';
+	@import '../../styles/abstracts/mixins';
 	
+	#orgs {
+		
+	}
 	.chart-section {
 		background-color: $bk;
 		border-radius: 0;
@@ -72,6 +81,10 @@
 	#interface {
 		width: 100%;
 		display: flex;
+
+		@include respond(phone) {
+			flex-direction: column;
+		}
 	}
 	.conclusion__cta {
 		margin-bottom: 3em;
@@ -79,6 +92,10 @@
 	#map-wrapper {
 		width: 50%;
 		height: 500px;
+
+		@include respond(phone) {
+			width: 100%;
+		}
 	}
 	.stateShape {
 	  stroke: $slate;
@@ -95,6 +112,10 @@
 	}
 	.states {
 		transform: translate(-140px, 0);
+
+		@include respond(phone) {
+			transform: translate(-320px, 0);
+		}
 	}
 	.org-list {
 		max-width: 50%;
@@ -103,6 +124,10 @@
 		padding: 1em;
 		border: 2px solid;
 		border-radius: 10px;
+
+		@include respond(phone) {
+			max-width: 100%;
+		}
 
 		&__item {
 			background-color: $primary3;
@@ -113,6 +138,11 @@
 			align-items: center;
 			color: $primary2;
 			border-radius: 10px;
+
+			@include respond(phone) {
+				flex-direction: column;
+				text-align: center;
+			}
 
 			&__title-line {
 				display: flex;
@@ -139,6 +169,10 @@
 			h3 {
 				color: $white;
 				margin-right: 1em;
+
+				@include respond(phone) {
+					margin: 0;
+				}
 			}
 
 			a {
@@ -151,6 +185,10 @@
 				margin-left: 24px;
 				max-width: 500px;
 				max-height: 100px;
+
+				@include respond(phone) {
+					margin-left: 0;
+				}
 			}
 			.hide {
 				display: -webkit-box;

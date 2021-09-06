@@ -5,7 +5,7 @@
     border-radius: 10px;
 
     @include respond(phone) {
-        padding: 2em;
+        padding: 4em 2em 2em 2em;
     }
 
     .chart__copy {
@@ -13,6 +13,10 @@
 
         &__title {
             margin-bottom: 8px;
+
+            @include respond(phone) {
+                font-size: $mid-font-size;
+            }
         }
 
         &__description {
@@ -41,6 +45,11 @@
         overflow: hidden;
         font-family: 'Montserrat', sans-serif;
 
+        @include respond(phone) {
+            height: 200px;
+            width: 320px;
+        }
+
         svg {
             max-width: 100%;
         }
@@ -51,6 +60,31 @@
             }
         } 
 
+    }
+
+    .bar-chart {
+        .x-axis {
+            .tick:last-of-type {
+                text {
+                    transform: translateX(12px);
+                }
+            }
+        }
+    
+        .y-axis {
+
+            .tick {
+                text {
+                    @include respond(phone) {
+                        display: none;
+                    }
+                }
+            }
+    
+            @include respond(phone) {
+                transform: translate(200px, 0)
+            }
+        }
     }
 }
 

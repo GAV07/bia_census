@@ -24,6 +24,7 @@
 	let height = width * 0.7
 	let showHide = 'true';
 	let toolTip = "";
+	let scaleNumber = 650;
 	
 	let founderSummary = rollup(data, v => v.length, d => d.state)
 	let founderExtent = extent(founderSummary, d => d[1])
@@ -73,7 +74,11 @@
 		}
 	}
 
-	const projectionAlbersUsa = geoAlbersUsa().scale(650)
+	if( window.screen.width <= 480) {
+		scaleNumber = 400
+	}
+
+	const projectionAlbersUsa = geoAlbersUsa().scale(scaleNumber)
 	let currentProj = projectionAlbersUsa;
 	
 	let path = geoPath().projection(currentProj);
@@ -127,9 +132,18 @@
   
 <style lang="scss">
 	@import '../../styles/abstracts/variables';
+	@import '../../styles/abstracts/mixins';
 	
 	#founder-map {
 		background-color: $bk;
+	}
+	.input-container {
+		display: flex;
+		gap: 1em;
+
+		@include respond(phone) {
+			flex-direction: column;
+        }
 	}
 	#map-wrapper {
 		width: 1000px;
@@ -137,15 +151,28 @@
 		position: relative;
 		overflow: visible;
 		display: flex;
+
+		@include respond(phone) {
+			flex-direction: column;
+		}
 	}
 	svg {
 		overflow: visible;
 	}
 	.map-name {
 		transform: translate(100px, 100px);
+
+		@include respond(phone) {
+			font-size: $phone-font-size;
+			transform: translate(400px, 40px);
+		}
 	}
 	.states {
 		transform: translate(-250px, 0);
+
+		@include respond(phone) {
+			transform: translate(20px, -120px);
+		}
 	}
 	.state {
 		&__shape {

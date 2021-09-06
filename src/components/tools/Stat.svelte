@@ -25,6 +25,7 @@
 
 <style lang="scss">
     @import '../../styles/abstracts/variables';
+    @import '../../styles/abstracts/mixins';
 
     .stat-container {
         margin-top: 2em;
@@ -38,6 +39,12 @@
         border-radius: 10px;
         padding: 6em;
         overflow: hidden;
+
+        @include respond(phone) {
+            padding: 3em;
+            flex-direction: column;
+            height: 100%;
+        }
 
         .gradient {
             position: absolute;
@@ -56,6 +63,11 @@
         .stat {
             font-size: $mega-font-size;
             padding-right: 1em;
+
+            @include respond(phone) {
+                padding-right: 0;
+                padding-bottom: 16px;
+            }
         }
     }
 </style>

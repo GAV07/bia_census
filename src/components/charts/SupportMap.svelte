@@ -54,7 +54,7 @@
 
 	
 	if( window.screen.width <= 480) {
-		scaleNumber = 450
+		scaleNumber = 400
 	}
 
 
@@ -122,6 +122,11 @@
 	
 	#support-map {
 		background-color: $bk;
+
+		@include respond(phone) {
+			padding-top: 4em;
+			height: 900px;
+		}
 	}
 	.input-container {
 		display: flex;
@@ -138,7 +143,7 @@
 		overflow: visible;
 
 		@include respond(phone) {
-			transform: translate(25px, -60px);
+			transform: translate(25px, -100px);
         }
 	}
 	.state {
@@ -184,7 +189,7 @@
 		transform: translate(0, 30px);
 
 		@include respond(phone) {
-			transform: translate(-110px, -40px);
+			transform: translate(-220px, -100px);
         }
 
 		.keys {
@@ -193,6 +198,10 @@
 
 			.key-title {
 				flex-basis: 100%;
+
+				@include respond(phone) {
+					font-size: $phone-font-size;
+				}
 			}
 
 			.boxes {
@@ -200,6 +209,10 @@
 				height: 5px;
 				overflow: visible;
 				margin-bottom: 8px;
+
+				@include respond(phone) {
+					width: 25px;
+				}
 	
 				p {
 					font-size: $sm-font-size;

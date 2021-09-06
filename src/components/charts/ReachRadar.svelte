@@ -4,6 +4,7 @@
     import Radar from '../cake-components/Radar.svelte';
     import AxisRadial from '../cake-components/AxisRadial.svelte';
     import { rollup } from 'd3-array';
+    import MediaQuery from '../tools/MediaQuery.svelte'
 
     export let data;
     export let title;
@@ -44,12 +45,17 @@
 </script>
 
 <style lang="scss">
+  @import '../../styles/abstracts/mixins';
 
   #radar-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     max-width: 1100px;
+
+    @include respond(phone) {
+      text-align: center;
+    }
 
     .radar-title {
       margin-bottom: 0px;
@@ -59,76 +65,152 @@
       height: 300px;
       width: 380px;
       margin-bottom: 32px;
+
+      @include respond(phone) {
+        width: 300px;
+      }
     }
   }
 </style>
+
 
 <section  class="chart-section">
     <ChartTitle 
         title={title}
         description={description}
     />
-    <div id="radar-container">
-      <figure id="radar-chart" class="chart-container">
-        <h3 class="radar-title">{firstChart[0].type}</h3>
-        <LayerCake
-          padding={{ top: 20, right: 0, bottom: 7, left: 0 }}
-          x={xKey}
-          xDomain={[0, 15]}
-          xRange={({ height }) => [0, height / 3]}
-          data={firstChart}
-        >
-          <Svg>
-            <AxisRadial/>
-            <Radar color={colors[0]}/>
-          </Svg>
-        </LayerCake>
-      </figure>
-      <figure id="radar-chart" class="chart-container">
-        <h3 class="radar-title">{fourthChart[0].type}</h3>
-        <LayerCake
-          padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
-          x={xKey}
-          xDomain={[0, 15]}
-          xRange={({ height }) => [0, height / 3]}
-          data={fourthChart}
-        >
-          <Svg>
-            <AxisRadial/>
-            <Radar color={colors[3]}/>
-          </Svg>
-        </LayerCake>
-      </figure>
-      <figure id="radar-chart" class="chart-container">
-        <h3 class="radar-title">{secondChart[0].type}</h3>
-        <LayerCake
-          padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
-          x={xKey}
-          xDomain={[0, 15]}
-          xRange={({ height }) => [0, height / 3]}
-          data={secondChart}
-        >
-          <Svg>
-            <AxisRadial/>
-            <Radar color={colors[1]}/>
-          </Svg>
-        </LayerCake>
-      </figure>
-      <figure id="radar-chart" class="chart-container">
-        <h3 class="radar-title">{thirdChart[0].type}</h3>
-        <LayerCake
-          padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
-          x={xKey}
-          xDomain={[0, 15]}
-          xRange={({ height }) => [0, height / 3]}
-          data={thirdChart}
-        >
-          <Svg>
-            <AxisRadial/>
-            <Radar color={colors[2]}/>
-          </Svg>
-        </LayerCake>
-      </figure>
-    </div>
+    <MediaQuery query="(min-width: 1281px)" let:matches>
+      {#if matches}    
+        <div id="radar-container">
+          <figure id="radar-chart" class="chart-container">
+            <h3 class="radar-title">{firstChart[0].type}</h3>
+            <LayerCake
+              padding={{ top: 20, right: 0, bottom: 7, left: 0 }}
+              x={xKey}
+              xDomain={[0, 15]}
+              xRange={({ height }) => [0, height / 3]}
+              data={firstChart}
+            >
+              <Svg>
+                <AxisRadial/>
+                <Radar color={colors[0]}/>
+              </Svg>
+            </LayerCake>
+          </figure>
+          <figure id="radar-chart" class="chart-container">
+            <h3 class="radar-title">{fourthChart[0].type}</h3>
+            <LayerCake
+              padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
+              x={xKey}
+              xDomain={[0, 15]}
+              xRange={({ height }) => [0, height / 3]}
+              data={fourthChart}
+            >
+              <Svg>
+                <AxisRadial/>
+                <Radar color={colors[3]}/>
+              </Svg>
+            </LayerCake>
+          </figure>
+          <figure id="radar-chart" class="chart-container">
+            <h3 class="radar-title">{secondChart[0].type}</h3>
+            <LayerCake
+              padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
+              x={xKey}
+              xDomain={[0, 15]}
+              xRange={({ height }) => [0, height / 3]}
+              data={secondChart}
+            >
+              <Svg>
+                <AxisRadial/>
+                <Radar color={colors[1]}/>
+              </Svg>
+            </LayerCake>
+          </figure>
+          <figure id="radar-chart" class="chart-container">
+            <h3 class="radar-title">{thirdChart[0].type}</h3>
+            <LayerCake
+              padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
+              x={xKey}
+              xDomain={[0, 15]}
+              xRange={({ height }) => [0, height / 3]}
+              data={thirdChart}
+            >
+              <Svg>
+                <AxisRadial/>
+                <Radar color={colors[2]}/>
+              </Svg>
+            </LayerCake>
+          </figure>
+        </div>
+      {/if}
+    </MediaQuery>
+
+    <MediaQuery query="(max-width: 480px)" let:matches>
+      {#if matches}    
+        <div id="radar-container">
+          <figure id="radar-chart" class="chart-container">
+            <h3 class="radar-title">{firstChart[0].type}</h3>
+            <LayerCake
+              padding={{ top: 20, right: 0, bottom: 7, left: 0 }}
+              x={xKey}
+              xDomain={[0, 15]}
+              xRange={({ height }) => [0, height / 5]}
+              data={firstChart}
+            >
+              <Svg>
+                <AxisRadial/>
+                <Radar color={colors[0]}/>
+              </Svg>
+            </LayerCake>
+          </figure>
+          <figure id="radar-chart" class="chart-container">
+            <h3 class="radar-title">{fourthChart[0].type}</h3>
+            <LayerCake
+              padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
+              x={xKey}
+              xDomain={[0, 15]}
+              xRange={({ height }) => [0, height / 5]}
+              data={fourthChart}
+            >
+              <Svg>
+                <AxisRadial/>
+                <Radar color={colors[3]}/>
+              </Svg>
+            </LayerCake>
+          </figure>
+          <figure id="radar-chart" class="chart-container">
+            <h3 class="radar-title">{secondChart[0].type}</h3>
+            <LayerCake
+              padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
+              x={xKey}
+              xDomain={[0, 15]}
+              xRange={({ height }) => [0, height / 4]}
+              data={secondChart}
+            >
+              <Svg>
+                <AxisRadial/>
+                <Radar color={colors[1]}/>
+              </Svg>
+            </LayerCake>
+          </figure>
+          <figure id="radar-chart" class="chart-container">
+            <h3 class="radar-title">{thirdChart[0].type}</h3>
+            <LayerCake
+              padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
+              x={xKey}
+              xDomain={[0, 15]}
+              xRange={({ height }) => [0, height / 4]}
+              data={thirdChart}
+            >
+              <Svg>
+                <AxisRadial/>
+                <Radar color={colors[2]}/>
+              </Svg>
+            </LayerCake>
+          </figure>
+        </div>
+      {/if}
+    </MediaQuery>
     
 </section>

@@ -11,6 +11,10 @@
   color: $white;
   border: none;
   max-height: 56px;
+
+  @include respond(phone) {
+    font-size: $phone-font-size;
+  }
 }
 
 .cta-btn-alt {
@@ -25,6 +29,10 @@
   color: $white;
   border: none;
   max-height: 56px;
+
+  @include respond(phone) {
+    font-size: $phone-font-size;
+  }
   
 }
 
