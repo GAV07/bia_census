@@ -40,8 +40,8 @@
 
 <section class="conclusion">
     <div id="closing" class="callout">
-        <div class="callout__contianer">
-            <Image width={400} src="./assets/images/naga.jpg" alt="Black Woman in Head Wrap"/>
+        <div class="callout__contianer callout__image">
+            <Image width={500} src="./assets/images/naga.jpg" alt="Black Woman in Head Wrap"/>
         </div>
         <div class="callout__contianer callout__copy">
             <p>{Copy.conclusion}</p>

@@ -88,6 +88,13 @@
 	}
 	.conclusion__cta {
 		margin-bottom: 3em;
+		width: 100%;
+		max-width: 800px;
+
+		@include respond(phone) {
+			display: flex;
+			justify-content: center;
+		}
 	}
 	#map-wrapper {
 		width: 50%;
@@ -95,6 +102,7 @@
 
 		@include respond(phone) {
 			width: 100%;
+			height: 250px;
 		}
 	}
 	.stateShape {
@@ -114,7 +122,7 @@
 		transform: translate(-140px, 0);
 
 		@include respond(phone) {
-			transform: translate(-320px, 0);
+			transform: translate(-320px, -150px);
 		}
 	}
 	.org-list {

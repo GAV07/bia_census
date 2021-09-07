@@ -168,7 +168,7 @@
 <article>
     <div class="callout">
         <div class="callout__contianer callout__image">
-            <Image width={400} src="./assets/images/wesley.jpg" alt="Black Woman in Head Wrap"/>
+            <Image width={500} src="./assets/images/wesley.jpg" alt="Black Woman in Head Wrap"/>
         </div>
         <div class="callout__contianer callout__copy">
             <p>{Copy.intro}</p>
