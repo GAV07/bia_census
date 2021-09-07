@@ -3,6 +3,7 @@
     color: $primary3;
     padding: 5em;
     border-radius: 10px;
+    overflow: hidden;
 
     @include respond(phone) {
         padding: 4em 2em 2em 2em;
