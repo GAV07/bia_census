@@ -5,6 +5,7 @@
 	import { csvParse } from 'd3-dsv'
 	import { onMount } from "svelte";
 	import { feature } from "topojson";
+	import { fade } from 'svelte/transition';
 	import ChartTitle from '../tools/ChartTitle.svelte';
 
 	export let data;
@@ -187,14 +188,15 @@
 
 
 		&__info {
-			
+			z-index: 100;
+
 			&__name {
 				font-family: 'Montserrat Alternates', sans-serif;
 				font-size: $mid-font-size;
-				transform: translate(0 ,250px)
+				transform: translate(350px,450px)
 			}
 			&__number {
-				transform: translate(0 ,270px)
+				transform: translate(350px,470px)
 			}
 		}
 	}
@@ -261,11 +263,11 @@
 						fill={getFounderColor(feature)[0]} 
 					/>
 					{#if toolTip === feature.properties.name}
-							<g class="state__info">
-								<text class="state__info__name">{feature.properties.name}:</text>
-								<text class="state__info__number">{getFounderColor(feature)[1]} Venture(s)</text>
-							</g>
-						{/if}
+						<g class="state__info">
+							<text class="state__info__name">{feature.properties.name}:</text>
+							<text class="state__info__number">{getFounderColor(feature)[1]} Venture(s)</text>
+						</g>
+					{/if}
 				</g>
 				{/each}
 			</g>
@@ -273,7 +275,7 @@
 			<g class="cities">
 				{#each cities as city}
 					{#if data.some(org => org.city === city.city)}
-						<circle class="city" cx={makePoints(city.lng, city.lat)[0]} cy={makePoints(city.lng, city.lat)[1]} r={getFounderRadius(city.city)} />
+						<circle transition:fade class="city" cx={makePoints(city.lng, city.lat)[0]} cy={makePoints(city.lng, city.lat)[1]} r={getFounderRadius(city.city)} />
 					{/if}
 				{/each}
 			</g>
@@ -293,6 +295,12 @@
 							class="state__shape"
 							fill={getSupportColor(feature)[0]} 
 						/>
+						{#if toolTip === feature.properties.name}
+							<g class="state__info">
+								<text class="state__info__name">{feature.properties.name}:</text>
+								<text class="state__info__number">{getSupportColor(feature)[1]} BSO(s)</text>
+							</g>
+						{/if}
 					</g>
 				{/each}
 			</g>
@@ -300,7 +308,7 @@
 				<g class="cities">
 					{#each cities as city}
 						{#if supportData.some(org => org.city === city.city)}
-							<circle class="city" cx={makePoints(city.lng, city.lat)[0]} cy={makePoints(city.lng, city.lat)[1]} r={getSupportRadius(city.city)} />
+							<circle transition:fade class="city" cx={makePoints(city.lng, city.lat)[0]} cy={makePoints(city.lng, city.lat)[1]} r={getSupportRadius(city.city)} />
 						{/if}
 					{/each}
 				</g>

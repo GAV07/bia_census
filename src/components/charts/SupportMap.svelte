@@ -104,16 +104,6 @@
 		mapData = land.features;
 	});
 
-	// function scale(node, { duration }) {
-	// 	return {
-	// 		duration,
-	// 		css: t => {
-	// 			const eased = circOut(t);
-
-	// 			return `transform: scale(.5);`
-	// 		}
-	// 	}
-	// }
 </script>
   
 <style lang="scss">

@@ -1,5 +1,7 @@
 <script>
 	import { getContext } from 'svelte';
+	import gsap from 'gsap';
+
 	import {
 		forceSimulation,
 		forceX,
@@ -59,8 +61,8 @@
 	}
 
 	let toolTip = "";
-	const handleToolTip = function(programName) {
-		toolTip = programName
+	const handleToolTip = function(stateName) {
+		toolTip = stateName
 		return toolTip
 	}
 	const handleMouseOut = function() {
@@ -69,76 +71,75 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
+	@import '../../styles/abstracts/variables';
+
 	.tag, .tag-text {
 		z-index: 999;
+		opacity: 0;
+	}
+
+	.program {
+		&__group:hover circle {
+			stroke-width: 1.2;
+			transition: all .5s ease-in-out;
+		}
+		&__info {
+			&__name {
+				font-family: 'Montserrat Alternates', sans-serif;
+				font-size: $mid-font-size;
+				transform: translate(0 ,50px)
+			}
+			&__per {
+				transform: translate(0 ,70px)
+			}
+		}
 	}
 </style>
 
-{#each nodes as point}
-		<circle
-		class='node'
-		r={$rGet(point)}
-		fill={nodeColor || $zGet(point)}
-		stroke-width={nodeStrokeWidth}
-		stroke={nodeStrokeColor}
-		cx='{point.x}'
-		cy='{point.y}'
+{#each nodes as point, i}
+	<g 
+		class="program__group"
 		on:mouseover={handleToolTip(point.name)} 
 		on:mouseout={handleMouseOut}
 	>
-	</circle>
-	{#if $rGet(point) > 40}
-		{#if toolTip === point.name}
-			<rect
-				class="tag"
-				x='{point.x}'
-				y='{point.y}'
-				rx='10px'
-				ry='10px'
-				width='150px'
-				height='60px'
-				fill="#ECE5F0"
-				transform='translate(-75,-25)'
-			></rect>
+		<circle
+			class='node'
+			r={$rGet(point)}
+			fill={nodeColor || $zGet(point)}
+			stroke-width={nodeStrokeWidth}
+			stroke={nodeStrokeColor}
+			cx='{point.x}'
+			cy='{point.y}'
+		>
+		</circle>
+		{#if $rGet(point) > 40}
 			<text
-				class="tag-text"
-				x='{point.x - point.name.length * 2.5}'
-				y='{point.y + 20}'
-				fill='#1D1E68'
-				font-size="10"
+				class="tag-percent"
+				id="{point.name}__per"
+				x='{point.x - 10}'
+				y='{point.y + 5}'
+				fill='#fff'
 			>
-				{point.name}
+				{point.percent}%
 			</text>
+		{:else}
+			<text
+				class="tag-percent"
+				id="{point.name}__per"
+				x='{point.x - 10}'
+				y='{point.y + 5}'
+				opacity="0"
+				fill='#fff'
+			>
+				{point.percent}%
+		</text>
 		{/if}
-		<text
-			class="tag-text"
-			x='{point.x - 10}'
-			y='{point.y + 5}'
-			fill='#fff'
-		>
-			{point.percent}%
-		</text>
-	{:else if toolTip === point.name}
-		<rect
-			class="tag"
-			x='{point.x}'
-			y='{point.y}'
-			rx='10px'
-			ry='10px'
-			width='150px'
-			height='60px'
-			fill="#ECE5F0"
-			transform='translate(-75,-25)'
-		></rect>
-		<text
-			class="tag-text"
-			x='{point.x - point.name.length * 2.5}'
-			y='{point.y + 20}'
-			fill='#1D1E68'
-			font-size="10"
-		>
-			{point.name}
-		</text>
-	{/if}
+		{#if toolTip === point.name}
+			<g class="program__info">
+				<text class="program__info__name"> {point.name} </text>
+				<text class="program__info__per"> {point.percent}% </text>
+			</g>
+		{/if}
+	</g>
 {/each}

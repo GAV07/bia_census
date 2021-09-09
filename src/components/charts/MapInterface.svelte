@@ -243,7 +243,7 @@
 			</svg>
 		</div>
 		<div class="org-list">
-			<h1 class="selected-state">{selectedState}</h1>
+			<h2 class="selected-state">{selectedState}</h2>
 			{#each newList as org}
 				<div class="org-list__item" 
 				>
