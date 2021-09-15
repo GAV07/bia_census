@@ -4,14 +4,9 @@
     import Copy from '../../data/doc.json'
     import Image from '../tools/Image.svelte'
     import { fly } from 'svelte/transition'
-    import { onMount } from 'svelte';
 
     let y;
     let visible = true;
-
-    onMount(() => {
-
-    })
 
 </script>
 
@@ -20,13 +15,19 @@
     @import '../../styles/abstracts/mixins';
 
     .intro {
+        position: relative;
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
         overflow: hidden;
+        margin-bottom: 2em;
         
+        &__background {
+            position: absolute;
+            opacity: .3;
+        }
 
-        .intro__copy {
+        &__copy {
             height: 60%;
             align-items: flex-start;
             z-index: 2;
@@ -87,7 +88,7 @@
 
         }
 
-        .intro__area {
+        &__area {
             width: 50vw;
             padding: 0 2em;
             display: flex;
@@ -131,6 +132,9 @@
 
 <Header/>
 <section class="intro">
+    <div class="intro__background">
+        <Image width={100} format="%" src="/assets/images/BIA_Pattern_Fog.jpg" alt="background"/>
+    </div>
     <div class="intro__area intro__copy">
         <p id="intro__lead" class="lead">The Time is Now</p>
         <h1 transition:fly="{{ x: -20, duration: 1000}}" class="intro__copy__title">Pathways to Prosperity</h1>
@@ -161,7 +165,7 @@
             
         />
         <div class="img-container">
-            <Image src="/assets/images/black-up.jpg" alt="Black Woman"/>
+            <Image src="/assets/images/andrey1.jpg" alt="Black Woman"/>
         </div>
     </div>
 </section>

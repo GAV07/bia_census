@@ -1,5 +1,7 @@
 <script>
     import { rollup } from 'd3-array'
+    import Image from '../tools/Image.svelte'
+
     export let data;
     export let category;
     export let dataPoint;
@@ -34,9 +36,7 @@
         height: 120px;
         display: flex;
         align-items: center;
-        background-image: url("./assets/images/BIA_Pattern_Horizon.jpg");
         color: $white;
-        border-radius: 10px;
         padding: 6em;
         overflow: hidden;
 
@@ -44,6 +44,11 @@
             padding: 3em;
             flex-direction: column;
             height: 100%;
+        }
+
+        .stat-background {
+            position: absolute;
+            left: 0;
         }
 
         .gradient {
@@ -73,6 +78,9 @@
 </style>
 
 <div class="stat-container">
+    <div class="stat-background">
+        <Image width={100} format="%" src="/assets/images/BIA_Pattern_Horizon.jpg" alt="Black Woman"/>
+    </div>
     <h1 class="stat">{mark}{percentageOfCategory()}%</h1>
     <h3 class="info">{info}</h3>
     <div class="gradient"></div>

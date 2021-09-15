@@ -2,6 +2,7 @@
     export let src
     export let alt
     export let width = 800;
+    export let format = "px"
   
     import { onMount } from 'svelte'
   
@@ -26,4 +27,4 @@
     }
   </style>
   
-  <img width="{width}px" {src} {alt} class:loaded bind:this={thisImage} />
+  <img width="{width}{format}" {src} {alt} class:loaded bind:this={thisImage} />

@@ -10,9 +10,11 @@
 
 
 <article id="innovators">
-    <p class="lead">Audience</p>
-    <h1 class="title">{Copy.innHead}</h1>
-    <p class="subtitle">{Copy.innSub}</p>
+    <div class="section-header">
+        <p class="lead">Audience</p>
+        <h1 class="title">{Copy.innHead}</h1>
+        <p class="subtitle">{Copy.innSub}</p>
+    </div>
 
     <div class="copy">
         <p>{Copy.inn1}</p>

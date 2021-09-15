@@ -55,9 +55,6 @@
   @import '../../styles/abstracts/variables';
   @import '../../styles/abstracts/mixins';
 
-  #programs {
-		background-color: $bk;
-	}
 
   #force-chart {
     overflow: visible;

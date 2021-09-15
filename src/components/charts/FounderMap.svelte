@@ -135,9 +135,7 @@
 	@import '../../styles/abstracts/variables';
 	@import '../../styles/abstracts/mixins';
 	
-	#founder-map {
-		background-color: $bk;
-	}
+	
 	.input-container {
 		display: flex;
 		gap: 1em;

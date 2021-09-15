@@ -11,9 +11,11 @@
 
 
 <article id="service">
-    <p class="lead">Service</p>
-    <h1 class="title">{Copy.serHead}</h1>
-    <p class="subtitle">{Copy.serSub}</p>
+    <div class="section-header">
+        <p class="lead">Service</p>
+        <h1 class="title">{Copy.serHead}</h1>
+        <p class="subtitle">{Copy.serSub}</p>
+    </div>
 
    <!-- Programs in Simple Force Graph (change later) -->
    <div class="copy">

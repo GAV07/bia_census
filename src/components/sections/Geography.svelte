@@ -12,9 +12,11 @@
 
 
 <article id="place">
-    <p class="lead">Place</p>
-    <h1 class="title">{Copy.placeHead}</h1>
-    <p class="subtitle">{Copy.placeSub}</p>
+    <div class="section-header">
+        <p class="lead">Place</p>
+        <h1 class="title">{Copy.placeHead}</h1>
+        <p class="subtitle">{Copy.placeSub}</p>
+    </div>
 
     <!-- Organiztion Map showing location of orgs -->
     <div class="copy">

@@ -11,6 +11,8 @@
   color: $white;
   border: none;
   max-height: 56px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
 
   @include respond(phone) {
     font-size: $phone-font-size;
@@ -29,6 +31,8 @@
   color: $white;
   border: none;
   max-height: 56px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
 
   @include respond(phone) {
     font-size: $phone-font-size;

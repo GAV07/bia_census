@@ -19,6 +19,7 @@
 
 <style lang="scss">
   @import '../../styles/abstracts/mixins';
+  @import '../../styles/abstracts/variables';
 
   #pre-loader {
     position: relative;
@@ -51,8 +52,8 @@
       }
     }
     .cls-1{
-      fill:none;
-      stroke:#fff;
+      fill: none;
+      stroke: $white;
       stroke-width: .75px;
       stroke-miterlimit:10;
       stroke-dasharray: 600;

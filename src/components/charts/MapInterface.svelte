@@ -71,13 +71,6 @@
 	@import '../../styles/abstracts/variables';
 	@import '../../styles/abstracts/mixins';
 	
-	#orgs {
-		
-	}
-	.chart-section {
-		background-color: $bk;
-		border-radius: 0;
-	}
 	#interface {
 		width: 100%;
 		display: flex;

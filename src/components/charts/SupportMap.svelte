@@ -111,7 +111,6 @@
 	@import '../../styles/abstracts/mixins';
 	
 	#support-map {
-		background-color: $bk;
 
 		@include respond(phone) {
 			padding-top: 4em;

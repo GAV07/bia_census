@@ -1,8 +1,7 @@
 .chart-section {
-    background-color: $secondary3;
+    background-color: $bk2;
     color: $primary3;
-    padding: 5em;
-    border-radius: 10px;
+    padding: 5em 3em;
     overflow: hidden;
 
     @include respond(phone) {
@@ -29,7 +28,8 @@
         margin-right: 1em;
 
         label {
-            background-color: $secondary3;
+            color: $white;
+            background-color: $primary3;
             padding: 1em 2em;
             border-radius: 10px;
             font-family: 'Montserrat', sans-serif;

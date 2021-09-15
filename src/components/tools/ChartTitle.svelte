@@ -11,11 +11,12 @@
         max-width: 800px;
 
         &__title {
-            margin-bottom: 8px;
+            margin-bottom: 16px;
         }
 
         &__description {
             margin-bottom: 32px;
+            line-height: 1.5;
         }
     }
 </style>
