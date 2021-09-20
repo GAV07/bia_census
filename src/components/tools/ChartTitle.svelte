@@ -11,7 +11,7 @@
         max-width: 800px;
 
         &__title {
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
         &__description {

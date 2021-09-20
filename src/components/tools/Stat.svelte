@@ -49,6 +49,12 @@
         .stat-background {
             position: absolute;
             left: 0;
+
+            @include respond(phone) {
+                top: 0;
+                height: 100%;
+                width: 100%;
+            }
         }
 
         .gradient {
@@ -72,6 +78,7 @@
             @include respond(phone) {
                 padding-right: 0;
                 padding-bottom: 16px;
+                align-self: flex-start;
             }
         }
     }
@@ -79,7 +86,7 @@
 
 <div class="stat-container">
     <div class="stat-background">
-        <Image width={100} format="%" src="/assets/images/BIA_Pattern_Horizon.jpg" alt="Black Woman"/>
+        <Image width={100} height={100} format="%" src="/assets/images/BIA_Pattern_Horizon.jpg" alt="Black Woman"/>
     </div>
     <h1 class="stat">{mark}{percentageOfCategory()}%</h1>
     <h3 class="info">{info}</h3>

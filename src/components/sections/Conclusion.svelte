@@ -31,22 +31,41 @@
 </script>
 
 <style lang="scss">
+
+    @import '../../styles/abstracts/mixins';
    
+    .conclusion {
+        padding-top: 0;
+        margin-top: -5em;
+    }
+    
     #closing {
-        margin: 5em;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0;
+
+        @include respond(phone) {
+            margin-bottom: 3em;
+            padding: 4em 0;
+            height: 90vh;
+        }
+
     }
 </style>
 
 
 <section class="conclusion">
     <div id="closing" class="callout">
-        <div class="callout__contianer callout__image">
-            <Image width={500} src="./assets/images/naga.jpg" alt="Black Woman in Head Wrap"/>
+        <div class="closing-bk">
+            <Image width={100} height={100} format="%" src="/assets/images/BIA_Pattern_Black.jpg" alt="Black Pattern"/>
         </div>
-        <div class="callout__contianer callout__copy">
+        <div class="callout__contianer">
+            <Image width={200} src="./assets/images/BIA_Logo_White.png" alt=""/>
+        </div>
+        <div class="callout__contianer closing-copy ">
             <p>{Copy.conclusion}</p>
+            <a class="cta-btn" href="https://blackinnovationalliance.com/">Learn More</a>
         </div>
-        <div class="bk"></div>
     </div>
 
     <MapInterface 

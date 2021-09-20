@@ -86,7 +86,7 @@
 
 		@include respond(phone) {
 			display: flex;
-			justify-content: center;
+			justify-content: flex-start;
 		}
 	}
 	#map-wrapper {
@@ -136,19 +136,23 @@
 			margin: .5em 0;
 			display: flex;
 			justify-content: space-between;
-			align-items: center;
+			align-items: flex-start;
+			flex-direction: column;
 			color: $primary2;
 			border-radius: 10px;
 
 			@include respond(phone) {
 				flex-direction: column;
-				text-align: center;
 			}
 
 			&__title-line {
 				display: flex;
 				align-items: center;
 				margin-bottom: 8px;
+			}
+
+			#card-lead {
+				color: $secondary3;
 			}
 
 			&__programs {
@@ -183,7 +187,6 @@
 
 			.right {
 				margin-top: 8px;
-				margin-left: 24px;
 				max-width: 500px;
 				max-height: 100px;
 
@@ -214,7 +217,7 @@
 		description= {description}
 	/>
 	<div class="conclusion__cta">
-		<a href="https://airtable.com/shriQiDe45MmH0YSw" class="cta-btn-alt">Submit your Org</a>
+		<a href="https://airtable.com/shriQiDe45MmH0YSw" class="cta-btn-alt">Add your Org</a>
 	</div>
 	<div id="interface">
 		<div class="chart-container" id="map-wrapper" bind:clientWidth="{width}">
@@ -238,35 +241,27 @@
 		<div class="org-list">
 			<h2 class="selected-state">{selectedState}</h2>
 			{#each newList as org}
-				<div class="org-list__item" 
-				>
-					<!-- on:click={() => {
-						if(current === 'hide'){
-							current = 'show'
-						}
-						else {
-							current = 'hide'
-						}
-						}} -->
+				<div class="org-list__item" >
 					<div class="left">
 						<div class="org-list__item__title-line">
-							<h3>{org.name}</h3>
-							<a href="{org.site}">  <Icon name="external-link" stroke=1 strokeWidth=1/>  </a>
+							<a href="{org.site}">  
+								<h3>{org.name}</h3>
+							</a>
 						</div>
-						<p>{org.type}</p>
-						{#if org.programs !== undefined}
-							<div class="org-list__item__programs">
-								{#each org.programs as program}
-								<p class="org-list__item__programs__program">{program}</p>
-								{/each}
-							</div>
-						{:else}
-							<p>No Programs Avaliable</p>
-						{/if}
+						<p id="card-lead" class="lead">{org.type}</p>
 					</div>
 					<div class="right" class:show="{current === 'show'}" class:hide="{current === 'hide'}" >
 						<p class="org-description" >{org.description}</p>
 					</div>
+					{#if org.programs !== undefined}
+						<div class="org-list__item__programs">
+							{#each org.programs as program}
+							<p class="org-list__item__programs__program">{program}</p>
+							{/each}
+						</div>
+					{:else}
+						<p>No Programs Avaliable</p>
+					{/if}
 				</div>
 		  	{/each}
 		</div>

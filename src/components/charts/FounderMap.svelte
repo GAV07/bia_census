@@ -20,6 +20,7 @@
 	$: cities = [];
 	const keys = []
 	const colors = ["#adf5ff","#70eeff","#47eaff","#33e7ff","#00b8d1","#00a2b8","#0090a3","#007e8f"]
+	const altColors = ["#E26D5A","#DF5B47","#DB4A34","#D33C25","#C03722","#AD311E","#9A2C1B","#862618"]
 	let founderColorScale = () => {};
 	let width = 1200
 	let height = width * 0.7
@@ -43,7 +44,7 @@
 	
 	$: founderColorScale = scaleQuantize()
 		.domain(founderExtent)
-		.range(colors);
+		.range(altColors);
 
 	$: supportColorScale = scaleQuantize()
 		.domain(supportExtent)
@@ -159,7 +160,7 @@
 		overflow: visible;
 	}
 	.map-name {
-		transform: translate(100px, 100px);
+		transform: translate(100px, 85px);
 
 		@include respond(phone) {
 			font-size: $phone-font-size;
@@ -205,6 +206,10 @@
 	.cities {
 		opacity: .7;
 		transform: translate(-250px, 0);
+
+		@include respond(phone) {
+			transform: translate(20px, -120px);
+		}
 	}
 	.city {
 		fill: $primary3;

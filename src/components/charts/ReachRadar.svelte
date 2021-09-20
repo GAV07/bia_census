@@ -51,6 +51,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 2em;
     max-width: 1100px;
 
     @include respond(phone) {
@@ -59,6 +60,8 @@
 
     .radar-title {
       margin-bottom: 0px;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
     }
     
     #radar-chart {
@@ -83,12 +86,12 @@
       {#if matches}    
         <div id="radar-container">
           <figure id="radar-chart" class="chart-container">
-            <h3 class="radar-title">{firstChart[0].type}</h3>
+            <h3 class="radar-title" style="color: {colors[0]};">{firstChart[0].type}</h3>
             <LayerCake
-              padding={{ top: 20, right: 0, bottom: 7, left: 0 }}
+              padding={{ top: 0, right: 0, bottom: 7, left: 20 }}
               x={xKey}
               xDomain={[0, 15]}
-              xRange={({ height }) => [0, height / 3]}
+              xRange={({ height }) => [0, height / 3.9]}
               data={firstChart}
             >
               <Svg>
@@ -98,12 +101,12 @@
             </LayerCake>
           </figure>
           <figure id="radar-chart" class="chart-container">
-            <h3 class="radar-title">{fourthChart[0].type}</h3>
+            <h3 class="radar-title" style="color: {colors[3]};">{fourthChart[0].type}</h3>
             <LayerCake
-              padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
+              padding={{ top: 0, right: 0, bottom: 7, left: 0 }}
               x={xKey}
               xDomain={[0, 15]}
-              xRange={({ height }) => [0, height / 3]}
+              xRange={({ height }) => [0, height / 3.7]}
               data={fourthChart}
             >
               <Svg>
@@ -113,12 +116,12 @@
             </LayerCake>
           </figure>
           <figure id="radar-chart" class="chart-container">
-            <h3 class="radar-title">{secondChart[0].type}</h3>
+            <h3 class="radar-title" style="color: {colors[1]};">{secondChart[0].type}</h3>
             <LayerCake
-              padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
+              padding={{ top: 0, right: 0, bottom: 7, left: 0 }}
               x={xKey}
               xDomain={[0, 15]}
-              xRange={({ height }) => [0, height / 3]}
+              xRange={({ height }) => [0, height / 3.35]}
               data={secondChart}
             >
               <Svg>
@@ -128,12 +131,12 @@
             </LayerCake>
           </figure>
           <figure id="radar-chart" class="chart-container">
-            <h3 class="radar-title">{thirdChart[0].type}</h3>
+            <h3 class="radar-title" style="color: {colors[2]};">{thirdChart[0].type}</h3>
             <LayerCake
-              padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
+              padding={{ top: 0, right: 0, bottom: 7, left: 0 }}
               x={xKey}
               xDomain={[0, 15]}
-              xRange={({ height }) => [0, height / 3]}
+              xRange={({ height }) => [0, height / 2.55]}
               data={thirdChart}
             >
               <Svg>

@@ -3,6 +3,7 @@
     import Ripple from '../tools/Ripple.svelte'
     import Copy from '../../data/doc.json'
     import Image from '../tools/Image.svelte'
+    import MediaQuery from '../tools/MediaQuery.svelte';
     import { fly } from 'svelte/transition'
 
     let y;
@@ -21,6 +22,10 @@
         flex-direction: row;
         overflow: hidden;
         margin-bottom: 2em;
+
+        @include respond(phone) {
+            height: 100vh;
+        }
         
         &__background {
             position: absolute;
@@ -33,7 +38,7 @@
             z-index: 2;
 
             @include respond(phone) {
-                    margin: 4em 0;
+                    margin: 8em 0;
                 }
 
             .lead {
@@ -84,6 +89,11 @@
                 height: 100%;
                 display: flex;
                 gap: 2em;
+
+                @include respond(phone) {
+                    flex-direction: column;
+                    max-width: 42vw;
+                }
             }
 
         }
@@ -99,6 +109,17 @@
             @include respond(phone) {
                     width: 100vw;
                     padding-left: 2em;
+            }
+
+            &__overlay {
+                position: absolute;
+                left: 0;
+                top: 0;
+                z-index: 1;
+                width: 100%;
+                height: 100%;
+                background-color: $primary3;
+                opacity: .7;
             }
 
             .img-container {
@@ -145,36 +166,50 @@
             {Copy.opening2}
         </p>
         <div class="intro__copy__cta">
-            <button transition:fly="{{ x: -10, duration: 1000, delay: 2000}}" class="cta-btn">Read the Story</button>
-            <button transition:fly="{{ x: -10, duration: 1000, delay: 2500}}" class="cta-btn-alt">Submit your Org</button>
+            <a href="#open-call" transition:fly="{{ x: -10, duration: 1000, delay: 2000}}" class="cta-btn">Read the Story</a>
+            <a href="" transition:fly="{{ x: -10, duration: 1000, delay: 2500}}" class="cta-btn-alt">Submit your Org</a>
         </div>
     </div>
     <div class="intro__area intro__image">
-        <Ripple
-            top={"25vh"}
-            right={"45vh"}
-        />
-        <Ripple
-            top={"45vh"}
-            right={"25vh"}
-            
-        />
-        <Ripple
-            top={"65vh"}
-            right={"5vh"}
-            
-        />
+        <MediaQuery query="(min-width: 1281px)" let:matches>
+            {#if matches}
+                <Ripple
+                    top={"25vh"}
+                    right={"45vh"}
+                />
+                <Ripple
+                    top={"45vh"}
+                    right={"25vh"}
+                    
+                />
+                <Ripple
+                    top={"65vh"}
+                    right={"5vh"}
+                    
+                />
+            {/if}
+        </MediaQuery>
+        <MediaQuery query="(max-width: 480px)" let:matches>
+            {#if matches}
+                <div class="intro__area__overlay"></div>
+            {/if}
+        </MediaQuery>
         <div class="img-container">
             <Image src="/assets/images/andrey1.jpg" alt="Black Woman"/>
         </div>
     </div>
 </section>
 <article>
-    <div class="callout">
-        <div class="callout__contianer callout__image">
-            <Image width={500} src="./assets/images/wesley.jpg" alt="Black Woman in Head Wrap"/>
-        </div>
+    <div id="open-call" class="callout">
+        <MediaQuery query="(min-width: 1281px)" let:matches>
+            {#if matches}  
+                <div class="callout__contianer callout__image">
+                    <Image width={500} src="./assets/images/wesley.jpg" alt="Black Woman in Head Wrap"/>
+                </div>
+            {/if} 
+        </MediaQuery>
         <div class="callout__contianer callout__copy">
+            <p id="callout__lead" class="lead">The Time is Now</p>
             <p>{Copy.intro}</p>
         </div>
         <div class="bk"></div>

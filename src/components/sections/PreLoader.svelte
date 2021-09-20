@@ -2,6 +2,7 @@
   import { fade } from 'svelte/transition'
   import { gsap } from 'gsap'
   import Smoke from '../tools/Smoke.svelte'
+  import LoaderTest from '../tools/LoaderTest.svelte'
   import { onMount } from 'svelte';
 
   export let visible;
@@ -29,6 +30,7 @@
     overflow: hidden;
     width: 100vw;
     height: 100vh;
+    background-color: $primary2;
 
   }
   #icon-container {
@@ -38,6 +40,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: transparent;
     
     @include respond(phone) {
         flex-direction: column;
@@ -69,7 +72,7 @@
   on:introstart="{() => visible = false}"
   on:outroend="{() => visible = true}"
 >
-  <Smoke/>
+  <LoaderTest/>
   <div id="icon-container">
     <svg class="icon" id="action" viewBox="0 0 98.04 98.04">
       <path class="cls-1" d="M34.45,59.08,21.89,66.92a18.62,18.62,0,0,0,8.27,2l10.42-.53,2.29-1.43A20.39,20.39,0,0,1,34.45,59.08Z"/>

@@ -15,7 +15,7 @@
   letter-spacing: .1em;
 
   @include respond(phone) {
-    font-size: $phone-font-size;
+    font-size: $sm-phone-font-size;
   }
 }
 
@@ -27,7 +27,7 @@
   padding: 1rem 2rem;
   line-height: 1;
   z-index: 1;
-  background-color: $primary3;
+  background-color: $secondary2;
   color: $white;
   border: none;
   max-height: 56px;
@@ -35,7 +35,7 @@
   letter-spacing: .1em;
 
   @include respond(phone) {
-    font-size: $phone-font-size;
+    font-size: $sm-phone-font-size;
   }
   
 }
