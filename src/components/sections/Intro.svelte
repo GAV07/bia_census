@@ -23,8 +23,9 @@
         overflow: hidden;
         margin-bottom: 2em;
 
-        @include respond(phone) {
+        @include respond(tab-land) {
             height: 100vh;
+            justify-content: flex-start;
         }
         
         &__background {
@@ -35,14 +36,19 @@
         &__copy {
             height: 60%;
             align-items: flex-start;
+            max-width: 50%;
             z-index: 2;
 
-            @include respond(phone) {
+            @include respond(tab-land) {
                     margin: 8em 0;
                 }
+            
+            @include respond(phone) {
+                max-width: 100%;
+            }
 
             .lead {
-                @include respond(phone) {
+                @include respond(tab-land) {
                     color: $primary2;
                 }
             }
@@ -52,7 +58,7 @@
                 color: $primary1;
                 margin-bottom: .5em;
 
-                @include respond(phone) {
+                @include respond(tab-land) {
                     font-size: $large-font-size;
                 }
             }
@@ -63,7 +69,7 @@
                 color: $primary3;
                 margin-bottom: 1.5em;
 
-                @include respond(phone) {
+                @include respond(tab-land) {
                     color: $white;
                     font-size: $default-font-size;
                 }
@@ -72,15 +78,14 @@
                 margin-bottom: 2em;
                 font-size: $default-font-size;
 
-                @include respond(phone) {
+                @include respond(tab-land) {
                     color: $bk;
                     font-size: $phone-font-size;
                 }
             }
 
             
-            p {
-                padding-right: 3em; 
+            p { 
                 line-height: 1.5;
             }
 
@@ -90,9 +95,13 @@
                 display: flex;
                 gap: 2em;
 
+
+                @include respond(tab-land) {
+                    max-height: 42px;
+                }
                 @include respond(phone) {
                     flex-direction: column;
-                    max-width: 42vw;
+                    max-width: 180px;
                 }
             }
 
@@ -100,13 +109,13 @@
 
         &__area {
             width: 50vw;
-            padding: 0 2em;
+            padding: 0 1em 0 2em;
             display: flex;
             flex-direction: column;
             justify-content: center;
             text-align: left;
 
-            @include respond(phone) {
+            @include respond(tab-land) {
                     width: 100vw;
                     padding-left: 2em;
             }
@@ -122,26 +131,29 @@
                 opacity: .7;
             }
 
+        }
+        
+        &__image {
+            max-height: 95vh;
+
             .img-container {
                 position: relative;
                 overflow: hidden;
-                height: 100vh;
+                height: 120vh;
                 width: 50vw;
-
-                @include respond(phone) {
+    
+                @include respond(tab-land) {
                     position: absolute;
                     top: 0;
                     left: 0;
                     width: 100vw;
                 }
 
-                img {
-                    position: absolute;
-                    top: 0%;
-                    left: 0%;
-                    max-width: 200%;
-                    width: 100%;
-                    transition: transform ease-in-out;
+                .hero-img {
+                    @include respond(phone) {
+                        width: 150%;
+                        transform: translateX(-200px);
+                    }
                 }
             }
         }
@@ -167,7 +179,7 @@
         </p>
         <div class="intro__copy__cta">
             <a href="#open-call" transition:fly="{{ x: -10, duration: 1000, delay: 2000}}" class="cta-btn">Read the Story</a>
-            <a href="" transition:fly="{{ x: -10, duration: 1000, delay: 2500}}" class="cta-btn-alt">Submit your Org</a>
+            <a href="https://airtable.com/shrtgsfpPWmwcVVX1" transition:fly="{{ x: -10, duration: 1000, delay: 2500}}" class="cta-btn-alt">Submit an Org</a>
         </div>
     </div>
     <div class="intro__area intro__image">
@@ -180,7 +192,6 @@
                 <Ripple
                     top={"45vh"}
                     right={"25vh"}
-                    
                 />
                 <Ripple
                     top={"65vh"}
@@ -189,16 +200,31 @@
                 />
             {/if}
         </MediaQuery>
-        <MediaQuery query="(max-width: 480px)" let:matches>
+        <MediaQuery query="(max-width: 1200px)" let:matches>
             {#if matches}
                 <div class="intro__area__overlay"></div>
             {/if}
         </MediaQuery>
         <div class="img-container">
-            <Image src="/assets/images/andrey1.jpg" alt="Black Woman"/>
+            <MediaQuery query="(min-width: 1281px)" let:matches>
+                {#if matches}
+                    <Image width={100} format={"%"} src="/assets/images/Hero.png" alt="Black Man and Woman"/>
+                {/if}
+            </MediaQuery>
+            <MediaQuery query="(min-width: 480px)" let:matches>
+                {#if matches}
+                    <Image width={100} format={"%"} src="/assets/images/Hero.png" alt="Black Man and Woman"/>
+                {/if}
+            </MediaQuery>
+            <MediaQuery query="(max-width: 480px)" let:matches>
+                {#if matches}
+                    <Image width={220} format={"%"} src="/assets/images/Hero.png" alt="Black Man and Woman"/>
+                {/if}
+            </MediaQuery>
         </div>
     </div>
 </section>
+<!-- Callout below fold -->
 <article>
     <div id="open-call" class="callout">
         <MediaQuery query="(min-width: 1281px)" let:matches>

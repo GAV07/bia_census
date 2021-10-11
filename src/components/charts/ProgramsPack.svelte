@@ -47,6 +47,7 @@
     count: group.count,
     percent: Math.round(group.count / programs.length * 100)
   }))
+  chartData = chartData.filter(group => group.count > 10)
   let manyBodyStrength = 3;
   let xStrength = 0.5
 </script>
@@ -71,13 +72,9 @@
     title={title}
     description= {description}
   />
-  <!-- <div class="input-container">
-    <label><input type="radio" bind:group={groupBy} value="true"/>Group by category</label>
-    <label><input type="radio" bind:group={groupBy} value="false"/>Clump together</label>
-  </div> -->
 
-  <MediaQuery query="(min-width: 1281px)" let:matches>
-    {#if matches}    
+  <MediaQuery query="(min-width: 481px)" let:matches>
+    {#if matches}   
       <figure id="force-chart" class="chart-container">
         <LayerCake
           data={chartData}
@@ -86,7 +83,7 @@
           z={zKey}
           xScale={scaleBand()}
           xDomain={catNames}
-          rRange={[5, 75]}
+          rRange={[45, 75]}
           zScale={scaleOrdinal()}
           zDomain={catNames}
           zRange={seriesColors}
@@ -105,7 +102,7 @@
   </MediaQuery>
 
   <MediaQuery query="(max-width: 480px)" let:matches>
-    {#if matches}    
+    {#if matches}   
       <figure id="force-chart" class="chart-container">
         <LayerCake
           data={chartData}
@@ -114,7 +111,7 @@
           z={zKey}
           xScale={scaleBand()}
           xDomain={catNames}
-          rRange={[5, 55]}
+          rRange={[25, 45]}
           zScale={scaleOrdinal()}
           zDomain={catNames}
           zRange={seriesColors}
@@ -130,5 +127,6 @@
         </LayerCake>
       </figure>
     {/if}
-  </MediaQuery>
+</MediaQuery>
+
 </section>

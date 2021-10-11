@@ -110,7 +110,7 @@
 
 
 
-<MediaQuery query="(min-width: 1281px)" let:matches>
+<MediaQuery query="(min-width: 1440px)" let:matches>
 	{#if matches}
         <div class="header">
             <a href="https://blackinnovationalliance.com/">
@@ -129,21 +129,21 @@
 	{/if}
 </MediaQuery>
 
-<MediaQuery query="(max-width: 480px)" let:matches>
+<MediaQuery query="(max-width: 1440px)" let:matches>
 	{#if matches}
         <div class="header">
             <div on:click={showMenu}><Icon name="menu" width="1.5em" height="1.5em"/></div>
             <h3 class="mobile-title">Black Innovation Cens<em>Us</em></h3>
         </div>
         {#if visible}
-            <div class="mobile" transition:fly="{{ y: 200, duration: 2000 }}">
+            <div class="mobile" transition:fly="{{ y: 400, duration: 1000 }}">
                 <nav>
                     <ul>
                         <li id="back" on:click={hideMenu}>Back</li>
-                        <li><a href="#place">Place</a></li>
-                        <li><a href="#service">Service</a></li>
-                        <li><a href="#innovators">Audience</a></li>
-                        <li><a href="#orgs">Organizations</a></li>
+                        <li on:click={hideMenu}><a href="#place">Place</a></li>
+                        <li on:click={hideMenu}><a href="#service">Service</a></li>
+                        <li on:click={hideMenu}><a href="#innovators">Audience</a></li>
+                        <li on:click={hideMenu}><a href="#orgs">Organizations</a></li>
                     </ul>
                 </nav>
             </div>

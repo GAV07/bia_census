@@ -78,16 +78,19 @@
     
         .y-axis {
 
-            .tick {
-                text {
-                    @include respond(phone) {
-                        display: none;
-                    }
+            .tick:not(:nth-last-child(-n+3)) {
+                @include respond(tab-land) {
+                    display: none;
                 }
             }
     
-            @include respond(phone) {
-                transform: translate(200px, 0)
+            @include respond(tab-land) {
+                transform: translate(10px, 0);
+                font-size: $phone-font-size;
+
+                text {
+                    fill: $white;
+                }
             }
         }
     }

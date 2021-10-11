@@ -1,5 +1,6 @@
 <script>
 	import { getContext } from 'svelte';
+	import MediaQuery from '../tools/MediaQuery.svelte'
 
 	const { padding, xRange, yScale } = getContext('LayerCake');
 
@@ -43,13 +44,30 @@
 					y2={yTick + (isBandwidth ? ($yScale.bandwidth() / 2) : 0)}
 				></line>
 			{/if}
-			<text
-				x='{xTick}'
-				y='{yTick + (isBandwidth ? $yScale.bandwidth() / 2 : 0)}'
-				dx='{isBandwidth ? -9 : dxTick}'
-				dy='{isBandwidth ? 4 : dyTick}'
-				style="text-anchor:{isBandwidth ? 'end' : textAnchor};"
-			>{formatTick(tick)}</text>
+			
+			<MediaQuery query="(max-width: 1280px)" let:matches>
+				{#if matches}  
+					<text
+						x='{xTick}'
+						y='{yTick + (isBandwidth ? $yScale.bandwidth() / 2 : 0)}'
+						dx='{isBandwidth ? -9 : dxTick}'
+						dy='{isBandwidth ? 4 : dyTick}'
+						style="text-anchor:{isBandwidth ? 'start' : textAnchor};"
+					>{formatTick(tick)}</text>
+				{/if}
+			</MediaQuery>
+
+			<MediaQuery query="(min-width: 1281px)" let:matches>
+				{#if matches}  
+					<text
+						x='{xTick}'
+						y='{yTick + (isBandwidth ? $yScale.bandwidth() / 2 : 0)}'
+						dx='{isBandwidth ? -9 : dxTick}'
+						dy='{isBandwidth ? 4 : dyTick}'
+						style="text-anchor:{isBandwidth ? 'end' : textAnchor};"
+					>{formatTick(tick)}</text>
+				{/if}
+			</MediaQuery>
 		</g>
 	{/each}
 </g>

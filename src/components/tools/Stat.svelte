@@ -30,7 +30,6 @@
     @import '../../styles/abstracts/mixins';
 
     .stat-container {
-        margin-top: 2em;
         position: relative;
         width: 100%;
         height: 120px;

@@ -9,9 +9,9 @@
   import Layout from "./tools/_Layout.svelte"
   import PreLoader from '../components/sections/PreLoader.svelte'
 
-  const asyncAirtable = new AsyncAirtable('keyN1k9XF9da7gLtx', 'appjLRnzzcRAolMde')
+  const asyncAirtable = new AsyncAirtable('keyrS9j6UtUM8dpmM', 'appn70zbAeXjt7tcC')
   async function fetchOrgs() {
-    const results = await asyncAirtable.select('Black Organizations');
+    const results = await asyncAirtable.select('Organizations');
     const cleanedData = results.map((org) => ({
         name: org.fields['Org. Name'],
         year: org.fields['Year Founded'],
@@ -30,7 +30,7 @@
   }
 
   async function fetchFoun() {
-    const results = await asyncAirtable.select('Black Founders');
+    const results = await asyncAirtable.select('Founders');
     const cleanedData = results.map(founder => ({
       company: founder.fields['Company Name'],
       city: founder.fields['City'],

@@ -18,7 +18,7 @@
         .top{
             animation: moveTop 10s linear infinite;
             transform: translateX(-160px);
-            opacity: .1;
+            opacity: .2;
             fill: #fff;
         }
         @keyframes moveTop{

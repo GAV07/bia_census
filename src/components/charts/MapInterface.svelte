@@ -45,7 +45,9 @@
 	}
 
 	if( window.screen.width <= 480) {
-		scaleNumber = 400
+		scaleNumber = 350
+	} else if( window.screen.width <= 1280) {
+		scaleNumber = 600
 	}
 
 	const projectionAlbersUsa = geoAlbersUsa().scale(scaleNumber)
@@ -114,6 +116,9 @@
 	.states {
 		transform: translate(-140px, 0);
 
+		@include respond(tab-land) {
+			transform: translate(-200px, 0);
+		}
 		@include respond(phone) {
 			transform: translate(-320px, -150px);
 		}
@@ -217,7 +222,7 @@
 		description= {description}
 	/>
 	<div class="conclusion__cta">
-		<a href="https://airtable.com/shriQiDe45MmH0YSw" class="cta-btn-alt">Add your Org</a>
+		<a href="https://airtable.com/shrtgsfpPWmwcVVX1" class="cta-btn-alt">Submit an Org</a>
 	</div>
 	<div id="interface">
 		<div class="chart-container" id="map-wrapper" bind:clientWidth="{width}">

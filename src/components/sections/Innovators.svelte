@@ -19,19 +19,20 @@
     <div class="copy">
         <p>{Copy.inn1}</p>
     </div>
+    <EthnicBarChart
+        data={data}
+        title={Copy.innChartTitle2}
+        description={Copy.innChartSub2}
+    />
+    
+    <div class="copy">
+        <p>{Copy.inn2}</p>
+    </div>
+
     <FounderMap
         data={altData}
         supportData={data}
         title={Copy.innChartTitle1}
         description={Copy.innChartSub1}
-    />
-
-    <div class="copy">
-        <p>{Copy.inn2}</p>
-    </div>
-    <EthnicBarChart
-        data={data}
-        title={Copy.innChartTitle2}
-        description={Copy.innChartSub2}
     />
 </article>

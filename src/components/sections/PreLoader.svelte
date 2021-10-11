@@ -1,8 +1,7 @@
 <script>
   import { fade } from 'svelte/transition'
   import { gsap } from 'gsap'
-  import Smoke from '../tools/Smoke.svelte'
-  import LoaderTest from '../tools/LoaderTest.svelte'
+  import LoaderPattern from '../tools/LoaderPattern.svelte'
   import { onMount } from 'svelte';
 
   export let visible;
@@ -25,12 +24,13 @@
   #pre-loader {
     position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     width: 100vw;
     height: 100vh;
-    background-color: $primary2;
+    background-color: #000000;
 
   }
   #icon-container {
@@ -47,11 +47,12 @@
     }
 
     .icon {
-      max-width: 225px;
+      max-width: 100px;
       margin: 1em;
 
       @include respond(phone) {
         min-width: 200px;
+        opacity: .25;
       }
     }
     .cls-1{
@@ -64,6 +65,26 @@
       fill-opacity: 0;
     }
   }
+
+  .quote {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    transform-origin: center;
+    text-align: center;
+
+    @include respond(phone) {
+      top: 50%;
+    }
+    
+
+    p {
+      color: $white;
+      font-size: $mid-font-size;
+    }
+  }
 </style>
 
 <div 
@@ -72,7 +93,7 @@
   on:introstart="{() => visible = false}"
   on:outroend="{() => visible = true}"
 >
-  <LoaderTest/>
+  <LoaderPattern/>
   <div id="icon-container">
     <svg class="icon" id="action" viewBox="0 0 98.04 98.04">
       <path class="cls-1" d="M34.45,59.08,21.89,66.92a18.62,18.62,0,0,0,8.27,2l10.42-.53,2.29-1.43A20.39,20.39,0,0,1,34.45,59.08Z"/>
@@ -102,5 +123,8 @@
       <path class="cls-1" d="M49.46,1.08A47.72,47.72,0,1,0,97.17,48.8,47.73,47.73,0,0,0,49.46,1.08Zm34,47.45,0,0-9.93,6.19,5.69,10.63h0v0l-11.73.39-.41,12v0h0L56.7,72.3,50.34,82.54l0,0v0l-6.19-10L33.51,78.22h0v0l-.4-11.69-12-.4,0,0,5.5-10.35L16.32,49.36l10-6.19L20.64,32.56l11.7-.43.39-12h0v0L43.1,25.61l6.38-10.22v0l6.2,10,10.63-5.69,0,0,.38,11.72,12,.42h0v0l-5.5,10.33,10.2,6.36Z"/>
       <path class="cls-1" d="M58.89,43.31A10.07,10.07,0,0,0,60.4,38l0-.39h0a10.25,10.25,0,0,0-5.52,1.94,10.09,10.09,0,0,0-1.33-5.33L53.38,34l-.15,0a10.25,10.25,0,0,0-3.72,4.37,10,10,0,0,0-3.82-3.94l-.23-.12-.16,0a10.16,10.16,0,0,0-1,5.64A10.12,10.12,0,0,0,39,38.46l-.34,0,0,.05A10.2,10.2,0,0,0,40.52,44a10,10,0,0,0-5.32,1.33l-.33.21a10.19,10.19,0,0,0,4.43,3.81,10.12,10.12,0,0,0-3.95,3.82l-.17.34a10.24,10.24,0,0,0,5.74,1.09,10.07,10.07,0,0,0-1.51,5.28l0,.39a10.24,10.24,0,0,0,5.51-1.94,10.07,10.07,0,0,0,1.34,5.33l.21.33a10.24,10.24,0,0,0,3.81-4.43,10,10,0,0,0,3.82,3.94l.34.18a10.24,10.24,0,0,0,1.09-5.74,10.07,10.07,0,0,0,5.28,1.51l.38,0a10.21,10.21,0,0,0-1.93-5.52,10.09,10.09,0,0,0,5.33-1.33l.33-.21a10.27,10.27,0,0,0-4.44-3.81,10.06,10.06,0,0,0,4-3.82l.18-.34A10.26,10.26,0,0,0,58.89,43.31Z"/>
     </svg>
+  </div>
+  <div class="quote">
+    <p>How do we build an innovation ecosystem that works for everyone?</p>
   </div>
 </div>

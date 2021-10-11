@@ -88,10 +88,10 @@
 			&__name {
 				font-family: 'Montserrat Alternates', sans-serif;
 				font-size: $mid-font-size;
-				transform: translate(0 ,50px)
+				transform: translate(0 ,20px)
 			}
 			&__per {
-				transform: translate(0 ,70px)
+				transform: translate(0 ,40px)
 			}
 		}
 	}
@@ -108,7 +108,7 @@
 			r={$rGet(point)}
 			fill={nodeColor || $zGet(point)}
 			stroke-width={nodeStrokeWidth}
-			stroke={nodeStrokeColor}
+			stroke={nodeColor}
 			cx='{point.x}'
 			cy='{point.y}'
 		>

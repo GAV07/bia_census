@@ -66,11 +66,11 @@
         {/if}
     </MediaQuery>
 
-    <MediaQuery query="(max-width: 480px)" let:matches>
+    <MediaQuery query="(max-width: 1280px)" let:matches>
         {#if matches}   
             <figure class="chart-container bar-chart">
                 <LayerCake
-                    padding={{ top: 0, bottom: 20, left: 20, right: 10 }}
+                    padding={{ top: 0, bottom: 20, left: 10, right: 10 }}
                     x={xKey}
                     y={yKey}
                     yScale={scaleBand().paddingInner(.15).round(true)}
@@ -85,11 +85,10 @@
                             snapTicks={true}
                             formatTick={d => d + "%"}
                         />
+                        <Bar/>
                         <AxisY
                             gridlines={false}
-                            textAnchor={"end"}
                         />
-                        <Bar/>
                     </Svg>
                 </LayerCake>
             </figure>
