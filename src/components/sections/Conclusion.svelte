@@ -70,7 +70,7 @@
 <section class="conclusion">
     <div id="closing" class="callout">
         <div class="closing-bk">
-            <Image width={100} height={100} format="%" src="/assets/images/BIA_Pattern_Black.jpg" alt="Black Pattern"/>
+            <Image width={110} height={180} format="%" src="/assets/images/BIA_Pattern_Black.jpg" alt="Black Pattern"/>
         </div>
         <div class="callout__contianer closing-copy ">
             <Image width={200} src="./assets/images/BIA_Logo_White.png" alt=""/>

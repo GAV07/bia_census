@@ -34,6 +34,7 @@
 
 <section class="chart-section">
     <ChartTitle 
+        number={2}
         title={title}
         description={description}
     />

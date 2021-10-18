@@ -3,7 +3,7 @@
     import Stat from '../tools/Stat.svelte'
     import MapChart from '../charts/SupportMap.svelte'
     import BeeChart from '../charts/BeeChart.svelte'
-    //import ReachGrouped from '../charts/ReachGrouped.svelte'
+    import TypeBarChart from '../charts/TypeBarChart.svelte'
     import ReachRadar from '../charts/ReachRadar.svelte';
 
     export let data;
@@ -28,21 +28,34 @@
         description={Copy.placeChartSub1}
     />
 
-    <Stat
-        data={data}
-        category={"city"}
-        dataPoint={"Atlanta"}
-        info="Atlanta leads cities in America with a little over 20% of all listed Black Support Organizations headquartered there."
+    <Stat 
+        info="Atlanta has more BISOs than all Southern states combined."
     />
-    
-    <!-- Year of inception for orgs in dataset -->
+
     <div class="copy">
         <p>{Copy.place2}</p>
     </div>
-    <BeeChart
+    <TypeBarChart
         data={data}
         title={Copy.placeChartTitle2}
         description={Copy.placeChartSub2}
+    />
+
+    <Stat
+        data={data}
+        mark={"<"}
+        category={"type"}
+        dataPoint={"Research Institute"}
+        info="Less than one percent of the types of Black Support Organizations are reserach institutions."
+    />
+    
+    <div class="copy">
+        <p>{Copy.place3}</p>
+    </div>
+    <BeeChart
+        data={data}
+        title={Copy.placeChartTitle3}
+        description={Copy.placeChartSub3}
     />
 
     <Stat
@@ -52,14 +65,18 @@
         info="Over 20% of Black Support Organizations were founded in 2017."
     />
 
-    <!-- Reach of organizations in dataset -->
     <div class="copy">
-        <p>{Copy.place3}</p>
+        <p>{Copy.place4}</p>
     </div>
+
     <ReachRadar
         data={data}
-        title={Copy.placeChartTitle3}
-        description={Copy.placeChartSub3}
+        title={Copy.placeChartTitle4}
+        description={Copy.placeChartSub4}
     />
+
+    <div class="copy">
+        <p>{Copy.place5}</p>
+    </div>
 </article>
 

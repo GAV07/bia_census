@@ -79,8 +79,9 @@
 
 <section  class="chart-section">
     <ChartTitle 
-        title={title}
-        description={description}
+      number={4}
+      title={title}
+      description={description}
     />   
     <div id="radar-container">
       <figure id="radar-chart" class="chart-container">

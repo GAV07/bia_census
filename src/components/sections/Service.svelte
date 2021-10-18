@@ -17,45 +17,16 @@
         <p class="subtitle">{Copy.serSub}</p>
     </div>
 
-   <!-- Programs in Simple Force Graph (change later) -->
-   <div class="copy">
-        <p>{Copy.ser1}</p>
-    </div>
-    <TypeBarChart
-        data={data}
-        title={Copy.serChartTitle1}
-        description={Copy.serChartSub1}
-    />
-
-    <Stat
-        data={data}
-        mark={"<"}
-        category={"type"}
-        dataPoint={"Research Institute"}
-        info="Less than one percent of the types of Black Support Organizations are reserach institutions."
-    />
+ 
 
     <!-- Simple Type Breakdown -->
     <div class="copy">
-        <p>{Copy.ser2}</p>
+        <p>{Copy.ser1}</p>
     </div>
     <ProgramsPack 
         data={data}
-        title={Copy.serChartTitle2}
-        description={Copy.serChartSub2}
-    />
-    
-
-    <!-- Smaller Callout for Primary Customers -->
-    <div class="copy">
-        <p>{Copy.place3}</p>
-    </div>
-    <Stat
-        data={data}
-        category={"customer"}
-        dataPoint={"Founders/Entrepreneurs"}
-        info="The percentage of Black Support Organizations that focus on Founders and Entrepreneurs as an audience. 
-            Does this heavy emphasis on Founders limit the impact of impact that BSO's can have collectively on the wider Black Innovation Ecosystem?"
+        title={Copy.serChartTitle1}
+        description={Copy.serChartSub1}
     />
     
 </article>

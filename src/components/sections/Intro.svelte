@@ -22,10 +22,10 @@
         flex-direction: row;
         overflow: hidden;
         margin-bottom: 2em;
+        justify-content: flex-start;
 
         @include respond(tab-land) {
             height: 100vh;
-            justify-content: flex-start;
         }
         
         &__background {
@@ -41,16 +41,14 @@
 
             @include respond(tab-land) {
                     margin: 8em 0;
-                }
-            
+            }
             @include respond(phone) {
-                max-width: 100%;
+                    max-width: 100%;
             }
 
+
             .lead {
-                @include respond(tab-land) {
-                    color: $primary2;
-                }
+                color: $primary2;
             }
 
             h1 {
@@ -66,20 +64,19 @@
 
             &__first {
                 font-size: $mid-font-size;
-                color: $primary3;
+                color: $white;
                 margin-bottom: 1.5em;
 
                 @include respond(tab-land) {
-                    color: $white;
                     font-size: $default-font-size;
                 }
             }
             &__second {
                 margin-bottom: 2em;
                 font-size: $default-font-size;
+                color: $bk;
 
                 @include respond(tab-land) {
-                    color: $bk;
                     font-size: $phone-font-size;
                 }
             }
@@ -108,7 +105,7 @@
         }
 
         &__area {
-            width: 50vw;
+            width: 100vw;
             padding: 0 1em 0 2em;
             display: flex;
             flex-direction: column;
@@ -116,7 +113,6 @@
             text-align: left;
 
             @include respond(tab-land) {
-                    width: 100vw;
                     padding-left: 2em;
             }
 
@@ -137,17 +133,13 @@
             max-height: 95vh;
 
             .img-container {
-                position: relative;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100vw;
                 overflow: hidden;
                 height: 120vh;
-                width: 50vw;
-    
-                @include respond(tab-land) {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100vw;
-                }
+                
 
                 .hero-img {
                     @include respond(phone) {
@@ -200,11 +192,11 @@
                 />
             {/if}
         </MediaQuery>
-        <MediaQuery query="(max-width: 1200px)" let:matches>
-            {#if matches}
+        <!-- <MediaQuery query="(max-width: 1200px)" let:matches>
+            {#if matches} -->
                 <div class="intro__area__overlay"></div>
-            {/if}
-        </MediaQuery>
+            <!-- {/if}
+        </MediaQuery> -->
         <div class="img-container">
             <MediaQuery query="(min-width: 1281px)" let:matches>
                 {#if matches}
@@ -230,13 +222,15 @@
         <MediaQuery query="(min-width: 1281px)" let:matches>
             {#if matches}  
                 <div class="callout__contianer callout__image">
-                    <Image width={500} src="./assets/images/wesley.jpg" alt="Black Woman in Head Wrap"/>
+                    <Image width={150} format={"%"} src="./assets/images/wesley.jpg" alt="Black Woman in Head Wrap"/>
                 </div>
             {/if} 
         </MediaQuery>
         <div class="callout__contianer callout__copy">
             <p id="callout__lead" class="lead">The Time is Now</p>
-            <p>{Copy.intro}</p>
+            <p>{Copy.introP1}</p>
+            <br/>
+            <p>{Copy.introP2}</p>
         </div>
         <div class="bk"></div>
     </div>

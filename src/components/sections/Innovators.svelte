@@ -1,6 +1,6 @@
 <script>
     import Copy from '../../data/doc.json'
-    
+    import Stat from '../tools/Stat.svelte'
     import FounderMap from '../charts/FounderMap.svelte'
     import EthnicBarChart from '../charts/EthnicBarChart.svelte';
 
@@ -21,8 +21,8 @@
     </div>
     <EthnicBarChart
         data={data}
-        title={Copy.innChartTitle2}
-        description={Copy.innChartSub2}
+        title={Copy.innChartTitle1}
+        description={Copy.innChartSub1}
     />
     
     <div class="copy">
@@ -32,7 +32,12 @@
     <FounderMap
         data={altData}
         supportData={data}
-        title={Copy.innChartTitle1}
-        description={Copy.innChartSub1}
+        title={Copy.innChartTitle2}
+        description={Copy.innChartSub2}
+    />
+    <Stat
+        manual={10}
+        mark={"x"}
+        info="New York City funds Black founders at 10 times the rate of Boston, even though Boston deploys more venture capital."
     />
 </article>

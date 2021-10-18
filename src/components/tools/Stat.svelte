@@ -7,18 +7,23 @@
     export let dataPoint;
     export let info;
     export let mark = "";
+    export let manual = "";
 
     const percentageOfCategory = () => {
-        let sum = 0;
-        let name;
-
-        let summary = rollup(data, v => v.length, d => d[category])
-        let flatData = Array.from(summary, ([variable, value]) => ({ variable, value }))
-        for(let i = 0; i < flatData.length; i++){
-            sum += flatData[i].value;
+        if(data) {
+            let sum = 0;
+            let name;
+    
+            let summary = rollup(data, v => v.length, d => d[category])
+            let flatData = Array.from(summary, ([variable, value]) => ({ variable, value }))
+            for(let i = 0; i < flatData.length; i++){
+                sum += flatData[i].value;
+            }
+            let percent = (summary.get(dataPoint) / sum) * 100
+            return Math.round(percent)
+        } else {
+            return false
         }
-        let percent = (summary.get(dataPoint) / sum) * 100
-        return Math.round(percent)
     }
 
 
@@ -32,13 +37,16 @@
     .stat-container {
         position: relative;
         width: 100%;
-        height: 120px;
+        min-height: 120px;
         display: flex;
         align-items: center;
         color: $white;
         padding: 6em;
         overflow: hidden;
 
+        @include respond(tab-land) {
+            padding: 3em;
+        }
         @include respond(phone) {
             padding: 3em;
             flex-direction: column;
@@ -87,7 +95,8 @@
     <div class="stat-background">
         <Image width={100} height={100} format="%" src="/assets/images/BIA_Pattern_Horizon.jpg" alt="Black Woman"/>
     </div>
-    <h1 class="stat">{mark}{percentageOfCategory()}%</h1>
+    <h1 class="stat">{percentageOfCategory() ? mark : ""}{percentageOfCategory() ? percentageOfCategory() + "%" : ""}</h1>
+    <h1 class="stat">{manual}{manual != "" ? mark : ""}</h1>
     <h3 class="info">{info}</h3>
     <div class="gradient"></div>
 </div>

@@ -42,6 +42,7 @@
 	{#if matches}
     <section class="chart-section">
       <ChartTitle 
+        number={3}
         title={title}
         description= {description}
       />
@@ -80,7 +81,7 @@
 	{/if}
 </MediaQuery>
 
-<MediaQuery query="(max-width: 480px)" let:matches>
+<MediaQuery query="(max-width: 1280px)" let:matches>
 	{#if matches}
     <section class="chart-section">
       <ChartTitle 

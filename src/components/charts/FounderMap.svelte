@@ -241,6 +241,7 @@
   
 <section id="founder-map" class="chart-section">
 	<ChartTitle 
+		number={7}
 		title={title}
 		description= {description}
 	/>

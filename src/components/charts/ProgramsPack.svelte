@@ -69,6 +69,7 @@
 
 <section id="programs" class="chart-section">
   <ChartTitle 
+    number={5}
     title={title}
     description= {description}
   />

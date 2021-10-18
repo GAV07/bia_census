@@ -32,10 +32,17 @@ article {
     }
 
     .section-header {
-        padding-left: 2em;
+        padding-left: 22em;
+        max-width: 75vw;
+
+        @include respond(tab-land) {
+            padding-left: 9em;
+            max-width: 100%;
+        }
 
         @include respond(phone) {
             padding: 0;
+            max-width: 100%;
         }
 
         .lead {
@@ -137,10 +144,14 @@ article {
     &__container {
         display: flex;
         width: 50%;
+    }
+
+    &__image {
+        margin-left: -2em;
+        overflow: hidden;
 
         img {
-            position: absolute;
-            width: 800px;
+            transform: translate(-50px, 50px);
         }
     }
 
@@ -160,10 +171,10 @@ article {
             max-width: 80%;
             font-weight: 600;
             line-height: 1.7;
-            font-size: $mid-font-size;
+            font-size: $default-font-size;
 
             @include respond(phone) {
-                font-size: $default-font-size;
+                font-size: $phone-font-size;
             }
         }
     }

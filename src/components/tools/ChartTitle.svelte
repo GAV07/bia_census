@@ -1,6 +1,7 @@
 <script>
     export let title;
     export let description;
+    export let number;
 </script>
 
 
@@ -22,6 +23,7 @@
 </style>
 
 <div class="chart__copy">
+    <p class="chart__copy__figure">Figure {number}</p>
     <h2 class="chart__copy__title">{title}</h2>
     <p class="chart__copy__description">{description}</p>
 </div>

@@ -214,7 +214,8 @@
 </style>
   
 <section id="support-map" class="chart-section">
-	<ChartTitle 
+	<ChartTitle
+		number={1} 
 		title={title}
 		description= {description}
 	/>

@@ -33,6 +33,7 @@
 
 <section class="chart-section">
     <ChartTitle 
+        number={6}
         title={title}
         description={description}
     />
